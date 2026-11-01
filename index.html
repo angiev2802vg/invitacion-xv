@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV Años - Regina Alejandra</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --lila-principal: #C8B5E5;
+            --lila-oscuro: #8A68B1;
+            --lila-suave: #F3EFFF;
+            --plateado: #C0C0C8;
+            --plateado-brillo: #E8E8EE;
+            --blanco-perla: #FAF7FC;
+            --texto-oscuro: #3A3546;
+            --sombra-elegante: 0 10px 30px rgba(138, 104, 177, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--blanco-perla);
+            color: var(--texto-oscuro);
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* --- SOBRE INTERACTIVO --- */
+        #envelope-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FAF7FC 0%, #EAE3F7 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease, visibility 1s ease;
+            padding: 20px;
+        }
+
+        .envelope-container {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            background: #E4D9F5;
+            border-radius: 8px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border: 1px solid var(--plateado);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+
+        .envelope-container:hover {
+            transform: scale(1.03);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 120px solid #D1C0EC;
+            transform-origin: top;
+            transition: transform 0.6s ease;
+            z-index: 3;
+        }
+
+        .wax-seal {
+            position: absolute;
+            z-index: 4;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #D4AF37, #AA7C11);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 0 8px rgba(255,255,255,0.4);
+            border: 2px solid #F3E5AB;
+            transition: transform 0.4s ease;
+        }
+
+        .envelope-card-preview {
+            position: absolute;
+            width: 90%;
+            height: 85%;
+            background: #fff;
+            border-radius: 6px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px dashed var(--lila-principal);
+            z-index: 2;
+        }
+
+        .envelope-title {
+            font-family: 'Cinzel', serif;
+            color: var(--lila-oscuro);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .guest-tag {
+            background-color: var(--lila-suave);
+            border: 1px solid var(--lila-principal);
+            padding: 12px 25px;
+            border-radius: 30px;
+            margin-top: 25px;
+            max-width: 90%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .guest-name-preview {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--lila-oscuro);
+        }
+
+        .passes-preview {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .open-btn {
+            margin-top: 30px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--lila-oscuro), var(--lila-principal));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(138, 104, 177, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .open-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(138, 104, 177, 0.45);
+        }
+
+        /* --- BOTÓN MÚSICA FLOTANTE --- */
+        .music-control {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--lila-oscuro), var(--lila-principal));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+        }
+
+        .music-control.playing {
+            animation: pulse-music 2s infinite;
+        }
+
+        @keyframes pulse-music {
+            0% { box-shadow: 0 0 0 0 rgba(138, 104, 177, 0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(138, 104, 177, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(138, 104, 177, 0); }
+        }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .main-wrapper {
+            max-width: 520px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 0 40px rgba(0,0,0,0.06);
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 60px;
+        }
+
+        .svg-flower-header {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(180deg, #F3EFFF 0%, #ffffff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 20px 25px 40px 25px;
+        }
+
+        .sub-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            color: var(--plateado);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .name-title {
+            font-family: 'Alex Brush', cursive;
+            font-size: 3.8rem;
+            color: var(--lila-oscuro);
+            margin: 10px 0 20px 0;
+            line-height: 1.1;
+        }
+
+        .divider-silver {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--plateado), transparent);
+            margin: 25px auto;
+        }
+
+        .prayer-box {
+            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #555;
+            padding: 0 15px;
+            margin-bottom: 30px;
+        }
+
+        .photo-frame {
+            width: 85%;
+            margin: 20px auto;
+            border-radius: 150px 150px 15px 15px;
+            padding: 10px;
+            background: linear-gradient(135deg, var(--lila-principal), var(--plateado-brillo));
+            box-shadow: var(--sombra-elegante);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 140px 140px 10px 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body><!-- REPRODUCTOR DE MÚSICA EN FONDO -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=violin-romantic-112349.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- BOTÓN DE MÚSICA FLOTANTE -->
+    <div class="music-control" id="music-toggle" title="Reproducir / Pausar Música">
+        <i class="fa-solid fa-music"></i>
+    </div>
+
+    <!-- PANTALLA SOBRE INTERACTIVO -->
+    <div id="envelope-overlay">
+        <div class="envelope-container" onclick="openEnvelope()">
+            <div class="envelope-flap" id="envelope-flap"></div>
+            <div class="wax-seal" id="wax-seal">RA</div>
+            <div class="envelope-card-preview">
+                <div class="envelope-title">MIS XV AÑOS</div>
+                <div style="font-family: 'Alex Brush', cursive; font-size: 1.8rem; color: var(--lila-oscuro);">Regina Alejandra</div>
+            </div>
+        </div>
+
+        <div class="guest-tag">
+            <div class="guest-name-preview" id="guest-name-display">Familia Invitada</div>
+            <div class="passes-preview" id="guest-passes-display">Te invitamos a celebrar con nosotros</div>
+        </div>
+
+        <button class="open-btn" onclick="openEnvelope()">
+            <i class="fa-envelope-open" style="margin-right: 8px;"></i> ABRIR INVITACIÓN
+        </button>
+    </div>
+
+    <!-- CONTENIDO DE LA INVITACIÓN -->
+    <div class="main-wrapper">
+
+        <!-- CABECERA DE FLORES LILA -->
+        <div class="svg-flower-header">
+            <svg width="100%" height="100%" viewBox="0 0 500 150" preserveAspectRatio="none">
+                <path d="M0,0 L500,0 L500,80 Q250,150 0,80 Z" fill="#E4D9F5" opacity="0.5"/>
+                <path d="M0,0 L500,0 L500,50 Q250,120 0,50 Z" fill="#C8B5E5" opacity="0.7"/>
+            </svg>
+            <div style="position: absolute; top: 25px; color: var(--lila-oscuro); font-size: 1.5rem;">
+                ✦ &nbsp; 🎕 &nbsp; ✦
+            </div>
+        </div>
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="sub-title">MIS XV AÑOS</div>
+            <div class="name-title">Regina Alejandra</div>
+            
+            <div class="divider-silver"></div>
+
+            <div class="prayer-box">
+                "Doy gracias a Dios y a mis padres por concederme la vida y formar parte de ella. Hay recuerdos que no voy a olvidar y momentos como este que siempre voy a guardar, porque serán parte de mi vida. Es mi deseo que compartan conmigo la alegría de mis quince años."
+            </div>
+
+            <!-- FOTO PRINCIPAL -->
+            <div class="photo-frame">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800" alt="Regina Alejandra XV Años">
+            </div>
+        </section>
+
+        <!-- CUENTA REGRESIVA -->
+        <div class="countdown-container">
+            <div class="section-title" style="font-size: 1.1rem; margin-bottom: 15px;">FALTAN TAN SOLO</div>
+            <div class="countdown-grid">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Días</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Hs</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Min</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Seg</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- PADRES & PADRINOS -->
+        <section class="section-padding">
+            
+            <!-- PADRES -->
+            <div class="family-card">
+                <div class="family-sub">Con el amor y la bendición de mis padres:</div>
+                <div class="names-list">
+                    Andrés Amaya Lugo<br>
+                    <span style="font-family: 'Alex Brush', cursive; font-size: 1.5rem; color: var(--lila-oscuro);">&</span><br>
+                    Mónica Mirelia Cienfuegos García
+                </div>
+            </div>
+
+            <!-- PADRINOS -->
+            <div class="family-card">
+                <div class="section-title" style="font-size: 1.1rem; margin-bottom: 15px;">MIS PADRINOS</div>
+                <div class="family-sub" style="margin-bottom: 18px;">Quienes con su apoyo y cariño acompañan este día tan especial:</div>
+                
+                <div class="padrinos-item">
+                    Gabriela Cienfuegos García<br>
+                    <small style="color:#888;">&</small> Fernando Mendívil Valenzuela
+                </div>
+                <div class="divider-silver" style="margin: 12px auto; width: 40px;"></div>
+                <div class="padrinos-item">
+                    Nailea Yosmara Méndez Velázquez<br>
+                    <small style="color:#888;">&</small> Alejandro Gutiérrez Medina
+                </div>
+                <div class="divider-silver" style="margin: 12px auto; width: 40px;"></div>
+                <div class="padrinos-item">
+                    Camila Morales García<br>
+                    <small style="color:#888;">&</small> Jesús Aarón García Parra
+                </div>
+            </div>
+
+            <!-- CHAMBELÁN -->
+            <div class="family-card">
+                <div class="section-title" style="font-size: 1rem; margin-bottom: 12px;">MI CHAMBELÁN DE HONOR</div>
+                <div class="names-list" style="font-size: 1.1rem; color: var(--lila-oscuro);">
+                    Dilan Arak Enríquez Álvarez
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ITINERARIO -->
+        <section class="section-padding" style="background: #FAF7FC;">
+            <div class="section-title">¿DÓNDE & CUÁNDO?</div>
+            <div style="font-size: 0.9rem; color: #666; margin-bottom: 30px;">SÁBADO, 19 DE DICIEMBRE DE 2026</div>
+
+            <!-- MISA -->
+            <div class="event-card">
+                <div class="event-icon"><i class="fa-solid fa-church"></i></div>
+                <div class="event-type">MISA DE ACCIÓN DE GRACIAS</div>
+                <div class="event-time"><i class="fa-regular fa-clock"></i> 5:00 PM</div>
+                <div class="event-place">Iglesia Sagrados Corazones de Jesús y María</div>
+                <div class="event-address">Hermosillo, Sonora.</div>
+                <a href="https://maps.google.com/?q=Iglesia+Sagrados+Corazones+de+Jesus+y+Maria" target="_blank" class="map-btn">
+                    <i class="fa-solid fa-location-dot"></i> VER EN GOOGLE MAPS
+                </a>
+            </div>
+
+            <!-- RECEPCIÓN -->
+            <div class="event-card" style="border-left-color: var(--plateado);">
+                <div class="event-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+                <div class="event-type">RECEPCIÓN DE GALA</div>
+                <div class="event-time"><i class="fa-regular fa-clock"></i> 9:00 PM</div>
+                <div class="event-place">Eventos La Carreta</div>
+                <div class="event-address">Hermosillo, Sonora.</div>
+                <a href="https://maps.google.com/?q=Eventos+La+Carreta+Hermosillo" target="_blank" class="map-btn">
+                    <i class="fa-solid fa-location-dot"></i> VER EN GOOGLE MAPS
+                </a>
+            </div>
+        </section>
+
+        <!-- GALERÍA DE FOTOS -->
+        <section class="section-padding">
+            <div class="section-title">MIS RECUERDOS</div>
+            <div class="gallery-grid" style="margin-top: 20px;">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&q=80&w=400" alt="Foto XV">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&q=80&w=400" alt="Foto XV">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400" alt="Foto XV">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400" alt="Foto XV">
+                </div>
+            </div>
+        </section>
+
+        <!-- DETALLES ADICIONALES -->
+        <section class="section-padding" style="padding-top: 0;">
+            
+            <!-- DRESS CODE -->
+            <div class="info-box">
+                <div class="info-icon"><i class="fa-solid fa-user-tie"></i></div>
+                <div class="section-title" style="font-size: 1rem; margin-bottom: 8px;">CÓDIGO DE VESTIMENTA</div>
+                <div style="font-weight: 600; color: var(--lila-oscuro); letter-spacing: 1px;">FORMAL</div>
+                <div style="font-size: 0.85rem; color: #777; margin-top: 5px;">Agradecemos vestir de etiqueta para esta noche de gala.</div>
+            </div>
+
+            <!-- REGALOS / SOBRES -->
+            <div class="info-box">
+                <div class="info-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                <div class="section-title" style="font-size: 1rem; margin-bottom: 8px;">LLUVIA DE SOBRES</div>
+                <div style="font-size: 0.9rem; color: #555; line-height: 1.6;">
+                    Su presencia es nuestro mejor regalo. Sin embargo, si desean hacerme un obsequio, contaremos con un buzón para lluvia de sobres durante la recepción.
+                </div>
+            </div>
+
+        </section>
+
+        <!-- CONFIRMACIÓN DE ASISTENCIA -->
+        <section class="rsvp-section" id="rsvp">
+            <div class="section-title">CONFIRMAR ASISTENCIA</div>
+            <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">Por favor confirma tu asistencia antes del 1 de Diciembre de 2026.</div>
+
+            <form class="rsvp-form" onsubmit="sendWhatsApp(event)">
+                <div class="form-group">
+                    <label for="name">Nombre / Familia:</label>
+                    <input type="text" id="name" class="form-control" placeholder="Ej. Familia López" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="attending-passes">Lugares a confirmar:</label>
+                    <select id="attending-passes" class="form-control" required>
+                        <option value="1">1 Persona</option>
+                        <option value="2" selected>2 Personas</option>
+                        <option value="3">3 Personas</option>
+                        <option value="4">4 Personas</option>
+                        <option value="5">5 Personas</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">¿Asistirás?</label>
+                    <select id="status" class="form-control" required>
+                        <option value="Sí asistiré">¡Sí, ahí estaré con mucho gusto!</option>
+                        <option value="No podré asistir">Lamentablemente no podré asistir</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="whatsapp-btn">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> ENVIAR A WHATSAPP
+                </button>
+            </form>
+        </section>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="footer-name">Regina Alejandra</div>
+            <div>¡Te espero para celebrar juntos mis XV años!</div>
+        </div>
+
+    </div>
+
+    <!-- SCRIPTS DE FUNCIONALIDAD -->
+    <script>
+        // --- 1. CAPTURA DE PARÁMETROS URL (?invitado=...&pases=...&id=...) ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const invitadoParam = urlParams.get('invitado');
+        const pasesParam = urlParams.get('pases');
+        const idParam = urlParams.get('id');
+
+        const guestNameDisplay = document.getElementById('guest-name-display');
+        const guestPassesDisplay = document.getElementById('guest-passes-display');
+        const inputName = document.getElementById('name');
+        const selectPasses = document.getElementById('attending-passes');
+
+        if (invitadoParam) {
+            guestNameDisplay.textContent = invitadoParam;
+            inputName.value = invitadoParam;
+            
+            if (pasesParam) {
+                guestPassesDisplay.textContent = `Pases asignados: ${pasesParam} ${pasesParam == 1 ? 'Lugar' : 'Lugares'}`;
+                selectPasses.value = pasesParam <= 5 ? pasesParam : "5";
+            } else {
+                guestPassesDisplay.textContent = '¡Estás cordialmente invitado!';
+            }
+        } else {
+            guestNameDisplay.textContent = '¡Estás Invitado!';
+            guestPassesDisplay.textContent = 'Acompáñanos a celebrar este día tan especial';
+        }
+
+        // --- 2. CONTROL DEL SOBRE Y MÚSICA ---
+        const bgMusic = document.getElementById('bg-music');
+        const musicToggle = document.getElementById('music-toggle');
+        let isPlaying = false;
+
+        function openEnvelope() {
+            document.getElementById('wax-seal').style.transform = 'scale(0)';
+            document.getElementById('envelope-flap').style.transform = 'rotateX(180deg)';
+            
+            setTimeout(() => {
+                const overlay = document.getElementById('envelope-overlay');
+                overlay.style.opacity = '0';
+                overlay.style.visibility = 'hidden';
+                playMusic();
+            }, 600);
+        }
+
+        function playMusic() {
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                musicToggle.classList.add('playing');
+            }).catch(e => {
+                console.log("Reproducción automática bloqueada por navegador:", e);
+            });
+        }
+
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                isPlaying = false;
+                musicToggle.classList.remove('playing');
+            } else {
+                bgMusic.play();
+                isPlaying = true;
+                musicToggle.classList.add('playing');
+            }
+        });
+
+        // --- 3. CUENTA REGRESIVA ---
+        const eventDate = new Date('December 19, 2026 17:00:00').getTime();
+
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const difference = eventDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+                document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+                document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+            } else {
+                document.querySelector('.countdown-container').innerHTML = '<div style="font-family:Cinzel; font-size:1.2rem; color:var(--lila-oscuro);">¡LLEGÓ EL GRAN DÍA!</div>';
+            }
+        };
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // --- 4. ENVÍO DE CONFIRMACIÓN POR WHATSAPP ---
+        function sendWhatsApp(event) {
+            event.preventDefault();
+            
+            // Número de la mamá de Regina Alejandra
+            const phoneNumber = "526221252954"; 
+            
+            const name = document.getElementById('name').value;
+            const passes = document.getElementById('attending-passes').value;
+            const status = document.getElementById('status').value;
+            const guestID = idParam ? ` (ID: ${idParam})` : '';
+
+            let message = `¡Hola! Confirmo asistencia para los XV Años de Regina Alejandra ✨%0A%0A`;
+            message += `👤 *Nombre/Familia:* ${name}${guestID}%0A`;
+            message += `🎟️ *Asistentes:* ${passes} persona(s)%0A`;
+            message += `📌 *Estado:* ${status}`;
+
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
