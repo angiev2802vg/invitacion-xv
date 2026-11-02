@@ -173,21 +173,24 @@
             z-index: 2;
         }
 
-        /* Sello de Cera 3D Plateado Inspirado en la Referencia */
-        .wax-seal-real {
+        /* IMAGEN DEL SELLO REALISTA */
+        .wax-seal-img {
             position: absolute;
-            top: 72px;
+            top: 68px;
             left: 50%;
             transform: translateX(-50%);
-            width: 62px;
-            height: 62px;
+            width: 65px;
+            height: 65px;
             z-index: 4;
-            transition: transform 0.2s ease;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.45));
+            transition: transform 0.2s ease, filter 0.2s ease;
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.4));
+            object-fit: contain;
+            border-radius: 50%;
         }
 
-        .envelope-wrapper:hover .wax-seal-real {
+        .envelope-wrapper:hover .wax-seal-img {
             transform: translateX(-50%) scale(1.08);
+            filter: drop-shadow(0 8px 14px rgba(0,0,0,0.5));
         }
 
         .cover-footer {
@@ -369,7 +372,7 @@
             border: 1px solid rgba(184, 151, 195, 0.2);
         }
 
-        /* Cuenta Regresiva */
+        /* Cuenta Regresiva (Ubicada estratégicamente tras la familia) */
         .countdown-section {
             background: var(--white);
         }
@@ -537,7 +540,7 @@
             align-items: center;
         }
 
-        /* GALERÍA CARRUSEL DESLIZABLE HORIZONTALMENTE */
+        /* GALERÍA CARRUSEL DESLIZABLE HORIZONTALMENTE (LIMPIA) */
         .gallery-section {
             background: var(--white);
             padding-right: 0;
@@ -551,6 +554,7 @@
             scroll-snap-type: x mandatory;
             padding: 10px 20px 25px 20px;
             -webkit-overflow-scrolling: touch;
+            margin-top: 10px;
         }
 
         .gallery-carousel::-webkit-scrollbar {
@@ -580,14 +584,6 @@
             height: 340px;
             object-fit: cover;
             display: block;
-        }
-
-        .swipe-hint {
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--purple-primary);
-            margin-top: 10px;
         }
 
         /* RSVP */
@@ -722,76 +718,13 @@
                 <div class="cover-date">19 · 12 · 2026</div>
             </div>
 
-            <!-- SOBRE DE CARTA CERRADO CON SELLO BOTÁNICO 3D PLATEADO -->
+            <!-- SOBRE DE CARTA CERRADO CON SELLO EN IMAGEN REALISTA -->
             <div class="envelope-wrapper" onclick="openInvitation()">
                 <div class="env-fold-left"></div>
                 <div class="env-fold-right"></div>
                 <div class="env-flap-top"></div>
                 
-                <!-- SELLO DE CERA 3D CON RAMILLETE FLORAL REPLICANDO TU REFERENCIA -->
-                <svg class="wax-seal-real" viewBox="0 0 100 100">
-                    <defs>
-                        <radialGradient id="silverBase" cx="35%" cy="30%" r="70%">
-                            <stop offset="0%" stop-color="#ffffff"/>
-                            <stop offset="25%" stop-color="#e2e2e2"/>
-                            <stop offset="65%" stop-color="#999999"/>
-                            <stop offset="100%" stop-color="#4a4a4a"/>
-                        </radialGradient>
-                        <linearGradient id="silverHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
-                            <stop offset="100%" stop-color="#888888" stop-opacity="0.2"/>
-                        </linearGradient>
-                        <filter id="embossShadow" x="-20%" y="-20%" width="140%" height="140%">
-                            <feDropShadow dx="1" dy="2" stdDeviation="1" flood-color="#000000" flood-opacity="0.5"/>
-                        </filter>
-                    </defs>
-
-                    <!-- Base circular con bisel exterior -->
-                    <circle cx="50" cy="50" r="46" fill="url(#silverBase)" />
-                    <circle cx="50" cy="50" r="43" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
-                    <circle cx="50" cy="50" r="39" fill="none" stroke="#555555" stroke-width="1.2" opacity="0.6"/>
-
-                    <!-- Ramillete floral en relieve 3D -->
-                    <g filter="url(#embossShadow)">
-                        <!-- Tallo y ramas -->
-                        <path d="M52 75 Q48 55 50 30 M50 50 Q36 42 30 46 M50 55 Q64 48 68 53 M49 38 Q40 30 35 34 M51 35 Q60 27 65 31" fill="none" stroke="url(#silverHighlight)" stroke-width="2.2" stroke-linecap="round"/>
-                        
-                        <!-- Flor Principal Central 1 -->
-                        <g transform="translate(48, 54)">
-                            <circle cx="-5" cy="0" r="5" fill="#f0f0f0"/>
-                            <circle cx="5" cy="0" r="5" fill="#f0f0f0"/>
-                            <circle cx="0" cy="-5" r="5" fill="#f0f0f0"/>
-                            <circle cx="0" cy="5" r="5" fill="#f0f0f0"/>
-                            <circle cx="-3" cy="-3" r="4.5" fill="#e6e6e6"/>
-                            <circle cx="3" cy="3" r="4.5" fill="#e6e6e6"/>
-                            <circle cx="0" cy="0" r="3" fill="#666666"/>
-                        </g>
-
-                        <!-- Flor Principal 2 -->
-                        <g transform="translate(40, 38)">
-                            <circle cx="-4" cy="0" r="4" fill="#f0f0f0"/>
-                            <circle cx="4" cy="0" r="4" fill="#f0f0f0"/>
-                            <circle cx="0" cy="-4" r="4" fill="#f0f0f0"/>
-                            <circle cx="0" cy="4" r="4" fill="#f0f0f0"/>
-                            <circle cx="0" cy="0" r="2.5" fill="#666666"/>
-                        </g>
-
-                        <!-- Flor Principal 3 -->
-                        <g transform="translate(60, 42)">
-                            <circle cx="-4" cy="0" r="4" fill="#f0f0f0"/>
-                            <circle cx="4" cy="0" r="4" fill="#f0f0f0"/>
-                            <circle cx="0" cy="-4" r="4" fill="#f0f0f0"/>
-                            <circle cx="0" cy="4" r="4" fill="#f0f0f0"/>
-                            <circle cx="0" cy="0" r="2.5" fill="#666666"/>
-                        </g>
-
-                        <!-- Ramitas y capullos pequeños de fondo -->
-                        <circle cx="28" cy="45" r="2" fill="#ffffff"/>
-                        <circle cx="34" cy="32" r="2" fill="#ffffff"/>
-                        <circle cx="66" cy="30" r="2" fill="#ffffff"/>
-                        <circle cx="70" cy="52" r="2" fill="#ffffff"/>
-                    </g>
-                </svg>
+                <img src="sello.png" alt="Sello de Cera" class="wax-seal-img" onerror="this.src='https://images.unsplash.com/photo-1534447677768-be436bb09401?w=150&auto=format&fit=crop&q=80'">
             </div>
 
             <div class="cover-footer">
@@ -818,9 +751,9 @@
                 </div>
             </section>
 
-            <!-- ORACIÓN EMOTIVA ANTES DE LOS PADRES -->
+            <!-- ORACIÓN EMOTIVA SIN COMILLAS -->
             <div class="quote-section">
-                "Doy gracias a Dios, a mis padres por concederme la vida y formar parte de ella. Hay recuerdos que no voy a olvidar y momentos como este que siempre voy a guardar, porque serán parte de mi vida. Es mi deseo que compartan conmigo la alegría de Mis XV años."
+                Doy gracias a Dios, a mis padres por concederme la vida y formar parte de ella. Hay recuerdos que no voy a olvidar y momentos como este que siempre voy a guardar, porque serán parte de mi vida. Es mi deseo que compartan conmigo la alegría de Mis XV años.
             </div>
 
             <section class="family-section">
@@ -844,6 +777,7 @@
                 </div>
             </section>
 
+            <!-- CUENTA REGRESIVA AQUÍ (SE VE MUY ELEGANTE Y FLUIDA) -->
             <section class="countdown-section">
                 <div class="countdown-title">Faltan</div>
                 <div class="countdown-grid">
@@ -954,11 +888,10 @@
                 </div>
             </section>
 
-            <!-- GALERÍA CARRUSEL DESLIZABLE HACIA UN LADO -->
+            <!-- GALERÍA CARRUSEL DESLIZABLE (SIN TEXTO EXTRA) -->
             <section class="gallery-section">
                 <h2 class="section-title">Galería</h2>
-                <p style="font-size: 0.85rem; color: #666; margin-bottom: 8px;">Momentos especiales</p>
-                <div class="swipe-hint">Desliza para ver más ➔</div>
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 12px;">Momentos especiales</p>
                 
                 <div class="gallery-carousel">
                     <div class="carousel-item">
@@ -976,7 +909,7 @@
                 </div>
             </section>
 
-            <!-- RSVP CON TARJETA DESTACADA Y FECHA LÍMITE -->
+            <!-- RSVP -->
             <section class="rsvp-section">
                 <h2 class="section-title">Asistencia</h2>
                 <div class="rsvp-card">
