@@ -107,7 +107,6 @@
         .cover-header {
             margin-bottom: 15px;
             z-index: 5;
-            transition: opacity 0.5s ease;
         }
 
         .cover-name {
@@ -127,7 +126,7 @@
             text-transform: uppercase;
         }
 
-        /* ESTRUCTURA DEL SOBRE INTERACTIVO CON FLORES INTERNAS */
+        /* ESTRUCTURA DEL SOBRE CON FORRO FLORAL FINO */
         .envelope-container {
             position: relative;
             width: 300px;
@@ -138,19 +137,24 @@
             z-index: 4;
         }
 
-        /* Fondo del sobre (Interior con patrón floral) */
+        /* Interior del sobre con patrón de rosas y flores finas estilo Pinterest */
         .env-back {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #e8d9ee url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='%23b897c3' fill-opacity='0.25'%3E%3Ccircle cx='15' cy='15' r='6'/%3E%3Cpath d='M15 5 Q20 15 15 25 Q10 15 15 5 Z'/%3E%3Cpath d='M5 15 Q15 20 25 15 Q15 10 5 15 Z'/%3E%3Ccircle cx='45' cy='45' r='5'/%3E%3C/g%3E%3C/svg%3E");
+            background: #e9deef;
+            background-image: 
+                radial-gradient(#b897c3 1.2px, transparent 1.2px), 
+                radial-gradient(#8e639c 1.2px, #e9deef 1.2px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
             border-radius: 6px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
 
-        /* Solapas laterales e inferior del sobre */
+        /* Solapas del sobre */
         .env-left {
             position: absolute;
             bottom: 0;
@@ -191,7 +195,7 @@
             border-bottom-right-radius: 6px;
         }
 
-        /* Solapa Superior (Abre hacia arriba revelando las flores) */
+        /* Solapa superior */
         .env-flap-top {
             position: absolute;
             top: 0;
@@ -207,7 +211,7 @@
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
         }
 
-        /* Sello de Cera Plateado Realista */
+        /* Sello de Cera Realista */
         .wax-seal-img {
             position: absolute;
             top: 72px;
@@ -241,7 +245,6 @@
             color: var(--white);
             max-width: 320px;
             z-index: 5;
-            transition: opacity 0.5s ease;
         }
 
         .guest-title {
@@ -786,15 +789,15 @@
 
     <div class="phone-container">
 
-        <!-- PANTALLA DE PORTADA / SOBRE DE CARTA REALISTA -->
+        <!-- PANTALLA DE PORTADA / SOBRE INTERACTIVO -->
         <div id="envelope-screen">
             
-            <div class="cover-header" id="cover-header">
+            <div class="cover-header">
                 <div class="cover-name">Regina Alejandra</div>
                 <div class="cover-date">19 · 12 · 2026</div>
             </div>
 
-            <!-- SOBRE INTERACTIVO CON FLORES INTERNAS QUE SE ABRE AL TOCAR -->
+            <!-- SOBRE INTERACTIVO CON FORRO FLORAL FINO INTERNO -->
             <div class="envelope-container" id="env-container" onclick="openInvitation()">
                 <div class="env-back"></div>
                 <div class="env-flap-top"></div>
@@ -805,7 +808,7 @@
                 <img src="sello.png" alt="Sello de Cera" class="wax-seal-img" onerror="this.src='https://images.unsplash.com/photo-1534447677768-be436bb09401?w=150&auto=format&fit=crop&q=80'">
             </div>
 
-            <div class="cover-footer" id="cover-footer">
+            <div class="cover-footer">
                 <button class="click-prompt" onclick="openInvitation()">Clic para abrir</button>
                 
                 <div class="guest-title">Invitación especial para:</div>
@@ -1070,10 +1073,10 @@
                 console.log("Audio autoplay restricted by browser:", error);
             });
 
-            // 1. Activa la animación 3D de apertura del sobre
+            // Animación 3D de apertura del sobre
             envContainer.classList.add('open');
 
-            // 2. Transición suave para revelar la invitación
+            // Revelar el contenido principal suavemente
             setTimeout(() => {
                 envelopeScreen.classList.add('hidden');
                 mainContent.classList.add('visible');
