@@ -135,7 +135,7 @@
             cursor: pointer;
             margin: 15px 0 25px 0;
             border: 1px solid rgba(255,255,255,0.4);
-            overflow: hidden;
+            overflow: visible;
         }
 
         .env-fold-left {
@@ -173,30 +173,20 @@
             z-index: 2;
         }
 
-        .wax-seal-center {
+        /* Sello de Cera Realista con Grabado de Flor */
+        .wax-seal-real {
             position: absolute;
-            top: 85px;
+            top: 75px;
             left: 50%;
             transform: translateX(-50%);
-            width: 46px;
-            height: 46px;
-            background: linear-gradient(135deg, #e6e6e6, #8e8e8e);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-            border: 2px solid #ffffff;
-            font-family: var(--font-serif);
-            font-size: 13px;
-            color: #ffffff;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            z-index: 3;
+            width: 58px;
+            height: 58px;
+            z-index: 4;
             transition: transform 0.2s ease;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
         }
 
-        .envelope-wrapper:hover .wax-seal-center {
+        .envelope-wrapper:hover .wax-seal-real {
             transform: translateX(-50%) scale(1.08);
         }
 
@@ -257,7 +247,7 @@
             padding: 0 6px;
         }
 
-        /* Botón Flotante para pausar/reproducir música */
+        /* Botón Flotante para música */
         .music-btn {
             position: fixed;
             bottom: 20px;
@@ -547,12 +537,12 @@
             align-items: center;
         }
 
-        /* Galería */
+        /* Galería Asimétrica (4 fotos) */
         .gallery-section {
             background: var(--white);
         }
 
-        .gallery-grid {
+        .gallery-grid-asym {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
@@ -561,10 +551,18 @@
 
         .gallery-img {
             width: 100%;
-            height: 180px;
             object-fit: cover;
             border-radius: 4px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .img-tall {
+            height: 250px;
+            grid-row: span 2;
+        }
+
+        .img-short {
+            height: 120px;
         }
 
         /* RSVP */
@@ -572,19 +570,44 @@
             background: var(--lila-light);
         }
 
+        .rsvp-card {
+            background: #ffffff;
+            padding: 24px 18px;
+            border-radius: 8px;
+            border: 1px solid rgba(184, 151, 195, 0.25);
+            box-shadow: 0 4px 15px rgba(65, 40, 74, 0.03);
+            max-width: 360px;
+            margin: 0 auto;
+        }
+
+        .rsvp-limit-title {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--purple-primary);
+            margin-bottom: 6px;
+        }
+
+        .rsvp-limit-date {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            color: var(--purple-dark);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
         .btn-whatsapp {
             display: inline-block;
             background: #25D366;
             color: white;
-            padding: 14px 30px;
+            padding: 14px 28px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             letter-spacing: 1px;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
             transition: transform 0.3s ease;
-            margin-top: 15px;
         }
 
         .btn-whatsapp:hover {
@@ -651,7 +674,7 @@
 </head>
 <body>
 
-    <!-- REPRODUCTOR DE MÚSICA AMBIENTAL (EL PRIVILEGIO DE AMAR) -->
+    <!-- REPRODUCTOR DE MÚSICA AMBIENTAL -->
     <audio id="bg-music" loop>
         <source src="musica.mp3" type="audio/mp3">
         Tu navegador no soporta audio.
@@ -674,12 +697,35 @@
                 <div class="cover-date">19 · 12 · 2026</div>
             </div>
 
-            <!-- SOBRE DE CARTA CERRADO -->
+            <!-- SOBRE DE CARTA CERRADO CON SELLO DE CERA Y FLOR -->
             <div class="envelope-wrapper" onclick="openInvitation()">
                 <div class="env-fold-left"></div>
                 <div class="env-fold-right"></div>
                 <div class="env-flap-top"></div>
-                <div class="wax-seal-center">XV</div>
+                
+                <!-- SELLO DE CERA VECTORIAL REALISTA (BORDES IRREGULARES Y FLOR GRABADA) -->
+                <svg class="wax-seal-real" viewBox="0 0 100 100">
+                    <defs>
+                        <radialGradient id="silverGradient" cx="35%" cy="30%" r="70%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="30%" stop-color="#d8d8d8"/>
+                            <stop offset="70%" stop-color="#8e8e8e"/>
+                            <stop offset="100%" stop-color="#555555"/>
+                        </radialGradient>
+                    </defs>
+                    <!-- Borde irregular de cera derretida -->
+                    <path d="M50 4 C68 2, 85 10, 92 25 C99 42, 95 62, 88 78 C80 93, 62 98, 45 96 C28 94, 10 88, 5 70 C0 52, 6 32, 18 18 C30 4, 38 6, 50 4 Z" fill="url(#silverGradient)" />
+                    <!-- Anillo interior grabado -->
+                    <circle cx="50" cy="50" r="32" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.6"/>
+                    <!-- Grabado botánico de flor de cera -->
+                    <g stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9">
+                        <path d="M50 68 Q 48 52 50 38" />
+                        <path d="M50 54 Q 42 50 36 53" />
+                        <path d="M50 48 Q 58 44 64 47" />
+                        <!-- Pétalos estilizados -->
+                        <path d="M50 38 C44 30, 40 34, 46 26 C48 20, 52 20, 54 26 C60 34, 56 30, 50 38 Z" fill="rgba(255,255,255,0.2)"/>
+                    </g>
+                </svg>
             </div>
 
             <div class="cover-footer">
@@ -842,26 +888,31 @@
                 </div>
             </section>
 
+            <!-- GALERÍA ASIMÉTRICA (4 FOTOS) -->
             <section class="gallery-section">
                 <h2 class="section-title">Galería</h2>
                 <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">Momentos especiales</p>
-                <div class="gallery-grid">
-                    <img src="foto1.jpg" alt="Foto 1" class="gallery-img">
-                    <img src="foto2.jpg" alt="Foto 2" class="gallery-img">
-                    <img src="foto3.jpg" alt="Foto 3" class="gallery-img">
-                    <img src="foto4.jpg" alt="Foto 4" class="gallery-img">
-                    <img src="foto5.jpg" alt="Foto 5" class="gallery-img">
+                <div class="gallery-grid-asym">
+                    <img src="foto1.jpg" alt="Foto 1" class="gallery-img img-tall">
+                    <img src="foto2.jpg" alt="Foto 2" class="gallery-img img-short">
+                    <img src="foto3.jpg" alt="Foto 3" class="gallery-img img-short">
+                    <img src="foto4.jpg" alt="Foto 4" class="gallery-img img-tall">
                 </div>
             </section>
 
+            <!-- RSVP CON TARJETA DESTACADA -->
             <section class="rsvp-section">
                 <h2 class="section-title">Asistencia</h2>
-                <p style="font-size: 0.9rem; color: #555; line-height: 1.6; max-width: 320px; margin: 0 auto 20px auto;">
-                    Tu presencia es muy importante para nosotros. Por favor, confirma tu asistencia dando clic en el botón de abajo.
-                </p>
-                <a href="https://wa.me/526221252954?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Regina%20Alejandra." target="_blank" class="btn-whatsapp">
-                    Confirmar por WhatsApp
-                </a>
+                <div class="rsvp-card">
+                    <p style="font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 14px;">
+                        Tu presencia es muy importante para nosotros.
+                    </p>
+                    <div class="rsvp-limit-title">Favor de confirmar antes del</div>
+                    <div class="rsvp-limit-date">20 de Noviembre de 2026</div>
+                    <a href="https://wa.me/526221252954?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Regina%20Alejandra." target="_blank" class="btn-whatsapp">
+                        Confirmar por WhatsApp
+                    </a>
+                </div>
             </section>
 
             <section class="info-section">
@@ -873,6 +924,9 @@
                         <h3>Código de Vestimenta</h3>
                     </div>
                     <p style="font-weight: 600; color: var(--purple-dark); margin-bottom: 6px;">Formal</p>
+                    <p style="font-size: 0.82rem; font-style: italic; color: #777; line-height: 1.5;">
+                        "Sabemos que el lila es un color hermoso, pero lo hemos reservado exclusivamente para nuestra quinceañera."
+                    </p>
                 </div>
 
                 <div class="info-box">
