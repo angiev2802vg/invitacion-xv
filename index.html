@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis XV Regina Alejandra</title>
-    <!-- Combinación tipográfica profesional: Great Vibes (Cursiva elegante), Cormorant Garamond y Montserrat -->
+    <!-- Fuentes elegantes de Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -17,7 +17,6 @@
             --white: #ffffff;
             --silver: #c0c0c0;
             
-            /* Tipografías combinadas */
             --font-script: 'Great Vibes', cursive;
             --font-serif: 'Cormorant Garamond', serif;
             --font-sans: 'Montserrat', sans-serif;
@@ -49,14 +48,46 @@
             overflow-x: hidden;
         }
 
-        /* Pantalla de Sobre / Portada Realista */
+        /* Estilos de Íconos Vectoriales SVG */
+        .icon-svg {
+            width: 32px;
+            height: 32px;
+            fill: none;
+            stroke: var(--purple-primary);
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .icon-svg-small {
+            width: 22px;
+            height: 22px;
+            stroke: var(--purple-primary);
+            stroke-width: 1.8;
+            fill: none;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        .icon-svg-large {
+            width: 44px;
+            height: 44px;
+            stroke: var(--purple-primary);
+            stroke-width: 1.5;
+            fill: none;
+            margin-bottom: 8px;
+        }
+
+        /* Pantalla de Portada / Sobre de Carta Realista */
         #envelope-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(65,40,74,0.95), rgba(125,90,136,0.9)), url('portada.jpg') center/cover;
+            background: linear-gradient(135deg, rgba(65,40,74,0.96), rgba(125,90,136,0.92)), url('portada.jpg') center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -72,133 +103,177 @@
             visibility: hidden;
         }
 
-        .invite-title {
+        .cover-header {
+            margin-bottom: 20px;
+        }
+
+        .cover-name {
+            font-family: var(--font-script);
+            font-size: 3.2rem;
+            color: #ffffff;
+            line-height: 1;
+            margin-bottom: 4px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .cover-date {
             font-family: var(--font-serif);
-            color: var(--lila-light);
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+            color: var(--lila-accent);
             letter-spacing: 4px;
-            margin-bottom: 6px;
             text-transform: uppercase;
         }
 
-        .guest-name-cover {
-            font-family: var(--font-script);
-            font-size: 2.5rem;
-            color: #e2d2ec;
-            margin-bottom: 25px;
-            line-height: 1;
-        }
-
-        /* Sobre Clásico con Sello Plateado */
-        .real-envelope {
-            width: 300px;
-            height: 190px;
-            background: #f4ecf7;
-            border-radius: 6px;
+        /* Sobre de Carta Cerrado */
+        .envelope-wrapper {
             position: relative;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+            width: 290px;
+            height: 180px;
+            background: #f1e6f5;
+            border-radius: 6px;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.4);
             cursor: pointer;
-            margin-bottom: 25px;
-            border: 1px solid var(--lila-accent);
+            margin: 15px 0 25px 0;
+            border: 1px solid rgba(255,255,255,0.4);
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
-        .envelope-flap {
+        .env-fold-left {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 145px solid #e3d2ea;
+            border-top: 90px solid transparent;
+            border-bottom: 90px solid #e3d2ea;
+        }
+
+        .env-fold-right {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-right: 145px solid #e8d9ee;
+            border-top: 90px solid transparent;
+            border-bottom: 90px solid #e8d9ee;
+        }
+
+        .env-flap-top {
             position: absolute;
             top: 0;
             left: 0;
             width: 0;
             height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-top: 95px solid #e8daf0;
-            transform-origin: top;
-            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
-        }
-
-        .envelope-content-preview {
-            text-align: center;
+            border-left: 145px solid transparent;
+            border-right: 145px solid transparent;
+            border-top: 105px solid #eddff2;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
             z-index: 2;
-            padding-top: 30px;
         }
 
-        .envelope-content-preview h2 {
-            font-family: var(--font-script);
-            font-size: 2.3rem;
-            color: var(--purple-dark);
-            margin-bottom: -4px;
-            font-weight: 400;
-        }
-
-        .envelope-content-preview p {
-            font-family: var(--font-serif);
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            color: var(--purple-primary);
-            text-transform: uppercase;
-        }
-
-        .wax-seal-silver {
+        .wax-seal-center {
             position: absolute;
-            bottom: 20px;
+            top: 85px;
             left: 50%;
             transform: translateX(-50%);
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, #e0e0e0, #9e9e9e);
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(135deg, #e6e6e6, #8e8e8e);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
             border: 2px solid #ffffff;
-            font-size: 14px;
-            color: #fff;
-            z-index: 3;
-            letter-spacing: 1px;
+            font-family: var(--font-serif);
+            font-size: 13px;
+            color: #ffffff;
             font-weight: 600;
+            letter-spacing: 1.5px;
+            z-index: 3;
+            transition: transform 0.2s ease;
         }
 
-        .open-btn {
-            background: transparent;
-            border: 1px solid var(--white);
+        .envelope-wrapper:hover .wax-seal-center {
+            transform: translateX(-50%) scale(1.08);
+        }
+
+        .cover-footer {
             color: var(--white);
-            padding: 11px 30px;
+            max-width: 320px;
+        }
+
+        .guest-title {
+            font-family: var(--font-serif);
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--lila-accent);
+            margin-bottom: 4px;
+        }
+
+        .guest-name-text {
+            font-family: var(--font-script);
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .click-prompt {
             font-family: var(--font-sans);
             font-size: 0.75rem;
-            letter-spacing: 2.5px;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            color: #ffffff;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.6);
+            padding: 10px 24px;
+            border-radius: 3px;
             cursor: pointer;
             transition: all 0.3s ease;
-            border-radius: 3px;
+            margin-bottom: 15px;
         }
 
-        .open-btn:hover {
+        .click-prompt:hover {
             background: var(--white);
             color: var(--purple-dark);
         }
 
-        .reserved-box {
-            margin-top: 20px;
-            color: var(--lila-light);
-            font-size: 0.85rem;
+        .passes-badge {
+            font-size: 0.8rem;
             letter-spacing: 1px;
-            line-height: 1.5;
+            color: var(--lila-light);
+            line-height: 1.4;
         }
 
-        .reserved-badge {
-            display: inline-block;
-            border: 1px solid var(--lila-accent);
-            padding: 5px 16px;
-            border-radius: 4px;
-            margin-top: 5px;
-            font-size: 1.1rem;
-            color: var(--lila-light);
-            background: rgba(255,255,255,0.05);
+        .passes-num {
             font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: #ffffff;
+            border-bottom: 1px dashed var(--lila-accent);
+            padding: 0 6px;
+        }
+
+        /* Botón Flotante para pausar/reproducir música */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background: var(--purple-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            cursor: pointer;
+            z-index: 999;
+            border: 2px solid white;
         }
 
         /* Contenido Principal */
@@ -251,7 +326,6 @@
             color: var(--purple-primary);
         }
 
-        /* Oración emotiva */
         .quote-section {
             background: var(--lila-light);
             padding: 35px 25px;
@@ -260,58 +334,6 @@
             font-size: 1.25rem;
             color: var(--purple-dark);
             line-height: 1.7;
-        }
-
-        /* Cuenta Regresiva */
-        .countdown-section {
-            background: var(--white);
-        }
-
-        .countdown-title {
-            font-size: 0.75rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            color: var(--purple-primary);
-            font-weight: 500;
-        }
-
-        .countdown-grid {
-            display: flex;
-            justify-content: center;
-            gap: 22px;
-        }
-
-        .countdown-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .countdown-number {
-            font-family: var(--font-serif);
-            font-size: 2.6rem;
-            color: var(--purple-dark);
-            line-height: 1;
-            font-weight: 400;
-        }
-
-        .countdown-label {
-            font-size: 0.65rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 6px;
-            color: var(--purple-primary);
-        }
-
-        /* Títulos de sección con la fuente cursiva resaltada */
-        .section-title {
-            font-family: var(--font-script);
-            font-size: 3rem;
-            color: var(--purple-dark);
-            margin-bottom: 25px;
-            font-weight: 400;
-            line-height: 1;
         }
 
         /* Familia y Padrinos */
@@ -357,7 +379,58 @@
             border: 1px solid rgba(184, 151, 195, 0.2);
         }
 
-        /* Misa y Recepción */
+        /* Cuenta Regresiva */
+        .countdown-section {
+            background: var(--white);
+        }
+
+        .countdown-title {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: var(--purple-primary);
+            font-weight: 500;
+        }
+
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-number {
+            font-family: var(--font-serif);
+            font-size: 2.6rem;
+            color: var(--purple-dark);
+            line-height: 1;
+            font-weight: 400;
+        }
+
+        .countdown-label {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 6px;
+            color: var(--purple-primary);
+        }
+
+        .section-title {
+            font-family: var(--font-script);
+            font-size: 3rem;
+            color: var(--purple-dark);
+            margin-bottom: 25px;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        /* Ceremonia y Recepción */
         .events-section {
             background-color: var(--white);
         }
@@ -369,11 +442,6 @@
             border-radius: 6px;
             box-shadow: 0 4px 15px rgba(65, 40, 74, 0.04);
             border: 1px solid rgba(184, 151, 195, 0.2);
-        }
-
-        .event-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
         }
 
         .event-title {
@@ -416,7 +484,7 @@
             color: var(--white);
         }
 
-        /* Itinerario */
+        /* Itinerario Línea de Tiempo */
         .timeline-section {
             background: var(--lila-light);
             padding: 45px 20px;
@@ -424,7 +492,7 @@
 
         .timeline {
             position: relative;
-            max-width: 340px;
+            max-width: 360px;
             margin: 30px auto 0 auto;
             text-align: left;
         }
@@ -472,9 +540,11 @@
         .timeline-content-box {
             padding-left: 20px;
             flex-grow: 1;
-            font-size: 0.92rem;
+            font-size: 0.95rem;
             color: var(--text-color);
             font-weight: 500;
+            display: flex;
+            align-items: center;
         }
 
         /* Galería */
@@ -534,12 +604,19 @@
             border: 1px solid rgba(184, 151, 195, 0.15);
         }
 
+        .info-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
         .info-box h3 {
             font-family: var(--font-serif);
             font-size: 1.5rem;
             color: var(--purple-dark);
-            margin-bottom: 12px;
             font-weight: 600;
+            margin: 0;
         }
 
         .info-box p {
@@ -574,35 +651,48 @@
 </head>
 <body>
 
-    <!-- REPRODUCTOR DE MÚSICA (EL PRIVILEGIO DE AMAR - INSTRUMENTAL) -->
+    <!-- REPRODUCTOR DE MÚSICA AMBIENTAL (EL PRIVILEGIO DE AMAR) -->
     <audio id="bg-music" loop>
-        <source src="https://actions.google.com/sounds/v1/ambiences/music_box.ogg" type="audio/ogg">
+        <source src="musica.mp3" type="audio/mp3">
         Tu navegador no soporta audio.
     </audio>
 
+    <!-- BOTÓN DE MÚSICA FLOTANTE -->
+    <div class="music-btn" onclick="toggleMusic()" title="Música">
+        <svg id="music-icon" class="icon-svg" viewBox="0 0 24 24" style="stroke: white; width: 20px; height: 20px;">
+            <path d="M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zm12 0a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+    </div>
+
     <div class="phone-container">
 
-        <!-- PANTALLA DE SOBRE / PORTADA CON SELLO PLATEADO -->
+        <!-- PANTALLA DE PORTADA / SOBRE DE CARTA REALISTA -->
         <div id="envelope-screen">
-            <div class="invite-title">Invitación Especial para:</div>
-            <div class="guest-name-cover" id="guest-name">Estimado Invitado</div>
-
-            <div class="real-envelope" onclick="openInvitation()">
-                <div class="envelope-flap"></div>
-                <div class="envelope-content-preview">
-                    <h2>Mis XV Años</h2>
-                    <p>Regina Alejandra</p>
-                </div>
-                <div class="wax-seal-silver">XV</div>
-            </div>
-
-            <button class="open-btn" onclick="openInvitation()">Abrir Invitación</button>
             
-            <div class="reserved-box">
-                Hemos reservado<br>
-                <span class="reserved-badge" id="num-lugares">2</span><br>
-                Lugares en su honor
+            <div class="cover-header">
+                <div class="cover-name">Regina Alejandra</div>
+                <div class="cover-date">19 · 12 · 2026</div>
             </div>
+
+            <!-- SOBRE DE CARTA CERRADO -->
+            <div class="envelope-wrapper" onclick="openInvitation()">
+                <div class="env-fold-left"></div>
+                <div class="env-fold-right"></div>
+                <div class="env-flap-top"></div>
+                <div class="wax-seal-center">XV</div>
+            </div>
+
+            <div class="cover-footer">
+                <button class="click-prompt" onclick="openInvitation()">Clic para abrir</button>
+                
+                <div class="guest-title">Invitación especial para:</div>
+                <div class="guest-name-text" id="guest-name">Estimado Invitado</div>
+
+                <div class="passes-badge">
+                    Hemos reservado <span class="passes-num" id="num-lugares">2</span> lugares en su honor
+                </div>
+            </div>
+
         </div>
 
         <!-- CONTENIDO PRINCIPAL -->
@@ -618,7 +708,7 @@
 
             <!-- ORACIÓN EMOTIVA ANTES DE LOS PADRES -->
             <div class="quote-section">
-                Doy gracias a Dios, a mis padres por concederme la vida y formar parte de ella. Hay recuerdos que no voy a olvidar y momentos como este que siempre voy a guardar, porque serán parte de mi vida. Es mi deseo que compartan conmigo la alegría de Mis XV años.
+                "Doy gracias a Dios, a mis padres por concederme la vida y formar parte de ella. Hay recuerdos que no voy a olvidar y momentos como este que siempre voy a guardar, porque serán parte de mi vida. Es mi deseo que compartan conmigo la alegría de Mis XV años."
             </div>
 
             <section class="family-section">
@@ -638,7 +728,7 @@
 
                 <div class="family-block">
                     <div class="family-subtitle">Mi Chambelán</div>
-                    <div class="family-names">Dilan Arak Enriquez Alvarez</div>
+                    <div class="family-names">Dilam Arak Enriquez Alvarez</div>
                 </div>
             </section>
 
@@ -664,12 +754,14 @@
                 </div>
             </section>
 
-            <!-- CEREMONIA Y RECEPCIÓN JUNTAS -->
+            <!-- CEREMONIA Y RECEPCIÓN -->
             <section class="events-section">
                 <h2 class="section-title">Ceremonia y Recepción</h2>
 
                 <div class="card-event">
-                    <div class="event-icon">⛪</div>
+                    <svg class="icon-svg-large" viewBox="0 0 24 24">
+                        <path d="M12 2v4M10 4h4M12 6L3 12v9a1 1 0 001 1h16a1 1 0 001-1v-9l-9-6zM9 22v-6a3 3 0 016 0v6"></path>
+                    </svg>
                     <div class="event-title">Ceremonia Religiosa</div>
                     <div class="event-place">Iglesia Sagrados Corazones de Jesús y María</div>
                     <div class="event-address">19 de Diciembre de 2026 - 5:00 PM<br>Hermosillo, Sonora</div>
@@ -677,7 +769,9 @@
                 </div>
 
                 <div class="card-event" style="margin-bottom: 0;">
-                    <div class="event-icon">✨</div>
+                    <svg class="icon-svg-large" viewBox="0 0 24 24">
+                        <path d="M8 22h8M12 15v7M8 3h8l-1.5 8.5a4 4 0 01-5 0L8 3zM6 8h12"></path>
+                    </svg>
                     <div class="event-title">Recepción</div>
                     <div class="event-place">La Carreta</div>
                     <div class="event-address">19 de Diciembre de 2026 - 9:00 PM<br>Hermosillo, Sonora</div>
@@ -689,31 +783,62 @@
             <section class="timeline-section">
                 <h2 class="section-title">Itinerario</h2>
                 <div class="timeline">
+                    
                     <div class="timeline-row">
                         <div class="timeline-time-box">5:00 PM</div>
                         <div class="timeline-dot"></div>
-                        <div class="timeline-content-box">Misa ⛪</div>
+                        <div class="timeline-content-box">
+                            <svg class="icon-svg-small" viewBox="0 0 24 24">
+                                <path d="M12 2v4M10 4h4M12 6L3 12v9a1 1 0 001 1h16a1 1 0 001-1v-9l-9-6z"></path>
+                            </svg>
+                            Misa
+                        </div>
                     </div>
+
                     <div class="timeline-row">
                         <div class="timeline-time-box">9:00 PM</div>
                         <div class="timeline-dot"></div>
-                        <div class="timeline-content-box">Recepción / Evento 🥂</div>
+                        <div class="timeline-content-box">
+                            <svg class="icon-svg-small" viewBox="0 0 24 24">
+                                <path d="M8 22h8M12 15v7M8 3h8l-1.5 8.5a4 4 0 01-5 0L8 3z"></path>
+                            </svg>
+                            Recepción / Evento
+                        </div>
                     </div>
+
                     <div class="timeline-row">
                         <div class="timeline-time-box">9:40 PM</div>
                         <div class="timeline-dot"></div>
-                        <div class="timeline-content-box">Vals 💃</div>
+                        <div class="timeline-content-box">
+                            <svg class="icon-svg-small" viewBox="0 0 24 24">
+                                <path d="M12 4a2 2 0 100-4 2 2 0 000 4zM6 22l2-10 4 2 4-2 2 10H6z"></path>
+                            </svg>
+                            Vals
+                        </div>
                     </div>
+
                     <div class="timeline-row">
                         <div class="timeline-time-box">10:30 PM</div>
                         <div class="timeline-dot"></div>
-                        <div class="timeline-content-box">Cena 🍽️</div>
+                        <div class="timeline-content-box">
+                            <svg class="icon-svg-small" viewBox="0 0 24 24">
+                                <path d="M6 3v6a3 3 0 006 0V3M9 12v9M18 3v18M15 3a3 3 0 013 3v3h-3V3z"></path>
+                            </svg>
+                            Cena
+                        </div>
                     </div>
+
                     <div class="timeline-row" style="margin-bottom: 0;">
                         <div class="timeline-time-box">¡Fiesta!</div>
                         <div class="timeline-dot"></div>
-                        <div class="timeline-content-box">¡Todos a bailar! ✨</div>
+                        <div class="timeline-content-box">
+                            <svg class="icon-svg-small" viewBox="0 0 24 24">
+                                <path d="M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zm12 0a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            ¡Todos a bailar!
+                        </div>
                     </div>
+
                 </div>
             </section>
 
@@ -723,6 +848,9 @@
                 <div class="gallery-grid">
                     <img src="foto1.jpg" alt="Foto 1" class="gallery-img">
                     <img src="foto2.jpg" alt="Foto 2" class="gallery-img">
+                    <img src="foto3.jpg" alt="Foto 3" class="gallery-img">
+                    <img src="foto4.jpg" alt="Foto 4" class="gallery-img">
+                    <img src="foto5.jpg" alt="Foto 5" class="gallery-img">
                 </div>
             </section>
 
@@ -738,12 +866,23 @@
 
             <section class="info-section">
                 <div class="info-box">
-                    <h3>👗Código de Vestimenta</h3>
+                    <div class="info-title-container">
+                        <svg class="icon-svg-small" viewBox="0 0 24 24" style="margin-right: 10px;">
+                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"></path>
+                        </svg>
+                        <h3>Código de Vestimenta</h3>
+                    </div>
                     <p style="font-weight: 600; color: var(--purple-dark); margin-bottom: 6px;">Formal</p>
                 </div>
 
                 <div class="info-box">
-                    <h3>💌 Lluvia de Sobres</h3>
+                    <div class="info-title-container">
+                        <svg class="icon-svg-small" viewBox="0 0 24 24" style="margin-right: 10px;">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <h3>Lluvia de Sobres</h3>
+                    </div>
                     <p>Su presencia es nuestro mejor regalo, pero si desean tener un detalle adicional con nuestra quinceañera, tendremos lluvia de sobres.</p>
                 </div>
             </section>
@@ -782,6 +921,15 @@
             envelope.classList.add('hidden');
             mainContent.classList.add('visible');
             window.scrollTo(0, 0);
+        }
+
+        function toggleMusic() {
+            const music = document.getElementById('bg-music');
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
         }
 
         const eventDate = new Date('December 19, 2026 17:00:00').getTime();
