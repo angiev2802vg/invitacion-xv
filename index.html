@@ -93,7 +93,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            transition: opacity 1s ease 0.8s, visibility 1s ease 0.8s;
+            transition: opacity 0.8s ease 1.2s, visibility 0.8s ease 1.2s;
             padding: 20px;
             text-align: center;
             overflow: hidden;
@@ -105,7 +105,7 @@
         }
 
         .cover-header {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             z-index: 5;
         }
 
@@ -126,35 +126,93 @@
             text-transform: uppercase;
         }
 
-        /* ESTRUCTURA DEL SOBRE CON FORRO FLORAL FINO */
-        .envelope-container {
+        /* CONTENEDOR DEL SOBRE Y LA TARJETA QUE SALE BRINCANDO */
+        .envelope-scene {
             position: relative;
             width: 300px;
-            height: 195px;
-            margin: 15px 0 25px 0;
+            height: 240px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
             cursor: pointer;
             perspective: 1000px;
             z-index: 4;
         }
 
-        /* Interior del sobre con patrón de rosas y flores finas estilo Pinterest */
+        /* La Tarjeta que sale deslizándose/brincando desde dentro */
+        .invitation-card-popup {
+            position: absolute;
+            bottom: 20px;
+            width: 250px;
+            height: 160px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            border: 1px solid rgba(184, 151, 195, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            text-align: center;
+            z-index: 2;
+            transform: translateY(60px) scale(0.85);
+            opacity: 0;
+            transition: transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease;
+        }
+
+        .envelope-scene.open .invitation-card-popup {
+            transform: translateY(-80px) scale(1);
+            opacity: 1;
+        }
+
+        .popup-title {
+            font-family: var(--font-serif);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--purple-primary);
+            margin-bottom: 4px;
+        }
+
+        .popup-name {
+            font-family: var(--font-script);
+            font-size: 2.2rem;
+            color: var(--purple-dark);
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+
+        .popup-date {
+            font-family: var(--font-serif);
+            font-size: 0.9rem;
+            color: var(--purple-primary);
+            letter-spacing: 2px;
+        }
+
+        /* Estructura del Sobre Delante de la Tarjeta */
+        .envelope-front-group {
+            position: absolute;
+            bottom: 0;
+            width: 300px;
+            height: 195px;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* Interior con forro floral */
         .env-back {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #e9deef;
-            background-image: 
-                radial-gradient(#b897c3 1.2px, transparent 1.2px), 
-                radial-gradient(#8e639c 1.2px, #e9deef 1.2px);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
+            background: url('https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=500&auto=format&fit=crop&q=80') center/cover;
             border-radius: 6px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
-        /* Solapas del sobre */
         .env-left {
             position: absolute;
             bottom: 0;
@@ -164,7 +222,6 @@
             border-left: 150px solid #e3d2ea;
             border-top: 98px solid transparent;
             border-bottom: 97px solid #e3d2ea;
-            z-index: 3;
             border-bottom-left-radius: 6px;
         }
 
@@ -177,7 +234,6 @@
             border-right: 150px solid #ecddef;
             border-top: 98px solid transparent;
             border-bottom: 97px solid #ecddef;
-            z-index: 3;
             border-bottom-right-radius: 6px;
         }
 
@@ -190,12 +246,11 @@
             border-left: 150px solid transparent;
             border-right: 150px solid transparent;
             border-bottom: 105px solid #f2e7f6;
-            z-index: 3;
             border-bottom-left-radius: 6px;
             border-bottom-right-radius: 6px;
         }
 
-        /* Solapa superior */
+        /* Solapa superior que se abre hacia arriba */
         .env-flap-top {
             position: absolute;
             top: 0;
@@ -206,9 +261,10 @@
             border-right: 150px solid transparent;
             border-top: 110px solid #eddff2;
             transform-origin: top center;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 4;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
+            pointer-events: auto;
+            cursor: pointer;
         }
 
         /* Sello de Cera Realista */
@@ -219,32 +275,31 @@
             transform: translateX(-50%);
             width: 65px;
             height: 65px;
-            z-index: 5;
-            transition: transform 0.4s ease, opacity 0.4s ease, filter 0.2s ease;
+            z-index: 6;
+            transition: transform 0.3s ease, opacity 0.3s ease;
             filter: drop-shadow(0 6px 10px rgba(0,0,0,0.4));
             object-fit: contain;
             border-radius: 50%;
+            pointer-events: auto;
+            cursor: pointer;
         }
 
-        .envelope-container:hover .wax-seal-img {
-            transform: translateX(-50%) scale(1.08);
-        }
-
-        /* Animación de apertura */
-        .envelope-container.open .env-flap-top {
+        /* Animación de apertura del sobre */
+        .envelope-scene.open .env-flap-top {
             transform: rotateX(180deg);
             z-index: 1;
         }
 
-        .envelope-container.open .wax-seal-img {
+        .envelope-scene.open .wax-seal-img {
             opacity: 0;
-            transform: translateX(-50%) scale(0.5);
+            transform: translateX(-50%) scale(0.4);
         }
 
         .cover-footer {
             color: var(--white);
             max-width: 320px;
             z-index: 5;
+            margin-top: 5px;
         }
 
         .guest-title {
@@ -260,7 +315,7 @@
             font-family: var(--font-script);
             font-size: 2.2rem;
             color: #ffffff;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             line-height: 1.1;
         }
 
@@ -272,11 +327,11 @@
             color: #ffffff;
             background: transparent;
             border: 1px solid rgba(255,255,255,0.6);
-            padding: 10px 24px;
+            padding: 9px 22px;
             border-radius: 3px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .click-prompt:hover {
@@ -605,521 +660,4 @@
             border-radius: 8px;
             border: 1px solid rgba(184, 151, 195, 0.25);
             box-shadow: 0 4px 15px rgba(65, 40, 74, 0.04);
-            max-width: 360px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .rsvp-limit-title {
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--purple-primary);
-            margin-bottom: 6px;
-        }
-
-        .rsvp-limit-date {
-            font-family: var(--font-serif);
-            font-size: 1.35rem;
-            color: var(--purple-dark);
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .rsvp-buttons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .btn-rsvp-yes {
-            display: block;
-            background: #25D366;
-            color: white;
-            padding: 13px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.88rem;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
-            transition: transform 0.2s ease;
-        }
-
-        .btn-rsvp-yes:hover {
-            transform: scale(1.02);
-        }
-
-        .btn-rsvp-no {
-            display: block;
-            background: #f1e6f5;
-            color: var(--purple-dark);
-            padding: 13px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.88rem;
-            letter-spacing: 0.5px;
-            border: 1px solid var(--lila-accent);
-            transition: background 0.2s ease;
-        }
-
-        .btn-rsvp-no:hover {
-            background: #e3d2ea;
-        }
-
-        /* GALERÍA CARRUSEL */
-        .gallery-section {
-            background: var(--white);
-            padding-right: 0;
-            padding-left: 0;
-        }
-
-        .gallery-carousel {
-            display: flex;
-            gap: 15px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            padding: 10px 20px 25px 20px;
-            -webkit-overflow-scrolling: touch;
-            margin-top: 10px;
-        }
-
-        .gallery-carousel::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .gallery-carousel::-webkit-scrollbar-track {
-            background: var(--lila-light);
-            border-radius: 10px;
-        }
-
-        .gallery-carousel::-webkit-scrollbar-thumb {
-            background: var(--lila-accent);
-            border-radius: 10px;
-        }
-
-        .carousel-item {
-            flex: 0 0 82%;
-            scroll-snap-align: center;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(65, 40, 74, 0.12);
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 340px;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Info */
-        .info-section {
-            background: var(--white);
-        }
-
-        .info-box {
-            margin-bottom: 25px;
-            background: var(--bg-color);
-            padding: 30px 20px;
-            border-radius: 6px;
-            border: 1px solid rgba(184, 151, 195, 0.15);
-        }
-
-        .info-title-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 12px;
-        }
-
-        .info-box h3 {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            color: var(--purple-dark);
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .info-box p {
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.7;
-            max-width: 340px;
-            margin: 0 auto;
-        }
-
-        footer {
-            background: var(--purple-dark);
-            color: var(--white);
-            padding: 45px 20px;
-            text-align: center;
-        }
-
-        .footer-name {
-            font-family: var(--font-script);
-            font-size: 2.8rem;
-            line-height: 1;
-            margin-bottom: 5px;
-        }
-
-        .footer-date {
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            font-family: var(--font-sans);
-            color: var(--lila-accent);
-        }
-    </style>
-</head>
-<body>
-
-    <!-- REPRODUCTOR DE MÚSICA AMBIENTAL -->
-    <audio id="bg-music" loop>
-        <source src="musica.mp3" type="audio/mp3">
-        Tu navegador no soporta audio.
-    </audio>
-
-    <!-- BOTÓN DE MÚSICA FLOTANTE -->
-    <div class="music-btn" onclick="toggleMusic()" title="Música">
-        <svg id="music-icon" class="icon-svg" viewBox="0 0 24 24" style="stroke: white; width: 20px; height: 20px;">
-            <path d="M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zm12 0a3 3 0 11-6 0 3 3 0 016 0z"></path>
-        </svg>
-    </div>
-
-    <div class="phone-container">
-
-        <!-- PANTALLA DE PORTADA / SOBRE INTERACTIVO -->
-        <div id="envelope-screen">
-            
-            <div class="cover-header">
-                <div class="cover-name">Regina Alejandra</div>
-                <div class="cover-date">19 · 12 · 2026</div>
-            </div>
-
-            <!-- SOBRE INTERACTIVO CON FORRO FLORAL FINO INTERNO -->
-            <div class="envelope-container" id="env-container" onclick="openInvitation()">
-                <div class="env-back"></div>
-                <div class="env-flap-top"></div>
-                <div class="env-left"></div>
-                <div class="env-right"></div>
-                <div class="env-bottom"></div>
-                
-                <img src="sello.png" alt="Sello de Cera" class="wax-seal-img" onerror="this.src='https://images.unsplash.com/photo-1534447677768-be436bb09401?w=150&auto=format&fit=crop&q=80'">
-            </div>
-
-            <div class="cover-footer">
-                <button class="click-prompt" onclick="openInvitation()">Clic para abrir</button>
-                
-                <div class="guest-title">Invitación especial para:</div>
-                <div class="guest-name-text" id="guest-name">Estimado Invitado</div>
-
-                <div class="passes-badge">
-                    Hemos reservado <span class="passes-num" id="num-lugares">2</span> lugares en su honor
-                </div>
-            </div>
-
-        </div>
-
-        <!-- CONTENIDO PRINCIPAL DE LA INVITACIÓN -->
-        <div class="main-content" id="main-content">
-            
-            <section class="hero-section">
-                <img src="portada.jpg" alt="Regina Alejandra" class="hero-img">
-                <div class="hero-text">
-                    <h1>Regina Alejandra</h1>
-                    <p>Mis XV Años</p>
-                </div>
-            </section>
-
-            <!-- CUENTA REGRESIVA AL PRINCIPIO -->
-            <section class="countdown-section">
-                <div class="countdown-title">Faltan</div>
-                <div class="countdown-grid">
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="days">00</span>
-                        <span class="countdown-label">Días</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="hours">00</span>
-                        <span class="countdown-label">Horas</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="minutes">00</span>
-                        <span class="countdown-label">Min</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="seconds">00</span>
-                        <span class="countdown-label">Seg</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ORACIÓN EMOTIVA SIN COMILLAS -->
-            <div class="quote-section">
-                Doy gracias a Dios, a mis padres por concederme la vida y formar parte de ella. Hay recuerdos que no voy a olvidar y momentos como este que siempre voy a guardar, porque serán parte de mi vida. Es mi deseo que compartan conmigo la alegría de Mis XV años.
-            </div>
-
-            <section class="family-section">
-                <div class="family-block">
-                    <div class="family-subtitle">Con la bendición de mis padres</div>
-                    <div class="family-names">Andres Amaya y Monica Mirelia Cienfuegos</div>
-                </div>
-
-                <div class="family-block">
-                    <div class="family-subtitle">Mis Padrinos</div>
-                    <div class="godparents-list">
-                        <div class="godparents-pair">Gabriela Cienfuegos García & Fernando Mendivil Valenzuela</div>
-                        <div class="godparents-pair">Nailea Yosmara Mendez Velazquez & Alejandro Gutierrez Medina</div>
-                        <div class="godparents-pair">Jesus Aaron García Parra & Andrea Camila Morales Garcia</div>
-                    </div>
-                </div>
-
-                <div class="family-block">
-                    <div class="family-subtitle">Mi Chambelán</div>
-                    <div class="family-names">Dilan Arak Enriquez Alvarez</div>
-                </div>
-            </section>
-
-            <!-- CEREMONIA Y RECEPCIÓN -->
-            <section class="events-section">
-                <h2 class="section-title">Ceremonia y Recepción</h2>
-
-                <div class="card-event">
-                    <svg class="icon-svg-large" viewBox="0 0 24 24">
-                        <path d="M12 2v4M10 4h4M12 6L3 12v9a1 1 0 001 1h16a1 1 0 001-1v-9l-9-6zM9 22v-6a3 3 0 016 0v6"></path>
-                    </svg>
-                    <div class="event-title">Ceremonia Religiosa</div>
-                    <div class="event-place">Iglesia Sagrados Corazones de Jesús y María</div>
-                    <div class="event-address">19 de Diciembre de 2026 - 5:00 PM<br>Hermosillo, Sonora</div>
-                    <a href="https://maps.app.goo.gl/KRHMXpeEb2PEjHH89" target="_blank" class="btn-action">Ver Ubicación Misa</a>
-                </div>
-
-                <div class="card-event" style="margin-bottom: 0;">
-                    <svg class="icon-svg-large" viewBox="0 0 24 24">
-                        <path d="M8 22h8M12 15v7M8 3h8l-1.5 8.5a4 4 0 01-5 0L8 3zM6 8h12"></path>
-                    </svg>
-                    <div class="event-title">Recepción</div>
-                    <div class="event-place">La Carreta</div>
-                    <div class="event-address">19 de Diciembre de 2026 - 9:00 PM<br>Hermosillo, Sonora</div>
-                    <a href="https://maps.app.goo.gl/wJQENW439MBSDPB18" target="_blank" class="btn-action">Ver Ubicación Recepción</a>
-                </div>
-            </section>
-
-            <!-- ITINERARIO -->
-            <section class="timeline-section">
-                <h2 class="section-title">Itinerario</h2>
-                <div class="timeline">
-                    
-                    <div class="timeline-row">
-                        <div class="timeline-time-box">5:00 PM</div>
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content-box">
-                            <svg class="icon-svg-small" viewBox="0 0 24 24">
-                                <path d="M12 2v4M10 4h4M12 6L3 12v9a1 1 0 001 1h16a1 1 0 001-1v-9l-9-6z"></path>
-                            </svg>
-                            Misa
-                        </div>
-                    </div>
-
-                    <div class="timeline-row">
-                        <div class="timeline-time-box">9:00 PM</div>
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content-box">
-                            <svg class="icon-svg-small" viewBox="0 0 24 24">
-                                <path d="M8 22h8M12 15v7M8 3h8l-1.5 8.5a4 4 0 01-5 0L8 3z"></path>
-                            </svg>
-                            Recepción / Evento
-                        </div>
-                    </div>
-
-                    <div class="timeline-row">
-                        <div class="timeline-time-box">9:40 PM</div>
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content-box">
-                            <svg class="icon-svg-small" viewBox="0 0 24 24">
-                                <path d="M12 4a2 2 0 100-4 2 2 0 000 4zM6 22l2-10 4 2 4-2 2 10H6z"></path>
-                            </svg>
-                            Vals
-                        </div>
-                    </div>
-
-                    <div class="timeline-row">
-                        <div class="timeline-time-box">10:30 PM</div>
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content-box">
-                            <svg class="icon-svg-small" viewBox="0 0 24 24">
-                                <path d="M6 3v6a3 3 0 006 0V3M9 12v9M18 3v18M15 3a3 3 0 013 3v3h-3V3z"></path>
-                            </svg>
-                            Cena
-                        </div>
-                    </div>
-
-                    <div class="timeline-row" style="margin-bottom: 0;">
-                        <div class="timeline-time-box">¡Fiesta!</div>
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content-box">
-                            <svg class="icon-svg-small" viewBox="0 0 24 24">
-                                <path d="M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zm12 0a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                            ¡Todos a bailar!
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- CONFIRMACIÓN DE ASISTENCIA (ANTES DE LA GALERÍA) -->
-            <section class="rsvp-section">
-                <h2 class="section-title">Asistencia</h2>
-                <div class="rsvp-card">
-                    <div class="rsvp-limit-title">Favor de confirmar antes del</div>
-                    <div class="rsvp-limit-date">20 de Noviembre de 2026</div>
-                    
-                    <div class="rsvp-buttons-container">
-                        <a id="btn-yes" href="#" target="_blank" class="btn-rsvp-yes">
-                            ✓ Sí, asistiré
-                        </a>
-                        <a id="btn-no" href="#" target="_blank" class="btn-rsvp-no">
-                            ✕ No podré asistir
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- GALERÍA CARRUSEL -->
-            <section class="gallery-section">
-                <h2 class="section-title">Galería</h2>
-                <p style="font-size: 0.85rem; color: #666; margin-bottom: 12px;">Momentos especiales</p>
-                
-                <div class="gallery-carousel">
-                    <div class="carousel-item">
-                        <img src="foto1.jpg" alt="Foto 1">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="foto2.jpg" alt="Foto 2">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="foto3.jpg" alt="Foto 3">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="foto4.jpg" alt="Foto 4">
-                    </div>
-                </div>
-            </section>
-
-            <section class="info-section">
-                <div class="info-box">
-                    <div class="info-title-container">
-                        <svg class="icon-svg-small" viewBox="0 0 24 24" style="margin-right: 10px;">
-                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"></path>
-                        </svg>
-                        <h3>Código de Vestimenta</h3>
-                    </div>
-                    <p style="font-weight: 600; color: var(--purple-dark); margin-bottom: 6px;">Formal</p>
-                    <p style="font-size: 0.82rem; font-style: italic; color: #777; line-height: 1.5;">
-                        Sabemos que el lila es un color hermoso, pero lo hemos reservado exclusivamente para nuestra quinceañera.
-                    </p>
-                </div>
-
-                <div class="info-box">
-                    <div class="info-title-container">
-                        <svg class="icon-svg-small" viewBox="0 0 24 24" style="margin-right: 10px;">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg>
-                        <h3>Lluvia de Sobres</h3>
-                    </div>
-                    <p>Su presencia es nuestro mejor regalo, pero si desean tener un detalle adicional con nuestra quinceañera, tendremos lluvia de sobres.</p>
-                </div>
-            </section>
-
-            <footer>
-                <div class="footer-name">Regina Alejandra</div>
-                <div class="footer-date">19 · 12 · 2026</div>
-            </footer>
-
-        </div>
-
-    </div>
-
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        
-        const nombreInvitado = urlParams.get('nombre') ? decodeURIComponent(urlParams.get('nombre')) : 'Estimado Invitado';
-        const numInvitados = urlParams.get('invitados') ? urlParams.get('invitados') : '2';
-
-        document.getElementById('guest-name').innerText = nombreInvitado;
-        document.getElementById('num-lugares').innerText = numInvitados;
-
-        const telefono = "526221252954";
-        const mensajeSi = `¡Hola! 👋 Confirmo mi asistencia a los XV de Regina Alejandra. Soy ${nombreInvitado} y asistiremos ${numInvitados} personas. ¡Allá nos vemos! 🎉`;
-        const mensajeNo = `¡Hola! 👋 Lamentablemente no podré asistir a los XV de Regina Alejandra, pero les deseo el mejor de los éxitos. Soy ${nombreInvitado}. ✨`;
-
-        document.getElementById('btn-yes').href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeSi)}`;
-        document.getElementById('btn-no').href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeNo)}`;
-
-        let isOpened = false;
-        function openInvitation() {
-            if (isOpened) return;
-            isOpened = true;
-
-            const envContainer = document.getElementById('env-container');
-            const envelopeScreen = document.getElementById('envelope-screen');
-            const mainContent = document.getElementById('main-content');
-            const music = document.getElementById('bg-music');
-            
-            music.play().catch(error => {
-                console.log("Audio autoplay restricted by browser:", error);
-            });
-
-            // Animación 3D de apertura del sobre
-            envContainer.classList.add('open');
-
-            // Revelar el contenido principal suavemente
-            setTimeout(() => {
-                envelopeScreen.classList.add('hidden');
-                mainContent.classList.add('visible');
-                window.scrollTo(0, 0);
-            }, 900);
-        }
-
-        function toggleMusic() {
-            const music = document.getElementById('bg-music');
-            if (music.paused) {
-                music.play();
-            } else {
-                music.pause();
-            }
-        }
-
-        const eventDate = new Date('December 19, 2026 17:00:00').getTime();
-
-        const updateCountdown = () => {
-            const now = new Date().getTime();
-            const distance = eventDate - now;
-
-            if (distance < 0) {
-                document.getElementById('days').innerText = '00';
-                document.getElementById('hours').innerText = '00';
-                document.getElementById('minutes').innerText = '00';
-                document.getElementById('seconds').innerText = '00';
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').innerText = String(days).padStart(2, '0');
-            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
-        };
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-    </script>
-</body>
-</html>
+            max-width:
