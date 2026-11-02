@@ -126,7 +126,7 @@
             text-transform: uppercase;
         }
 
-        /* ESCENA PRINCIPAL CON EL SOBRE Y FLORES EXACTAS (UNA ABAJO, OTRA ARRIBA) */
+        /* ESCENA PRINCIPAL CON EL SOBRE LIMPIO */
         .envelope-scene {
             position: relative;
             width: 340px;
@@ -136,31 +136,6 @@
             justify-content: center;
             align-items: center;
             perspective: 1000px;
-        }
-
-        /* Flor Izquierda: Exactamente abajo a la izquierda */
-        .floral-img-left {
-            position: absolute;
-            left: -25px;
-            bottom: -15px;
-            width: 110px;
-            height: auto;
-            z-index: 6;
-            pointer-events: none;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
-        }
-
-        /* Flor Derecha: Exactamente arriba a la derecha */
-        .floral-img-right {
-            position: absolute;
-            right: -25px;
-            top: -15px;
-            width: 115px;
-            height: auto;
-            z-index: 6;
-            pointer-events: none;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
-            transform: scaleX(-1);
         }
 
         /* Contenedor del sobre físico */
@@ -376,7 +351,7 @@
             color: var(--purple-primary);
         }
 
-        /* Cuenta Regresiva al Inicio */
+        /* Cuenta Regresiva */
         .countdown-section {
             background: var(--white);
             padding: 25px 20px 35px 20px;
@@ -599,7 +574,7 @@
             align-items: center;
         }
 
-        /* SECCIÓN DE CONFIRMACIÓN DE ASISTENCIA */
+        /* SECCIÓN DE CONFIRMACIÓN DE ASISTENCIA INTERACTIVA */
         .rsvp-section {
             background: var(--lila-light);
             padding: 45px 20px;
@@ -649,7 +624,7 @@
             font-size: 0.88rem;
             letter-spacing: 0.5px;
             box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, opacity 0.3s ease;
         }
 
         .btn-rsvp-yes:hover {
@@ -667,11 +642,22 @@
             font-size: 0.88rem;
             letter-spacing: 0.5px;
             border: 1px solid var(--lila-accent);
-            transition: background 0.2s ease;
+            transition: background 0.2s ease, opacity 0.3s ease;
         }
 
         .btn-rsvp-no:hover {
             background: #e3d2ea;
+        }
+
+        .btn-hidden {
+            display: none !important;
+        }
+
+        .confirmed-text {
+            font-size: 0.85rem;
+            color: #777;
+            margin-top: 10px;
+            font-style: italic;
         }
 
         /* GALERÍA CARRUSEL */
@@ -795,7 +781,7 @@
 
     <div class="phone-container">
 
-        <!-- PANTALLA DE PORTADA / SOBRE (UN SOLO CLIC PARA ABRIR) -->
+        <!-- PANTALLA DE PORTADA / SOBRE LIMPIO -->
         <div id="envelope-screen" onclick="openInvitation()">
             
             <div class="cover-header">
@@ -803,14 +789,8 @@
                 <div class="cover-date">19 · 12 · 2026</div>
             </div>
 
-            <!-- ESCENA DEL SOBRE CON LAS FLORES BIEN UBICADAS (UNA ABAJO, OTRA ARRIBA) -->
+            <!-- ESCENA DEL SOBRE TOTALMENTE LIMPIA -->
             <div class="envelope-scene" id="env-container">
-                <!-- Flor abajo a la izquierda -->
-                <img src="flores-costados.png" alt="Flores Abajo" class="floral-img-left" onerror="this.style.display='none'">
-                <!-- Flor arriba a la derecha -->
-                <img src="flores-costados.png" alt="Flores Arriba" class="floral-img-right" onerror="this.style.display='none'">
-
-                <!-- El Sobre (Interior Liso) -->
                 <div class="envelope-container">
                     <div class="env-back"></div>
                     <div class="env-flap-top"></div>
@@ -867,7 +847,7 @@
                 </div>
             </section>
 
-            <!-- ORACIÓN EMOTIVA SIN COMILLAS -->
+            <!-- ORACIÓN EMOTIVA -->
             <div class="quote-section">
                 Doy gracias a Dios, a mis padres por concederme la vida y formar parte de ella. Hay recuerdos que no voy a olvidar y momentos como este que siempre voy a guardar, porque serán parte de mi vida. Es mi deseo que compartan conmigo la alegría de Mis XV años.
             </div>
@@ -881,8 +861,8 @@
                 <div class="family-block">
                     <div class="family-subtitle">Mis Padrinos</div>
                     <div class="godparents-list">
-                        <div class="godparents-pair">Gabriela Cienfuegos García & Fernando Mendivil Valenzuela</div>
-                        <div class="godparents-pair">Nailea Yosmara Mendez Velazquez & Alejandro Gutierrez Medina</div>
+                        <div class="godparents-pair">Fernando Mendivil Valenzuela & Gabriela Cienfuegos García</div>
+                        <div class="godparents-pair">Alejandro Gutierrez Medina & Nailea Yosmara Mendez Velazquez</div>
                         <div class="godparents-pair">Jesus Aaron García Parra & Andrea Camila Morales Garcia</div>
                     </div>
                 </div>
@@ -981,21 +961,22 @@
                 </div>
             </section>
 
-            <!-- CONFIRMACIÓN DE ASISTENCIA -->
+            <!-- SECCIÓN DE CONFIRMACIÓN DE ASISTENCIA DINÁMICA -->
             <section class="rsvp-section">
                 <h2 class="section-title">Asistencia</h2>
                 <div class="rsvp-card">
                     <div class="rsvp-limit-title">Favor de confirmar antes del</div>
                     <div class="rsvp-limit-date">20 de Noviembre de 2026</div>
                     
-                    <div class="rsvp-buttons-container">
-                        <a id="btn-yes" href="#" target="_blank" class="btn-rsvp-yes">
+                    <div class="rsvp-buttons-container" id="rsvp-container">
+                        <a id="btn-yes" href="#" target="_blank" class="btn-rsvp-yes" onclick="selectOption('yes')">
                             ✓ Sí, asistiré
                         </a>
-                        <a id="btn-no" href="#" target="_blank" class="btn-rsvp-no">
+                        <a id="btn-no" href="#" target="_blank" class="btn-rsvp-no" onclick="selectOption('no')">
                             ✕ No podré asistir
                         </a>
                     </div>
+                    <div id="rsvp-status-note" class="confirmed-text" style="display: none;">Respuesta registrada correctamente ✨</div>
                 </div>
             </section>
 
@@ -1068,8 +1049,24 @@
         const mensajeSi = `¡Hola! 👋 Confirmo mi asistencia a los XV de Regina Alejandra. Soy ${nombreInvitado} y asistiremos ${numInvitados} personas. ¡Allá nos vemos! 🎉`;
         const mensajeNo = `¡Hola! 👋 Lamentablemente no podré asistir a los XV de Regina Alejandra, pero les deseo el mejor de los éxitos. Soy ${nombreInvitado}. ✨`;
 
-        document.getElementById('btn-yes').href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeSi)}`;
-        document.getElementById('btn-no').href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeNo)}`;
+        const btnYes = document.getElementById('btn-yes');
+        const btnNo = document.getElementById('btn-no');
+
+        btnYes.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeSi)}`;
+        btnNo.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeNo)}`;
+
+        function selectOption(choice) {
+            if (choice === 'yes') {
+                btnNo.classList.add('btn-hidden');
+                btnYes.innerText = "✓ Asistencia Confirmada";
+                btnYes.style.pointerEvents = "none";
+            } else if (choice === 'no') {
+                btnYes.classList.add('btn-hidden');
+                btnNo.innerText = "✕ Confirmaste que no asistirás";
+                btnNo.style.pointerEvents = "none";
+            }
+            document.getElementById('rsvp-status-note').style.display = 'block';
+        }
 
         let isOpened = false;
         function openInvitation() {
@@ -1087,7 +1084,7 @@
             // Abre la solapa del sobre
             document.getElementById('env-container').classList.add('open');
 
-            // Muestra la invitación completa después de la animación de apertura
+            // Muestra la invitación completa tras la animación
             setTimeout(() => {
                 envelopeScreen.classList.add('hidden');
                 mainContent.classList.add('visible');
