@@ -13,6 +13,7 @@
             --purple-dark: #41284a;
             --lila-light: #f3edf6;
             --lila-accent: #b897c3;
+            --flower-shadow: #e5d8ec; /* Tono morado sutil para las sombras de flores */
             --text-color: #3b3540;
             --white: #ffffff;
             --silver: #c0c0c0;
@@ -46,6 +47,35 @@
             box-shadow: 0 0 25px rgba(65, 40, 74, 0.08);
             position: relative;
             overflow-x: hidden;
+        }
+
+        /* ILUSTRACIONES FLOREALES DE FONDO (PEONÍAS Y TULIPANES FINOS) */
+        .bg-flower {
+            position: absolute;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.55;
+            fill: none;
+            stroke: var(--flower-shadow);
+            stroke-width: 1.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .bg-flower-top-left {
+            top: -20px;
+            left: -30px;
+            width: 180px;
+            height: 180px;
+            transform: rotate(-15deg);
+        }
+
+        .bg-flower-bottom-right {
+            bottom: -20px;
+            right: -30px;
+            width: 190px;
+            height: 190px;
+            transform: rotate(165deg);
         }
 
         /* Íconos Vectoriales SVG */
@@ -96,6 +126,7 @@
             transition: opacity 0.8s ease, visibility 0.8s ease;
             padding: 20px;
             text-align: center;
+            overflow: hidden;
         }
 
         #envelope-screen.hidden {
@@ -104,7 +135,8 @@
         }
 
         .cover-header {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            z-index: 2;
         }
 
         .cover-name {
@@ -124,7 +156,7 @@
             text-transform: uppercase;
         }
 
-        /* Sobre de Carta Cerrado */
+        /* Sobre de Carta Cerrado con Sombras Floreales de Fondo */
         .envelope-wrapper {
             position: relative;
             width: 290px;
@@ -136,6 +168,7 @@
             margin: 15px 0 25px 0;
             border: 1px solid rgba(255,255,255,0.4);
             overflow: visible;
+            z-index: 2;
         }
 
         .env-fold-left {
@@ -196,6 +229,7 @@
         .cover-footer {
             color: var(--white);
             max-width: 320px;
+            z-index: 2;
         }
 
         .guest-title {
@@ -273,6 +307,7 @@
         .main-content {
             opacity: 0;
             transition: opacity 1s ease;
+            position: relative;
         }
 
         .main-content.visible {
@@ -283,6 +318,7 @@
             padding: 40px 20px;
             text-align: center;
             border-bottom: 1px solid rgba(184, 151, 195, 0.15);
+            position: relative;
         }
 
         .hero-section {
@@ -316,6 +352,49 @@
             letter-spacing: 4px;
             font-size: 1.1rem;
             text-transform: uppercase;
+            color: var(--purple-primary);
+        }
+
+        /* CUENTA REGRESIVA REUBICADA AQUÍ (ARRIBA DE LA ORACIÓN) */
+        .countdown-section {
+            background: var(--white);
+            padding: 25px 20px 35px 20px;
+        }
+
+        .countdown-title {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: var(--purple-primary);
+            font-weight: 500;
+        }
+
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-number {
+            font-family: var(--font-serif);
+            font-size: 2.6rem;
+            color: var(--purple-dark);
+            line-height: 1;
+            font-weight: 400;
+        }
+
+        .countdown-label {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 6px;
             color: var(--purple-primary);
         }
 
@@ -370,48 +449,6 @@
             background: rgba(255, 255, 255, 0.7);
             border-radius: 4px;
             border: 1px solid rgba(184, 151, 195, 0.2);
-        }
-
-        /* Cuenta Regresiva */
-        .countdown-section {
-            background: var(--white);
-        }
-
-        .countdown-title {
-            font-size: 0.75rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            color: var(--purple-primary);
-            font-weight: 500;
-        }
-
-        .countdown-grid {
-            display: flex;
-            justify-content: center;
-            gap: 22px;
-        }
-
-        .countdown-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .countdown-number {
-            font-family: var(--font-serif);
-            font-size: 2.6rem;
-            color: var(--purple-dark);
-            line-height: 1;
-            font-weight: 400;
-        }
-
-        .countdown-label {
-            font-size: 0.65rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 6px;
-            color: var(--purple-primary);
         }
 
         .section-title {
@@ -540,7 +577,7 @@
             align-items: center;
         }
 
-        /* SECCIÓN DE CONFIRMACIÓN DE ASISTENCIA (ANTES DE LA GALERÍA) */
+        /* SECCIÓN DE CONFIRMACIÓN DE ASISTENCIA */
         .rsvp-section {
             background: var(--lila-light);
             padding: 45px 20px;
@@ -738,6 +775,23 @@
 
         <!-- PANTALLA DE PORTADA / SOBRE DE CARTA REALISTA -->
         <div id="envelope-screen">
+
+            <!-- FLORES ELEGANTES DE FONDO (PEONÍA Y TULIPÁN EN SOMBRA SUTIL) -->
+            <svg class="bg-flower bg-flower-top-left" viewBox="0 0 100 100">
+                <path d="M30 70 Q 20 40 45 20 Q 70 40 60 70 Z" />
+                <path d="M35 55 Q 15 30 30 15 Q 50 30 45 55 Z" />
+                <path d="M55 55 Q 50 30 70 15 Q 85 30 65 55 Z" />
+                <path d="M45 70 C 45 85 40 95 40 100" />
+                <path d="M42 82 Q 25 75 20 85 Q 35 90 42 82 Z" />
+            </svg>
+
+            <svg class="bg-flower bg-flower-bottom-right" viewBox="0 0 100 100">
+                <path d="M30 70 Q 20 40 45 20 Q 70 40 60 70 Z" />
+                <path d="M35 55 Q 15 30 30 15 Q 50 30 45 55 Z" />
+                <path d="M55 55 Q 50 30 70 15 Q 85 30 65 55 Z" />
+                <path d="M45 70 C 45 85 40 95 40 100" />
+                <path d="M42 82 Q 25 75 20 85 Q 35 90 42 82 Z" />
+            </svg>
             
             <div class="cover-header">
                 <div class="cover-name">Regina Alejandra</div>
@@ -777,6 +831,29 @@
                 </div>
             </section>
 
+            <!-- CUENTA REGRESIVA UBICADA AQUÍ (AL PRINCIPIO, ARRIBA DE LA ORACIÓN) -->
+            <section class="countdown-section">
+                <div class="countdown-title">Faltan</div>
+                <div class="countdown-grid">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">00</span>
+                        <span class="countdown-label">Días</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">Horas</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">Min</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label">Seg</span>
+                    </div>
+                </div>
+            </section>
+
             <!-- ORACIÓN EMOTIVA SIN COMILLAS -->
             <div class="quote-section">
                 Doy gracias a Dios, a mis padres por concederme la vida y formar parte de ella. Hay recuerdos que no voy a olvidar y momentos como este que siempre voy a guardar, porque serán parte de mi vida. Es mi deseo que compartan conmigo la alegría de Mis XV años.
@@ -800,29 +877,6 @@
                 <div class="family-block">
                     <div class="family-subtitle">Mi Chambelán</div>
                     <div class="family-names">Dilan Arak Enriquez Alvarez</div>
-                </div>
-            </section>
-
-            <!-- CUENTA REGRESIVA -->
-            <section class="countdown-section">
-                <div class="countdown-title">Faltan</div>
-                <div class="countdown-grid">
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="days">00</span>
-                        <span class="countdown-label">Días</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="hours">00</span>
-                        <span class="countdown-label">Horas</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="minutes">00</span>
-                        <span class="countdown-label">Min</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="seconds">00</span>
-                        <span class="countdown-label">Seg</span>
-                    </div>
                 </div>
             </section>
 
@@ -991,14 +1045,12 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         
-        // Lee el nombre y los pases directo del enlace
         const nombreInvitado = urlParams.get('nombre') ? decodeURIComponent(urlParams.get('nombre')) : 'Estimado Invitado';
         const numInvitados = urlParams.get('invitados') ? urlParams.get('invitados') : '2';
 
         document.getElementById('guest-name').innerText = nombreInvitado;
         document.getElementById('num-lugares').innerText = numInvitados;
 
-        // Configura los botones de WhatsApp de forma automática con su nombre y pases
         const telefono = "526221252954";
         const mensajeSi = `¡Hola! 👋 Confirmo mi asistencia a los XV de Regina Alejandra. Soy ${nombreInvitado} y asistiremos ${numInvitados} personas. ¡Allá nos vemos! 🎉`;
         const mensajeNo = `¡Hola! 👋 Lamentablemente no podré asistir a los XV de Regina Alejandra, pero les deseo el mejor de los éxitos. Soy ${nombreInvitado}. ✨`;
