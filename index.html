@@ -92,7 +92,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            transition: opacity 0.8s ease 1.3s, visibility 0.8s ease 1.3s;
+            transition: opacity 0.8s ease 1.5s, visibility 0.8s ease 1.5s;
             padding: 20px;
             text-align: center;
             overflow: hidden;
@@ -125,7 +125,7 @@
             text-transform: uppercase;
         }
 
-        /* ESCENA PRINCIPAL CON EL SOBRE Y TUS FLORES A LOS COSTADOS */
+        /* ESCENA PRINCIPAL CON EL SOBRE Y FLORES (UNA ABAJO, OTRA ARRIBA) */
         .envelope-scene {
             position: relative;
             width: 340px;
@@ -138,11 +138,11 @@
             perspective: 1000px;
         }
 
-        /* Flores al costado izquierdo */
+        /* Flor Izquierda: Abajo, asomándose en la esquina inferior[cite: 10] */
         .floral-img-left {
             position: absolute;
-            left: -15px;
-            top: 35px;
+            left: -18px;
+            bottom: 10px;
             width: 95px;
             height: auto;
             z-index: 6;
@@ -150,37 +150,37 @@
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
         }
 
-        /* Flores al costado derecho */
+        /* Flor Derecha: Arriba, asomándose en la esquina superior[cite: 10] */
         .floral-img-right {
             position: absolute;
-            right: -15px;
-            top: 25px;
-            width: 105px;
+            right: -18px;
+            top: 5px;
+            width: 100px;
             height: auto;
             z-index: 6;
             pointer-events: none;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+            transform: scaleX(-1);
         }
 
-        /* EFECTO DE SALTO / DESLIZAMIENTO DE LA INVITACIÓN REAL */
+        /* ANIMACIÓN DE LA HOJA REAL SALIENDO DEL SOBRE */
         .popup-card {
             position: absolute;
-            bottom: 25px;
+            bottom: 45px;
             width: 220px;
-            height: 160px;
+            height: 155px;
             z-index: 2;
-            transform: translateY(40px) scale(0.85);
+            transform: translateY(70px) scale(0.9);
             opacity: 0;
-            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+            transition: transform 1.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
             box-shadow: 0 12px 30px rgba(0,0,0,0.35);
             border-radius: 6px;
             object-fit: cover;
             background: #ffffff;
         }
 
-        /* Cuando se abre, la invitación brinca hacia arriba saliendo del sobre */
         .envelope-scene.open .popup-card {
-            transform: translateY(-110px) scale(1.15);
+            transform: translateY(-95px) scale(1.05);
             opacity: 1;
         }
 
@@ -292,7 +292,7 @@
             color: var(--white);
             max-width: 320px;
             z-index: 5;
-            margin-top: 5px;
+            margin-top: 10px;
         }
 
         .guest-title {
@@ -310,26 +310,6 @@
             color: #ffffff;
             margin-bottom: 8px;
             line-height: 1.1;
-        }
-
-        .click-prompt {
-            font-family: var(--font-sans);
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #ffffff;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.6);
-            padding: 8px 20px;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 10px;
-        }
-
-        .click-prompt:hover {
-            background: var(--white);
-            color: var(--purple-dark);
         }
 
         .passes-badge {
@@ -837,22 +817,22 @@
 
     <div class="phone-container">
 
-        <!-- PANTALLA DE PORTADA / SOBRE CON TUS FLORES A LOS COSTADOS -->
-        <div id="envelope-screen">
+        <!-- PANTALLA DE PORTADA / SOBRE CON FLORES (UNA ABAJO Y OTRA ARRIBA) -->
+        <div id="envelope-screen" onclick="openInvitation()">
             
             <div class="cover-header">
                 <div class="cover-name">Regina Alejandra</div>
                 <div class="cover-date">19 · 12 · 2026</div>
             </div>
 
-            <!-- ESCENA CON TUS FLORES A LOS COSTADOS Y LA INVITACIÓN REAL QUE BRINCA -->
-            <div class="envelope-scene" id="env-container" onclick="openInvitation()">
-                <!-- Flores al costado izquierdo -->
-                <img src="flores-costados.png" alt="Flores" class="floral-img-left" onerror="this.style.display='none'">
-                <!-- Flores al costado derecho -->
-                <img src="flores-costados.png" alt="Flores" class="floral-img-right" style="transform: scaleX(-1);" onerror="this.style.display='none'">
+            <!-- ESCENA CON SOBRE Y FLORES ASIMÉTRICAS -->
+            <div class="envelope-scene" id="env-container">
+                <!-- Flor abajo a la izquierda[cite: 10] -->
+                <img src="flores-costados.png" alt="Flores Abajo" class="floral-img-left" onerror="this.style.display='none'">
+                <!-- Flor arriba a la derecha[cite: 10] -->
+                <img src="flores-costados.png" alt="Flores Arriba" class="floral-img-right" onerror="this.style.display='none'">
 
-                <!-- LA INVITACIÓN REAL QUE SALE DESLIZÁNDOSE HACIA ARRIBA -->
+                <!-- LA HOJA DE LA INVITACIÓN REAL QUE SALE DESLIZÁNDOSE DE ADENTRO -->
                 <img src="invitacion-real.png" alt="Invitación Regina Alejandra" class="popup-card" onerror="this.style.display='none'">
 
                 <!-- El Sobre (Interior Liso) -->
@@ -868,8 +848,6 @@
             </div>
 
             <div class="cover-footer">
-                <button class="click-prompt" onclick="openInvitation()">Clic para abrir</button>
-                
                 <div class="guest-title">Invitación especial para:</div>
                 <div class="guest-name-text" id="guest-name">Estimado Invitado</div>
 
@@ -1131,15 +1109,15 @@
                 console.log("Audio autoplay restricted by browser:", error);
             });
 
-            // Activa la animación donde el sobre se abre y la invitación real salta hacia arriba
+            // Activa la apertura de la solapa y el deslizamiento de la hoja de la invitación
             document.getElementById('env-container').classList.add('open');
 
-            // Después del salto, oculta el sobre y muestra toda la página principal
+            // Oculta el sobre y muestra toda la página web principal
             setTimeout(() => {
                 envelopeScreen.classList.add('hidden');
                 mainContent.classList.add('visible');
                 window.scrollTo(0, 0);
-            }, 1200);
+            }, 1300);
         }
 
         function toggleMusic() {
