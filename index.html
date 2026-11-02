@@ -79,7 +79,7 @@
             margin-bottom: 8px;
         }
 
-        /* Pantalla de Portada / Sobre Estilo Ilustración */
+        /* Pantalla de Portada / Sobre Estilo Alta Gama */
         #envelope-screen {
             position: fixed;
             top: 0;
@@ -92,7 +92,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            transition: opacity 1s ease 0.8s, visibility 1s ease 0.8s;
+            transition: opacity 0.8s ease 1.3s, visibility 0.8s ease 1.3s;
             padding: 20px;
             text-align: center;
             overflow: hidden;
@@ -104,7 +104,7 @@
         }
 
         .cover-header {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             z-index: 5;
         }
 
@@ -125,81 +125,83 @@
             text-transform: uppercase;
         }
 
-        /* CONTENEDOR ESTILO PINTEREST CON FLORES A LOS COSTADOS */
-        .envelope-art-container {
+        /* ESCENA PRINCIPAL CON EL SOBRE Y TUS FLORES A LOS COSTADOS */
+        .envelope-scene {
             position: relative;
-            width: 320px;
-            height: 220px;
-            margin: 10px 0 20px 0;
+            width: 340px;
+            height: 270px;
+            margin: 5px 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-end;
+            cursor: pointer;
+            perspective: 1000px;
         }
 
-        /* Arreglo floral izquierdo */
-        .floral-side-left {
+        /* Flores al costado izquierdo */
+        .floral-img-left {
             position: absolute;
-            left: -25px;
-            top: 20px;
-            width: 85px;
-            height: 110px;
-            background: radial-gradient(circle, rgba(210,180,225,0.85) 0%, rgba(140,100,160,0.4) 60%, transparent 100%);
-            border-radius: 50%;
-            filter: blur(1px);
-            z-index: 5;
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .floral-side-left::after {
-            content: '💐';
-            font-size: 3rem;
-            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
-        }
-
-        /* Arreglo floral derecho (más frondoso como el ejemplo) */
-        .floral-side-right {
-            position: absolute;
-            right: -25px;
-            top: 10px;
+            left: -15px;
+            top: 35px;
             width: 95px;
-            height: 130px;
-            background: radial-gradient(circle, rgba(220,190,235,0.85) 0%, rgba(150,110,170,0.4) 60%, transparent 100%);
-            border-radius: 50%;
-            filter: blur(1px);
-            z-index: 5;
+            height: auto;
+            z-index: 6;
             pointer-events: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .floral-side-right::after {
-            content: '🌸';
-            font-size: 3.5rem;
-            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
         }
 
-        /* El Sobre Interactivo */
+        /* Flores al costado derecho */
+        .floral-img-right {
+            position: absolute;
+            right: -15px;
+            top: 25px;
+            width: 105px;
+            height: auto;
+            z-index: 6;
+            pointer-events: none;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+        }
+
+        /* EFECTO DE SALTO / DESLIZAMIENTO DE LA INVITACIÓN REAL */
+        .popup-card {
+            position: absolute;
+            bottom: 25px;
+            width: 220px;
+            height: 160px;
+            z-index: 2;
+            transform: translateY(40px) scale(0.85);
+            opacity: 0;
+            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+            border-radius: 6px;
+            object-fit: cover;
+            background: #ffffff;
+        }
+
+        /* Cuando se abre, la invitación brinca hacia arriba saliendo del sobre */
+        .envelope-scene.open .popup-card {
+            transform: translateY(-110px) scale(1.15);
+            opacity: 1;
+        }
+
+        /* Contenedor del sobre físico */
         .envelope-container {
             position: relative;
             width: 290px;
             height: 185px;
-            cursor: pointer;
-            perspective: 1000px;
             z-index: 4;
         }
 
-        /* Forro interior floral fino */
+        /* Interior del sobre totalmente LISO y limpio */
         .env-back {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=500&auto=format&fit=crop&q=80') center/cover;
+            background: #eddff2;
             border-radius: 6px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.35);
         }
 
         .env-left {
@@ -242,6 +244,7 @@
             border-bottom-right-radius: 6px;
         }
 
+        /* Solapa superior interactiva */
         .env-flap-top {
             position: absolute;
             top: 0;
@@ -253,7 +256,7 @@
             border-top: 105px solid #eddff2;
             transform-origin: top center;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 4;
+            z-index: 5;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
         }
 
@@ -271,16 +274,16 @@
             border-radius: 50%;
         }
 
-        .envelope-container:hover .wax-seal-img {
+        .envelope-scene:hover .wax-seal-img {
             transform: translateX(-50%) scale(1.08);
         }
 
-        .envelope-container.open .env-flap-top {
+        .envelope-scene.open .env-flap-top {
             transform: rotateX(180deg);
             z-index: 1;
         }
 
-        .envelope-container.open .wax-seal-img {
+        .envelope-scene.open .wax-seal-img {
             opacity: 0;
             transform: translateX(-50%) scale(0.5);
         }
@@ -289,6 +292,7 @@
             color: var(--white);
             max-width: 320px;
             z-index: 5;
+            margin-top: 5px;
         }
 
         .guest-title {
@@ -304,7 +308,7 @@
             font-family: var(--font-script);
             font-size: 2.2rem;
             color: #ffffff;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             line-height: 1.1;
         }
 
@@ -316,11 +320,11 @@
             color: #ffffff;
             background: transparent;
             border: 1px solid rgba(255,255,255,0.6);
-            padding: 9px 22px;
+            padding: 8px 20px;
             border-radius: 3px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .click-prompt:hover {
@@ -833,7 +837,7 @@
 
     <div class="phone-container">
 
-        <!-- PANTALLA DE PORTADA / SOBRE CON FLORES A LOS COSTADOS Y FORRO INTERNO -->
+        <!-- PANTALLA DE PORTADA / SOBRE CON TUS FLORES A LOS COSTADOS -->
         <div id="envelope-screen">
             
             <div class="cover-header">
@@ -841,12 +845,18 @@
                 <div class="cover-date">19 · 12 · 2026</div>
             </div>
 
-            <!-- CONTENEDOR ESTILO PINTEREST -->
-            <div class="envelope-art-container">
-                <div class="floral-side-left"></div>
-                <div class="floral-side-right"></div>
+            <!-- ESCENA CON TUS FLORES A LOS COSTADOS Y LA INVITACIÓN REAL QUE BRINCA -->
+            <div class="envelope-scene" id="env-container" onclick="openInvitation()">
+                <!-- Flores al costado izquierdo -->
+                <img src="flores-costados.png" alt="Flores" class="floral-img-left" onerror="this.style.display='none'">
+                <!-- Flores al costado derecho -->
+                <img src="flores-costados.png" alt="Flores" class="floral-img-right" style="transform: scaleX(-1);" onerror="this.style.display='none'">
 
-                <div class="envelope-container" id="env-container" onclick="openInvitation()">
+                <!-- LA INVITACIÓN REAL QUE SALE DESLIZÁNDOSE HACIA ARRIBA -->
+                <img src="invitacion-real.png" alt="Invitación Regina Alejandra" class="popup-card" onerror="this.style.display='none'">
+
+                <!-- El Sobre (Interior Liso) -->
+                <div class="envelope-container">
                     <div class="env-back"></div>
                     <div class="env-flap-top"></div>
                     <div class="env-left"></div>
@@ -1113,7 +1123,6 @@
             if (isOpened) return;
             isOpened = true;
 
-            const envContainer = document.getElementById('env-container');
             const envelopeScreen = document.getElementById('envelope-screen');
             const mainContent = document.getElementById('main-content');
             const music = document.getElementById('bg-music');
@@ -1122,13 +1131,15 @@
                 console.log("Audio autoplay restricted by browser:", error);
             });
 
-            envContainer.classList.add('open');
+            // Activa la animación donde el sobre se abre y la invitación real salta hacia arriba
+            document.getElementById('env-container').classList.add('open');
 
+            // Después del salto, oculta el sobre y muestra toda la página principal
             setTimeout(() => {
                 envelopeScreen.classList.add('hidden');
                 mainContent.classList.add('visible');
                 window.scrollTo(0, 0);
-            }, 800);
+            }, 1200);
         }
 
         function toggleMusic() {
