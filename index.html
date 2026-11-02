@@ -372,7 +372,7 @@
             border: 1px solid rgba(184, 151, 195, 0.2);
         }
 
-        /* Cuenta Regresiva (Ubicada estratégicamente tras la familia) */
+        /* Cuenta Regresiva */
         .countdown-section {
             background: var(--white);
         }
@@ -540,7 +540,82 @@
             align-items: center;
         }
 
-        /* GALERÍA CARRUSEL DESLIZABLE HORIZONTALMENTE (LIMPIA) */
+        /* SECCIÓN DE CONFIRMACIÓN DE ASISTENCIA (ANTES DE LA GALERÍA) */
+        .rsvp-section {
+            background: var(--lila-light);
+            padding: 45px 20px;
+        }
+
+        .rsvp-card {
+            background: #ffffff;
+            padding: 30px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(184, 151, 195, 0.25);
+            box-shadow: 0 4px 15px rgba(65, 40, 74, 0.04);
+            max-width: 360px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .rsvp-limit-title {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--purple-primary);
+            margin-bottom: 6px;
+        }
+
+        .rsvp-limit-date {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            color: var(--purple-dark);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .rsvp-buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-rsvp-yes {
+            display: block;
+            background: #25D366;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.88rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+            transition: transform 0.2s ease;
+        }
+
+        .btn-rsvp-yes:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-rsvp-no {
+            display: block;
+            background: #f1e6f5;
+            color: var(--purple-dark);
+            padding: 13px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.88rem;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--lila-accent);
+            transition: background 0.2s ease;
+        }
+
+        .btn-rsvp-no:hover {
+            background: #e3d2ea;
+        }
+
+        /* GALERÍA CARRUSEL */
         .gallery-section {
             background: var(--white);
             padding-right: 0;
@@ -584,55 +659,6 @@
             height: 340px;
             object-fit: cover;
             display: block;
-        }
-
-        /* RSVP */
-        .rsvp-section {
-            background: var(--lila-light);
-        }
-
-        .rsvp-card {
-            background: #ffffff;
-            padding: 24px 18px;
-            border-radius: 8px;
-            border: 1px solid rgba(184, 151, 195, 0.25);
-            box-shadow: 0 4px 15px rgba(65, 40, 74, 0.03);
-            max-width: 360px;
-            margin: 0 auto;
-        }
-
-        .rsvp-limit-title {
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--purple-primary);
-            margin-bottom: 6px;
-        }
-
-        .rsvp-limit-date {
-            font-family: var(--font-serif);
-            font-size: 1.35rem;
-            color: var(--purple-dark);
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .btn-whatsapp {
-            display: inline-block;
-            background: #25D366;
-            color: white;
-            padding: 14px 28px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.88rem;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .btn-whatsapp:hover {
-            transform: scale(1.03);
         }
 
         /* Info */
@@ -777,7 +803,7 @@
                 </div>
             </section>
 
-            <!-- CUENTA REGRESIVA AQUÍ (SE VE MUY ELEGANTE Y FLUIDA) -->
+            <!-- CUENTA REGRESIVA -->
             <section class="countdown-section">
                 <div class="countdown-title">Faltan</div>
                 <div class="countdown-grid">
@@ -888,7 +914,25 @@
                 </div>
             </section>
 
-            <!-- GALERÍA CARRUSEL DESLIZABLE (SIN TEXTO EXTRA) -->
+            <!-- CONFIRMACIÓN DE ASISTENCIA (ANTES DE LA GALERÍA) -->
+            <section class="rsvp-section">
+                <h2 class="section-title">Asistencia</h2>
+                <div class="rsvp-card">
+                    <div class="rsvp-limit-title">Favor de confirmar antes del</div>
+                    <div class="rsvp-limit-date">20 de Noviembre de 2026</div>
+                    
+                    <div class="rsvp-buttons-container">
+                        <a id="btn-yes" href="#" target="_blank" class="btn-rsvp-yes">
+                            ✓ Sí, asistiré
+                        </a>
+                        <a id="btn-no" href="#" target="_blank" class="btn-rsvp-no">
+                            ✕ No podré asistir
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GALERÍA CARRUSEL -->
             <section class="gallery-section">
                 <h2 class="section-title">Galería</h2>
                 <p style="font-size: 0.85rem; color: #666; margin-bottom: 12px;">Momentos especiales</p>
@@ -906,21 +950,6 @@
                     <div class="carousel-item">
                         <img src="foto4.jpg" alt="Foto 4">
                     </div>
-                </div>
-            </section>
-
-            <!-- RSVP -->
-            <section class="rsvp-section">
-                <h2 class="section-title">Asistencia</h2>
-                <div class="rsvp-card">
-                    <p style="font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 14px;">
-                        Tu presencia es muy importante para nosotros.
-                    </p>
-                    <div class="rsvp-limit-title">Favor de confirmar antes del</div>
-                    <div class="rsvp-limit-date">20 de Noviembre de 2026</div>
-                    <a href="https://wa.me/526221252954?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Regina%20Alejandra." target="_blank" class="btn-whatsapp">
-                        Confirmar por WhatsApp
-                    </a>
                 </div>
             </section>
 
@@ -962,15 +991,20 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         
-        const nombreInvitado = urlParams.get('nombre');
-        if (nombreInvitado) {
-            document.getElementById('guest-name').innerText = decodeURIComponent(nombreInvitado);
-        }
+        // Lee el nombre y los pases directo del enlace
+        const nombreInvitado = urlParams.get('nombre') ? decodeURIComponent(urlParams.get('nombre')) : 'Estimado Invitado';
+        const numInvitados = urlParams.get('invitados') ? urlParams.get('invitados') : '2';
 
-        const numInvitados = urlParams.get('invitados');
-        if (numInvitados) {
-            document.getElementById('num-lugares').innerText = numInvitados;
-        }
+        document.getElementById('guest-name').innerText = nombreInvitado;
+        document.getElementById('num-lugares').innerText = numInvitados;
+
+        // Configura los botones de WhatsApp de forma automática con su nombre y pases
+        const telefono = "526221252954";
+        const mensajeSi = `¡Hola! 👋 Confirmo mi asistencia a los XV de Regina Alejandra. Soy ${nombreInvitado} y asistiremos ${numInvitados} personas. ¡Allá nos vemos! 🎉`;
+        const mensajeNo = `¡Hola! 👋 Lamentablemente no podré asistir a los XV de Regina Alejandra, pero les deseo el mejor de los éxitos. Soy ${nombreInvitado}. ✨`;
+
+        document.getElementById('btn-yes').href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeSi)}`;
+        document.getElementById('btn-no').href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeNo)}`;
 
         function openInvitation() {
             const envelope = document.getElementById('envelope-screen');
