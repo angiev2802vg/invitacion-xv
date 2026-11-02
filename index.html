@@ -44,7 +44,7 @@
             overflow-x: hidden;
         }
 
-        /* Pantalla de Sobre / Portada */
+        /* Pantalla de Sobre / Portada Realista */
         #envelope-screen {
             position: fixed;
             top: 0;
@@ -72,68 +72,92 @@
             color: var(--lila-light);
             font-size: 1.1rem;
             letter-spacing: 4px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-transform: uppercase;
         }
 
         .guest-name-cover {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             color: var(--gold);
-            margin-bottom: 12px;
+            margin-bottom: 25px;
             font-style: italic;
         }
 
-        .couple-names-cover {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            color: var(--white);
-            margin-bottom: 5px;
-            font-style: italic;
-            font-weight: 300;
-        }
-
-        .wedding-date-cover {
-            color: var(--lila-accent);
-            font-size: 1rem;
-            margin-bottom: 30px;
-            letter-spacing: 3px;
-        }
-
-        .envelope-box {
-            background: var(--purple-dark);
-            width: 82%;
-            max-width: 320px;
-            height: 170px;
+        /* Sobre Clásico */
+        .real-envelope {
+            width: 300px;
+            height: 190px;
+            background: #f4ecf7;
             border-radius: 6px;
             position: relative;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+            cursor: pointer;
+            margin-bottom: 25px;
+            border: 1px solid var(--lila-accent);
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.15);
-            margin-bottom: 20px;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 95px solid #e8daf0;
+            transform-origin: top;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+        }
+
+        .envelope-content-preview {
+            text-align: center;
+            z-index: 2;
+            padding-top: 30px;
+        }
+
+        .envelope-content-preview h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            color: var(--purple-dark);
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+
+        .envelope-content-preview p {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--purple-primary);
+            text-transform: uppercase;
         }
 
         .wax-seal {
-            width: 50px;
-            height: 50px;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 44px;
             background: var(--gold);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
             border: 2px solid #fff;
-            font-size: 20px;
+            font-size: 18px;
+            z-index: 3;
         }
 
         .open-btn {
             background: transparent;
             border: 1px solid var(--white);
             color: var(--white);
-            padding: 10px 28px;
+            padding: 11px 30px;
             font-family: 'Montserrat', sans-serif;
             font-size: 0.75rem;
             letter-spacing: 2.5px;
@@ -179,7 +203,7 @@
         }
 
         section {
-            padding: 50px 20px;
+            padding: 40px 20px;
             text-align: center;
             border-bottom: 1px solid rgba(184, 151, 195, 0.15);
         }
@@ -191,13 +215,13 @@
 
         .hero-img {
             width: 100%;
-            height: 480px;
+            height: 460px;
             object-fit: cover;
             display: block;
         }
 
         .hero-text {
-            padding: 40px 20px;
+            padding: 35px 20px;
             background: var(--white);
         }
 
@@ -217,9 +241,20 @@
             color: var(--purple-primary);
         }
 
+        /* Oración emotiva */
+        .quote-section {
+            background: var(--lila-light);
+            padding: 35px 25px;
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--purple-dark);
+            line-height: 1.7;
+        }
+
         /* Cuenta Regresiva */
         .countdown-section {
-            background: var(--lila-light);
+            background: var(--white);
         }
 
         .countdown-title {
@@ -268,14 +303,14 @@
             font-style: italic;
         }
 
-        /* Familia y Padrinos */
+        /* Familia y Padrinos en Parejas Armoniosas */
         .family-section {
-            background: var(--white);
+            background: var(--bg-color);
             line-height: 1.7;
         }
 
         .family-block {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .family-subtitle {
@@ -283,7 +318,7 @@
             letter-spacing: 2.5px;
             text-transform: uppercase;
             color: var(--purple-primary);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .family-names {
@@ -292,57 +327,71 @@
             color: var(--purple-dark);
         }
 
-        .godparents-grid {
-            font-size: 0.9rem;
-            color: #555;
-            max-width: 360px;
+        .godparents-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 380px;
             margin: 0 auto;
-            line-height: 1.6;
         }
 
-        /* Tarjetas de Evento */
+        .godparents-pair {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--purple-dark);
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 4px;
+            border: 1px solid rgba(184, 151, 195, 0.2);
+        }
+
+        /* Misa y Recepción */
+        .events-section {
+            background-color: var(--white);
+        }
+
         .card-event {
-            background: var(--white);
-            padding: 35px 20px;
-            margin-bottom: 25px;
+            background: var(--bg-color);
+            padding: 30px 20px;
+            margin-bottom: 20px;
             border-radius: 6px;
-            box-shadow: 0 6px 20px rgba(65, 40, 74, 0.04);
+            box-shadow: 0 4px 15px rgba(65, 40, 74, 0.04);
             border: 1px solid rgba(184, 151, 195, 0.2);
         }
 
         .event-icon {
             font-size: 2rem;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .event-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             color: var(--purple-dark);
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
         .event-place {
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--purple-primary);
         }
 
         .event-address {
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             color: #666;
-            margin-bottom: 25px;
-            line-height: 1.6;
+            margin-bottom: 18px;
+            line-height: 1.5;
         }
 
         .btn-action {
             display: inline-block;
-            padding: 11px 28px;
+            padding: 10px 24px;
             border: 1px solid var(--purple-primary);
             color: var(--purple-primary);
             text-decoration: none;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             letter-spacing: 2.5px;
             text-transform: uppercase;
             transition: all 0.3s ease;
@@ -354,7 +403,64 @@
             color: var(--white);
         }
 
-        /* Galería de Fotos */
+        /* Línea de Tiempo del Itinerario */
+        .timeline-section {
+            background: var(--lila-light);
+            padding: 40px 20px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 320px;
+            margin: 20px auto 0 auto;
+            padding-left: 20px;
+            text-align: left;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 29px;
+            top: 5px;
+            bottom: 5px;
+            width: 2px;
+            background: var(--purple-primary);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 35px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 21px;
+            top: 2px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--purple-primary);
+            border: 3px solid var(--white);
+            box-shadow: 0 0 0 2px var(--lila-accent);
+        }
+
+        .timeline-time {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--purple-dark);
+            font-weight: 600;
+        }
+
+        .timeline-title {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        /* Galería */
         .gallery-section {
             background: var(--white);
         }
@@ -374,7 +480,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        /* Confirmación de Asistencia (RSVP) */
+        /* RSVP */
         .rsvp-section {
             background: var(--lila-light);
         }
@@ -398,14 +504,14 @@
             transform: scale(1.03);
         }
 
-        /* Notas e Información */
+        /* Info */
         .info-section {
-            background: var(--bg-color);
+            background: var(--white);
         }
 
         .info-box {
             margin-bottom: 25px;
-            background: var(--white);
+            background: var(--bg-color);
             padding: 30px 20px;
             border-radius: 6px;
             border: 1px solid rgba(184, 151, 195, 0.15);
@@ -427,7 +533,6 @@
             margin: 0 auto;
         }
 
-        /* Footer */
         footer {
             background: var(--purple-dark);
             color: var(--white);
@@ -449,15 +554,17 @@
 
     <div class="phone-container">
 
-        <!-- PANTALLA DE SOBRE / PORTADA INTERACTIVA -->
+        <!-- PANTALLA DE SOBRE / PORTADA REALISTA -->
         <div id="envelope-screen">
             <div class="invite-title">Invitación Especial para:</div>
             <div class="guest-name-cover" id="guest-name">Estimado Invitado</div>
 
-            <div class="couple-names-cover">Regina Alejandra</div>
-            <div class="wedding-date-cover">Mis XV Años · 19 · 12 · 2026</div>
-
-            <div class="envelope-box" onclick="openInvitation()">
+            <div class="real-envelope" onclick="openInvitation()">
+                <div class="envelope-flap"></div>
+                <div class="envelope-content-preview">
+                    <h2>Mis XV Años</h2>
+                    <p>Regina Alejandra</p>
+                </div>
                 <div class="wax-seal">👑</div>
             </div>
 
@@ -478,6 +585,33 @@
                 <div class="hero-text">
                     <h1>Regina Alejandra</h1>
                     <p>Mis XV Años</p>
+                </div>
+            </section>
+
+            <!-- ORACIÓN EMOTIVA ANTES DE LOS PADRES -->
+            <div class="quote-section">
+                "Doy gracias a Dios, a mis padres por concederme la vida y formar parte de ella. Hay recuerdos que no voy a olvidar y momentos como este que siempre voy a guardar, porque serán parte de mi vida. Es mi deseo que compartan conmigo la alegría de Mis XV años."
+            </div>
+
+            <section class="family-section">
+                <div class="family-block">
+                    <div class="family-subtitle">Con la bendición de mis padres</div>
+                    <div class="family-names">Andres Amaya y Monica Mirelia Cienfuegos</div>
+                </div>
+
+                <!-- PADRINOS EN PAREJAS ARMONIOSAS -->
+                <div class="family-block">
+                    <div class="family-subtitle">Mis Padrinos</div>
+                    <div class="godparents-list">
+                        <div class="godparents-pair">Gabriela Cienfuegos García & Fernando Mendivil Valenzuela</div>
+                        <div class="godparents-pair">Nailea Yosmara Mendez Velazquez & Alejandro Gutierrez Medina</div>
+                        <div class="godparents-pair">Jesus Aaron García Parra & Andrea Camila Morales Garcia</div>
+                    </div>
+                </div>
+
+                <div class="family-block">
+                    <div class="family-subtitle">Mi Chambelán</div>
+                    <div class="family-names">Dilam Arak Enriquez Alvarez</div>
                 </div>
             </section>
 
@@ -503,34 +637,56 @@
                 </div>
             </section>
 
-            <section class="family-section">
-                <div class="family-block">
-                    <div class="family-subtitle">Con la bendición de mis padres</div>
-                    <div class="family-names">Andres Amaya y Monica Mirelia Cienfuegos</div>
-                </div>
-
-                <div class="family-block" style="margin-top: 30px;">
-                    <div class="family-subtitle">Mis Padrinos</div>
-                    <div class="godparents-grid">
-                        Gabriela Cienfuegos García, Fernando Mendivil Valenzuela, Nailea Yosmara Mendez Velazquez, Alejandro Gutierrez Medina, Jesus Aaron García Parra y Andrea Camila Morales Garcia
-                    </div>
-                </div>
-
-                <div class="family-block" style="margin-top: 30px;">
-                    <div class="family-subtitle">Mi Chambelán</div>
-                    <div class="family-names">Dilam Arak Enriquez Alvarez</div>
-                </div>
-            </section>
-
-            <section style="background-color: var(--bg-color);">
-                <h2 class="section-title">Detalles del Evento</h2>
+            <!-- CEREMONIA Y RECEPCIÓN JUNTAS -->
+            <section class="events-section">
+                <h2 class="section-title">Ceremonia y Recepción</h2>
 
                 <div class="card-event">
+                    <div class="event-icon">⛪</div>
+                    <div class="event-title">Ceremonia Religiosa</div>
+                    <div class="event-place">Iglesia Sagrados Corazones de Jesús y María</div>
+                    <div class="event-address">19 de Diciembre de 2026 - 5:00 PM<br>Hermosillo, Sonora</div>
+                    <a href="https://maps.app.goo.gl/KRHMXpeEb2PEjHH89" target="_blank" class="btn-action">Ver Ubicación Misa</a>
+                </div>
+
+                <div class="card-event" style="margin-bottom: 0;">
                     <div class="event-icon">✨</div>
                     <div class="event-title">Recepción</div>
                     <div class="event-place">La Carreta</div>
-                    <div class="event-address">19 de Diciembre de 2026<br>Hermosillo, Sonora</div>
-                    <a href="https://maps.google.com/?q=La+Carreta+Hermosillo" target="_blank" class="btn-action">Ver Ubicación</a>
+                    <div class="event-address">19 de Diciembre de 2026 - 9:00 PM<br>Hermosillo, Sonora</div>
+                    <a href="https://maps.app.goo.gl/wJQENW439MBSDPB18" target="_blank" class="btn-action">Ver Ubicación Recepción</a>
+                </div>
+            </section>
+
+            <!-- ITINERARIO -->
+            <section class="timeline-section">
+                <h2 class="section-title">Itinerario</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">5:00 PM</div>
+                        <div class="timeline-title">Misa ⛪</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">9:00 PM</div>
+                        <div class="timeline-title">Recepción / Evento 🥂</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">9:40 PM</div>
+                        <div class="timeline-title">Vals 💃</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">10:30 PM</div>
+                        <div class="timeline-title">Cena 🍽️</div>
+                    </div>
+                    <div class="timeline-item" style="margin-bottom: 0;">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-time">¡Fiesta!</div>
+                        <div class="timeline-title">¡Todos a bailar! ✨</div>
+                    </div>
                 </div>
             </section>
 
@@ -548,7 +704,6 @@
                 <p style="font-size: 0.9rem; color: #555; line-height: 1.6; max-width: 320px; margin: 0 auto 20px auto;">
                     Tu presencia es muy importante para nosotros. Por favor, confirma tu asistencia dando clic en el botón de abajo.
                 </p>
-                <!-- BOTÓN VINCULADO A TU WHATSAPP PERSONAL -->
                 <a href="https://wa.me/526221252954?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Regina%20Alejandra." target="_blank" class="btn-whatsapp">
                     Confirmar por WhatsApp
                 </a>
@@ -556,12 +711,12 @@
 
             <section class="info-section">
                 <div class="info-box">
-                    <h3>Código de Vestimenta</h3>
+                    <h3>👗 Código de Vestimenta</h3>
                     <p style="font-weight: 600; color: var(--purple-dark); margin-bottom: 6px;">Formal</p>
                 </div>
 
                 <div class="info-box">
-                    <h3>Lluvia de Sobres</h3>
+                    <h3>💌 Lluvia de Sobres</h3>
                     <p>Su presencia es nuestro mejor regalo, pero si desean tener un detalle adicional con nuestra quinceañera, tendremos lluvia de sobres.</p>
                 </div>
             </section>
@@ -602,9 +757,9 @@
             window.scrollTo(0, 0);
         }
 
-        const eventDate = new Date('December 19, 2026 19:00:00').getTime();
+        const eventDate = new Date('December 19, 2026 17:00:00').getTime();
 
-        function updateCountdown() {
+        const updateCountdown = () => {
             const now = new Date().getTime();
             const distance = eventDate - now;
 
@@ -625,7 +780,7 @@
             document.getElementById('hours').innerText = String(hours).padStart(2, '0');
             document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
             document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
-        }
+        };
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
