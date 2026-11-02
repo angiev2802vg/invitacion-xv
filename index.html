@@ -48,7 +48,7 @@
             overflow-x: hidden;
         }
 
-        /* Estilos de Íconos Vectoriales SVG */
+        /* Íconos Vectoriales SVG */
         .icon-svg {
             width: 32px;
             height: 32px;
@@ -173,17 +173,17 @@
             z-index: 2;
         }
 
-        /* Sello de Cera Realista con Grabado de Flor */
+        /* Sello de Cera 3D Plateado Inspirado en la Referencia */
         .wax-seal-real {
             position: absolute;
-            top: 75px;
+            top: 72px;
             left: 50%;
             transform: translateX(-50%);
-            width: 58px;
-            height: 58px;
+            width: 62px;
+            height: 62px;
             z-index: 4;
             transition: transform 0.2s ease;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.45));
         }
 
         .envelope-wrapper:hover .wax-seal-real {
@@ -537,32 +537,57 @@
             align-items: center;
         }
 
-        /* Galería Asimétrica (4 fotos) */
+        /* GALERÍA CARRUSEL DESLIZABLE HORIZONTALMENTE */
         .gallery-section {
             background: var(--white);
+            padding-right: 0;
+            padding-left: 0;
         }
 
-        .gallery-grid-asym {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 20px;
+        .gallery-carousel {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 10px 20px 25px 20px;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .gallery-img {
+        .gallery-carousel::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .gallery-carousel::-webkit-scrollbar-track {
+            background: var(--lila-light);
+            border-radius: 10px;
+        }
+
+        .gallery-carousel::-webkit-scrollbar-thumb {
+            background: var(--lila-accent);
+            border-radius: 10px;
+        }
+
+        .carousel-item {
+            flex: 0 0 82%;
+            scroll-snap-align: center;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(65, 40, 74, 0.12);
+        }
+
+        .carousel-item img {
             width: 100%;
+            height: 340px;
             object-fit: cover;
-            border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            display: block;
         }
 
-        .img-tall {
-            height: 250px;
-            grid-row: span 2;
-        }
-
-        .img-short {
-            height: 120px;
+        .swipe-hint {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--purple-primary);
+            margin-top: 10px;
         }
 
         /* RSVP */
@@ -697,33 +722,74 @@
                 <div class="cover-date">19 · 12 · 2026</div>
             </div>
 
-            <!-- SOBRE DE CARTA CERRADO CON SELLO DE CERA Y FLOR -->
+            <!-- SOBRE DE CARTA CERRADO CON SELLO BOTÁNICO 3D PLATEADO -->
             <div class="envelope-wrapper" onclick="openInvitation()">
                 <div class="env-fold-left"></div>
                 <div class="env-fold-right"></div>
                 <div class="env-flap-top"></div>
                 
-                <!-- SELLO DE CERA VECTORIAL REALISTA (BORDES IRREGULARES Y FLOR GRABADA) -->
+                <!-- SELLO DE CERA 3D CON RAMILLETE FLORAL REPLICANDO TU REFERENCIA -->
                 <svg class="wax-seal-real" viewBox="0 0 100 100">
                     <defs>
-                        <radialGradient id="silverGradient" cx="35%" cy="30%" r="70%">
+                        <radialGradient id="silverBase" cx="35%" cy="30%" r="70%">
                             <stop offset="0%" stop-color="#ffffff"/>
-                            <stop offset="30%" stop-color="#d8d8d8"/>
-                            <stop offset="70%" stop-color="#8e8e8e"/>
-                            <stop offset="100%" stop-color="#555555"/>
+                            <stop offset="25%" stop-color="#e2e2e2"/>
+                            <stop offset="65%" stop-color="#999999"/>
+                            <stop offset="100%" stop-color="#4a4a4a"/>
                         </radialGradient>
+                        <linearGradient id="silverHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                            <stop offset="100%" stop-color="#888888" stop-opacity="0.2"/>
+                        </linearGradient>
+                        <filter id="embossShadow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feDropShadow dx="1" dy="2" stdDeviation="1" flood-color="#000000" flood-opacity="0.5"/>
+                        </filter>
                     </defs>
-                    <!-- Borde irregular de cera derretida -->
-                    <path d="M50 4 C68 2, 85 10, 92 25 C99 42, 95 62, 88 78 C80 93, 62 98, 45 96 C28 94, 10 88, 5 70 C0 52, 6 32, 18 18 C30 4, 38 6, 50 4 Z" fill="url(#silverGradient)" />
-                    <!-- Anillo interior grabado -->
-                    <circle cx="50" cy="50" r="32" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.6"/>
-                    <!-- Grabado botánico de flor de cera -->
-                    <g stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9">
-                        <path d="M50 68 Q 48 52 50 38" />
-                        <path d="M50 54 Q 42 50 36 53" />
-                        <path d="M50 48 Q 58 44 64 47" />
-                        <!-- Pétalos estilizados -->
-                        <path d="M50 38 C44 30, 40 34, 46 26 C48 20, 52 20, 54 26 C60 34, 56 30, 50 38 Z" fill="rgba(255,255,255,0.2)"/>
+
+                    <!-- Base circular con bisel exterior -->
+                    <circle cx="50" cy="50" r="46" fill="url(#silverBase)" />
+                    <circle cx="50" cy="50" r="43" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+                    <circle cx="50" cy="50" r="39" fill="none" stroke="#555555" stroke-width="1.2" opacity="0.6"/>
+
+                    <!-- Ramillete floral en relieve 3D -->
+                    <g filter="url(#embossShadow)">
+                        <!-- Tallo y ramas -->
+                        <path d="M52 75 Q48 55 50 30 M50 50 Q36 42 30 46 M50 55 Q64 48 68 53 M49 38 Q40 30 35 34 M51 35 Q60 27 65 31" fill="none" stroke="url(#silverHighlight)" stroke-width="2.2" stroke-linecap="round"/>
+                        
+                        <!-- Flor Principal Central 1 -->
+                        <g transform="translate(48, 54)">
+                            <circle cx="-5" cy="0" r="5" fill="#f0f0f0"/>
+                            <circle cx="5" cy="0" r="5" fill="#f0f0f0"/>
+                            <circle cx="0" cy="-5" r="5" fill="#f0f0f0"/>
+                            <circle cx="0" cy="5" r="5" fill="#f0f0f0"/>
+                            <circle cx="-3" cy="-3" r="4.5" fill="#e6e6e6"/>
+                            <circle cx="3" cy="3" r="4.5" fill="#e6e6e6"/>
+                            <circle cx="0" cy="0" r="3" fill="#666666"/>
+                        </g>
+
+                        <!-- Flor Principal 2 -->
+                        <g transform="translate(40, 38)">
+                            <circle cx="-4" cy="0" r="4" fill="#f0f0f0"/>
+                            <circle cx="4" cy="0" r="4" fill="#f0f0f0"/>
+                            <circle cx="0" cy="-4" r="4" fill="#f0f0f0"/>
+                            <circle cx="0" cy="4" r="4" fill="#f0f0f0"/>
+                            <circle cx="0" cy="0" r="2.5" fill="#666666"/>
+                        </g>
+
+                        <!-- Flor Principal 3 -->
+                        <g transform="translate(60, 42)">
+                            <circle cx="-4" cy="0" r="4" fill="#f0f0f0"/>
+                            <circle cx="4" cy="0" r="4" fill="#f0f0f0"/>
+                            <circle cx="0" cy="-4" r="4" fill="#f0f0f0"/>
+                            <circle cx="0" cy="4" r="4" fill="#f0f0f0"/>
+                            <circle cx="0" cy="0" r="2.5" fill="#666666"/>
+                        </g>
+
+                        <!-- Ramitas y capullos pequeños de fondo -->
+                        <circle cx="28" cy="45" r="2" fill="#ffffff"/>
+                        <circle cx="34" cy="32" r="2" fill="#ffffff"/>
+                        <circle cx="66" cy="30" r="2" fill="#ffffff"/>
+                        <circle cx="70" cy="52" r="2" fill="#ffffff"/>
                     </g>
                 </svg>
             </div>
@@ -754,7 +820,7 @@
 
             <!-- ORACIÓN EMOTIVA ANTES DE LOS PADRES -->
             <div class="quote-section">
-                Doy gracias a Dios, a mis padres por concederme la vida y formar parte de ella. Hay recuerdos que no voy a olvidar y momentos como este que siempre voy a guardar, porque serán parte de mi vida. Es mi deseo que compartan conmigo la alegría de Mis XV años.
+                "Doy gracias a Dios, a mis padres por concederme la vida y formar parte de ella. Hay recuerdos que no voy a olvidar y momentos como este que siempre voy a guardar, porque serán parte de mi vida. Es mi deseo que compartan conmigo la alegría de Mis XV años."
             </div>
 
             <section class="family-section">
@@ -888,19 +954,29 @@
                 </div>
             </section>
 
-            <!-- GALERÍA ASIMÉTRICA (4 FOTOS) -->
+            <!-- GALERÍA CARRUSEL DESLIZABLE HACIA UN LADO -->
             <section class="gallery-section">
                 <h2 class="section-title">Galería</h2>
-                <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">Momentos especiales</p>
-                <div class="gallery-grid-asym">
-                    <img src="foto1.jpg" alt="Foto 1" class="gallery-img img-tall">
-                    <img src="foto2.jpg" alt="Foto 2" class="gallery-img img-short">
-                    <img src="foto3.jpg" alt="Foto 3" class="gallery-img img-short">
-                    <img src="foto4.jpg" alt="Foto 4" class="gallery-img img-tall">
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 8px;">Momentos especiales</p>
+                <div class="swipe-hint">Desliza para ver más ➔</div>
+                
+                <div class="gallery-carousel">
+                    <div class="carousel-item">
+                        <img src="foto1.jpg" alt="Foto 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="foto2.jpg" alt="Foto 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="foto3.jpg" alt="Foto 3">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="foto4.jpg" alt="Foto 4">
+                    </div>
                 </div>
             </section>
 
-            <!-- RSVP CON TARJETA DESTACADA -->
+            <!-- RSVP CON TARJETA DESTACADA Y FECHA LÍMITE -->
             <section class="rsvp-section">
                 <h2 class="section-title">Asistencia</h2>
                 <div class="rsvp-card">
@@ -925,7 +1001,7 @@
                     </div>
                     <p style="font-weight: 600; color: var(--purple-dark); margin-bottom: 6px;">Formal</p>
                     <p style="font-size: 0.82rem; font-style: italic; color: #777; line-height: 1.5;">
-                        "Sabemos que el lila es un color hermoso, pero lo hemos reservado exclusivamente para nuestra quinceañera."
+                        Sabemos que el lila es un color hermoso, pero lo hemos reservado exclusivamente para nuestra quinceañera.
                     </p>
                 </div>
 
