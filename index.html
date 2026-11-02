@@ -92,10 +92,11 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            transition: opacity 0.8s ease 1.5s, visibility 0.8s ease 1.5s;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
             padding: 20px;
             text-align: center;
             overflow: hidden;
+            cursor: pointer;
         }
 
         #envelope-screen.hidden {
@@ -104,7 +105,7 @@
         }
 
         .cover-header {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             z-index: 5;
         }
 
@@ -125,63 +126,41 @@
             text-transform: uppercase;
         }
 
-        /* ESCENA PRINCIPAL CON EL SOBRE Y FLORES (UNA ABAJO, OTRA ARRIBA) */
+        /* ESCENA PRINCIPAL CON EL SOBRE Y FLORES EXACTAS (UNA ABAJO, OTRA ARRIBA) */
         .envelope-scene {
             position: relative;
             width: 340px;
-            height: 270px;
-            margin: 5px 0;
+            height: 230px;
+            margin: 10px 0;
             display: flex;
             justify-content: center;
-            align-items: flex-end;
-            cursor: pointer;
+            align-items: center;
             perspective: 1000px;
         }
 
-        /* Flor Izquierda: Abajo, asomándose en la esquina inferior[cite: 10] */
+        /* Flor Izquierda: Exactamente abajo a la izquierda */
         .floral-img-left {
             position: absolute;
-            left: -18px;
-            bottom: 10px;
-            width: 95px;
+            left: -25px;
+            bottom: -15px;
+            width: 110px;
             height: auto;
             z-index: 6;
             pointer-events: none;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
         }
 
-        /* Flor Derecha: Arriba, asomándose en la esquina superior[cite: 10] */
+        /* Flor Derecha: Exactamente arriba a la derecha */
         .floral-img-right {
             position: absolute;
-            right: -18px;
-            top: 5px;
-            width: 100px;
+            right: -25px;
+            top: -15px;
+            width: 115px;
             height: auto;
             z-index: 6;
             pointer-events: none;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
             transform: scaleX(-1);
-        }
-
-        /* ANIMACIÓN DE LA HOJA REAL SALIENDO DEL SOBRE */
-        .popup-card {
-            position: absolute;
-            bottom: 45px;
-            width: 220px;
-            height: 155px;
-            z-index: 2;
-            transform: translateY(70px) scale(0.9);
-            opacity: 0;
-            transition: transform 1.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-            border-radius: 6px;
-            object-fit: cover;
-            background: #ffffff;
-        }
-
-        .envelope-scene.open .popup-card {
-            transform: translateY(-95px) scale(1.05);
-            opacity: 1;
         }
 
         /* Contenedor del sobre físico */
@@ -268,31 +247,30 @@
             width: 60px;
             height: 60px;
             z-index: 6;
-            transition: transform 0.4s ease, opacity 0.4s ease;
+            transition: transform 0.4s ease;
             filter: drop-shadow(0 6px 10px rgba(0,0,0,0.4));
             object-fit: contain;
             border-radius: 50%;
         }
 
-        .envelope-scene:hover .wax-seal-img {
+        #envelope-screen:hover .wax-seal-img {
             transform: translateX(-50%) scale(1.08);
         }
 
-        .envelope-scene.open .env-flap-top {
+        #envelope-screen.open .env-flap-top {
             transform: rotateX(180deg);
             z-index: 1;
         }
 
-        .envelope-scene.open .wax-seal-img {
+        #envelope-screen.open .wax-seal-img {
             opacity: 0;
-            transform: translateX(-50%) scale(0.5);
         }
 
         .cover-footer {
             color: var(--white);
             max-width: 320px;
             z-index: 5;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .guest-title {
@@ -817,7 +795,7 @@
 
     <div class="phone-container">
 
-        <!-- PANTALLA DE PORTADA / SOBRE CON FLORES (UNA ABAJO Y OTRA ARRIBA) -->
+        <!-- PANTALLA DE PORTADA / SOBRE (UN SOLO CLIC PARA ABRIR) -->
         <div id="envelope-screen" onclick="openInvitation()">
             
             <div class="cover-header">
@@ -825,15 +803,12 @@
                 <div class="cover-date">19 · 12 · 2026</div>
             </div>
 
-            <!-- ESCENA CON SOBRE Y FLORES ASIMÉTRICAS -->
+            <!-- ESCENA DEL SOBRE CON LAS FLORES BIEN UBICADAS (UNA ABAJO, OTRA ARRIBA) -->
             <div class="envelope-scene" id="env-container">
-                <!-- Flor abajo a la izquierda[cite: 10] -->
+                <!-- Flor abajo a la izquierda -->
                 <img src="flores-costados.png" alt="Flores Abajo" class="floral-img-left" onerror="this.style.display='none'">
-                <!-- Flor arriba a la derecha[cite: 10] -->
+                <!-- Flor arriba a la derecha -->
                 <img src="flores-costados.png" alt="Flores Arriba" class="floral-img-right" onerror="this.style.display='none'">
-
-                <!-- LA HOJA DE LA INVITACIÓN REAL QUE SALE DESLIZÁNDOSE DE ADENTRO -->
-                <img src="invitacion-real.png" alt="Invitación Regina Alejandra" class="popup-card" onerror="this.style.display='none'">
 
                 <!-- El Sobre (Interior Liso) -->
                 <div class="envelope-container">
@@ -1006,7 +981,7 @@
                 </div>
             </section>
 
-            <!-- CONFIRMACIÓN DE ASISTENCIA (ANTES DE LA GALERÍA) -->
+            <!-- CONFIRMACIÓN DE ASISTENCIA -->
             <section class="rsvp-section">
                 <h2 class="section-title">Asistencia</h2>
                 <div class="rsvp-card">
@@ -1109,15 +1084,15 @@
                 console.log("Audio autoplay restricted by browser:", error);
             });
 
-            // Activa la apertura de la solapa y el deslizamiento de la hoja de la invitación
+            // Abre la solapa del sobre
             document.getElementById('env-container').classList.add('open');
 
-            // Oculta el sobre y muestra toda la página web principal
+            // Muestra la invitación completa después de la animación de apertura
             setTimeout(() => {
                 envelopeScreen.classList.add('hidden');
                 mainContent.classList.add('visible');
                 window.scrollTo(0, 0);
-            }, 1300);
+            }, 800);
         }
 
         function toggleMusic() {
