@@ -15,7 +15,6 @@
             --lila-accent: #b897c3;
             --text-color: #3b3540;
             --white: #ffffff;
-            --silver: #c0c0c0;
             
             --font-script: 'Great Vibes', cursive;
             --font-serif: 'Cormorant Garamond', serif;
@@ -80,7 +79,7 @@
             margin-bottom: 8px;
         }
 
-        /* Pantalla de Portada / Sobre Interactivo */
+        /* Pantalla de Portada / Sobre Estilo Ilustración */
         #envelope-screen {
             position: fixed;
             top: 0;
@@ -93,7 +92,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            transition: opacity 0.8s ease 1.2s, visibility 0.8s ease 1.2s;
+            transition: opacity 1s ease 0.8s, visibility 1s ease 0.8s;
             padding: 20px;
             text-align: center;
             overflow: hidden;
@@ -105,7 +104,7 @@
         }
 
         .cover-header {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             z-index: 5;
         }
 
@@ -126,82 +125,72 @@
             text-transform: uppercase;
         }
 
-        /* CONTENEDOR DEL SOBRE Y LA TARJETA QUE SALE BRINCANDO */
-        .envelope-scene {
+        /* CONTENEDOR ESTILO PINTEREST CON FLORES A LOS COSTADOS */
+        .envelope-art-container {
             position: relative;
-            width: 300px;
-            height: 240px;
-            margin: 10px 0;
+            width: 320px;
+            height: 220px;
+            margin: 10px 0 20px 0;
             display: flex;
             justify-content: center;
-            align-items: flex-end;
+            align-items: center;
+        }
+
+        /* Arreglo floral izquierdo */
+        .floral-side-left {
+            position: absolute;
+            left: -25px;
+            top: 20px;
+            width: 85px;
+            height: 110px;
+            background: radial-gradient(circle, rgba(210,180,225,0.85) 0%, rgba(140,100,160,0.4) 60%, transparent 100%);
+            border-radius: 50%;
+            filter: blur(1px);
+            z-index: 5;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .floral-side-left::after {
+            content: '💐';
+            font-size: 3rem;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
+        }
+
+        /* Arreglo floral derecho (más frondoso como el ejemplo) */
+        .floral-side-right {
+            position: absolute;
+            right: -25px;
+            top: 10px;
+            width: 95px;
+            height: 130px;
+            background: radial-gradient(circle, rgba(220,190,235,0.85) 0%, rgba(150,110,170,0.4) 60%, transparent 100%);
+            border-radius: 50%;
+            filter: blur(1px);
+            z-index: 5;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .floral-side-right::after {
+            content: '🌸';
+            font-size: 3.5rem;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
+        }
+
+        /* El Sobre Interactivo */
+        .envelope-container {
+            position: relative;
+            width: 290px;
+            height: 185px;
             cursor: pointer;
             perspective: 1000px;
             z-index: 4;
         }
 
-        /* La Tarjeta que sale deslizándose/brincando desde dentro */
-        .invitation-card-popup {
-            position: absolute;
-            bottom: 20px;
-            width: 250px;
-            height: 160px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-            border: 1px solid rgba(184, 151, 195, 0.4);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            text-align: center;
-            z-index: 2;
-            transform: translateY(60px) scale(0.85);
-            opacity: 0;
-            transition: transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease;
-        }
-
-        .envelope-scene.open .invitation-card-popup {
-            transform: translateY(-80px) scale(1);
-            opacity: 1;
-        }
-
-        .popup-title {
-            font-family: var(--font-serif);
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--purple-primary);
-            margin-bottom: 4px;
-        }
-
-        .popup-name {
-            font-family: var(--font-script);
-            font-size: 2.2rem;
-            color: var(--purple-dark);
-            line-height: 1.1;
-            margin-bottom: 4px;
-        }
-
-        .popup-date {
-            font-family: var(--font-serif);
-            font-size: 0.9rem;
-            color: var(--purple-primary);
-            letter-spacing: 2px;
-        }
-
-        /* Estructura del Sobre Delante de la Tarjeta */
-        .envelope-front-group {
-            position: absolute;
-            bottom: 0;
-            width: 300px;
-            height: 195px;
-            z-index: 3;
-            pointer-events: none;
-        }
-
-        /* Interior con forro floral */
+        /* Forro interior floral fino */
         .env-back {
             position: absolute;
             top: 0;
@@ -210,7 +199,7 @@
             height: 100%;
             background: url('https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=500&auto=format&fit=crop&q=80') center/cover;
             border-radius: 6px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
 
         .env-left {
@@ -219,9 +208,10 @@
             left: 0;
             width: 0;
             height: 0;
-            border-left: 150px solid #e3d2ea;
-            border-top: 98px solid transparent;
-            border-bottom: 97px solid #e3d2ea;
+            border-left: 145px solid #e3d2ea;
+            border-top: 92px solid transparent;
+            border-bottom: 93px solid #e3d2ea;
+            z-index: 3;
             border-bottom-left-radius: 6px;
         }
 
@@ -231,9 +221,10 @@
             right: 0;
             width: 0;
             height: 0;
-            border-right: 150px solid #ecddef;
-            border-top: 98px solid transparent;
-            border-bottom: 97px solid #ecddef;
+            border-right: 145px solid #ecddef;
+            border-top: 92px solid transparent;
+            border-bottom: 93px solid #ecddef;
+            z-index: 3;
             border-bottom-right-radius: 6px;
         }
 
@@ -243,63 +234,61 @@
             left: 0;
             width: 0;
             height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-bottom: 105px solid #f2e7f6;
+            border-left: 145px solid transparent;
+            border-right: 145px solid transparent;
+            border-bottom: 100px solid #f2e7f6;
+            z-index: 3;
             border-bottom-left-radius: 6px;
             border-bottom-right-radius: 6px;
         }
 
-        /* Solapa superior que se abre hacia arriba */
         .env-flap-top {
             position: absolute;
             top: 0;
             left: 0;
             width: 0;
             height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-top: 110px solid #eddff2;
+            border-left: 145px solid transparent;
+            border-right: 145px solid transparent;
+            border-top: 105px solid #eddff2;
             transform-origin: top center;
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 4;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
-            pointer-events: auto;
-            cursor: pointer;
         }
 
-        /* Sello de Cera Realista */
         .wax-seal-img {
             position: absolute;
-            top: 72px;
+            top: 65px;
             left: 50%;
             transform: translateX(-50%);
-            width: 65px;
-            height: 65px;
+            width: 60px;
+            height: 60px;
             z-index: 6;
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            transition: transform 0.4s ease, opacity 0.4s ease;
             filter: drop-shadow(0 6px 10px rgba(0,0,0,0.4));
             object-fit: contain;
             border-radius: 50%;
-            pointer-events: auto;
-            cursor: pointer;
         }
 
-        /* Animación de apertura del sobre */
-        .envelope-scene.open .env-flap-top {
+        .envelope-container:hover .wax-seal-img {
+            transform: translateX(-50%) scale(1.08);
+        }
+
+        .envelope-container.open .env-flap-top {
             transform: rotateX(180deg);
             z-index: 1;
         }
 
-        .envelope-scene.open .wax-seal-img {
+        .envelope-container.open .wax-seal-img {
             opacity: 0;
-            transform: translateX(-50%) scale(0.4);
+            transform: translateX(-50%) scale(0.5);
         }
 
         .cover-footer {
             color: var(--white);
             max-width: 320px;
             z-index: 5;
-            margin-top: 5px;
         }
 
         .guest-title {
@@ -836,7 +825,7 @@
     </audio>
 
     <!-- BOTÓN DE MÚSICA FLOTANTE -->
-    <div class="music-btn" onclick="openInvitation()" title="Música">
+    <div class="music-btn" onclick="toggleMusic()" title="Música">
         <svg id="music-icon" class="icon-svg" viewBox="0 0 24 24" style="stroke: white; width: 20px; height: 20px;">
             <path d="M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zm12 0a3 3 0 11-6 0 3 3 0 016 0z"></path>
         </svg>
@@ -844,7 +833,7 @@
 
     <div class="phone-container">
 
-        <!-- PANTALLA DE PORTADA / SOBRE CON TARJETA SALIENDO -->
+        <!-- PANTALLA DE PORTADA / SOBRE CON FLORES A LOS COSTADOS Y FORRO INTERNO -->
         <div id="envelope-screen">
             
             <div class="cover-header">
@@ -852,26 +841,20 @@
                 <div class="cover-date">19 · 12 · 2026</div>
             </div>
 
-            <!-- ESCENA DEL SOBRE CON TARJETA EMERGENTE -->
-            <div class="envelope-scene" id="env-container" onclick="openInvitation()">
-                
-                <!-- Tarjeta que sale brincando de adentro -->
-                <div class="invitation-card-popup">
-                    <div class="popup-title">Mis XV Años</div>
-                    <div class="popup-name">Regina Alejandra</div>
-                    <div class="popup-date">19 · 12 · 2026</div>
-                </div>
+            <!-- CONTENEDOR ESTILO PINTEREST -->
+            <div class="envelope-art-container">
+                <div class="floral-side-left"></div>
+                <div class="floral-side-right"></div>
 
-                <!-- Frente y solapas del sobre -->
-                <div class="envelope-front-group">
+                <div class="envelope-container" id="env-container" onclick="openInvitation()">
                     <div class="env-back"></div>
                     <div class="env-flap-top"></div>
                     <div class="env-left"></div>
                     <div class="env-right"></div>
                     <div class="env-bottom"></div>
+                    
                     <img src="sello.png" alt="Sello de Cera" class="wax-seal-img" onerror="this.src='https://images.unsplash.com/photo-1534447677768-be436bb09401?w=150&auto=format&fit=crop&q=80'">
                 </div>
-
             </div>
 
             <div class="cover-footer">
@@ -1139,15 +1122,13 @@
                 console.log("Audio autoplay restricted by browser:", error);
             });
 
-            // Activa la animación donde el sobre se abre y la tarjeta sale brincando hacia arriba
             envContainer.classList.add('open');
 
-            // Transición a la invitación completa
             setTimeout(() => {
                 envelopeScreen.classList.add('hidden');
                 mainContent.classList.add('visible');
                 window.scrollTo(0, 0);
-            }, 1100);
+            }, 800);
         }
 
         function toggleMusic() {
