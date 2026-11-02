@@ -3,645 +3,632 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis XV Años - Regina Alejandra</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- FontAwesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Mis XV Regina Alejandra</title>
+    <!-- Fuentes elegantes de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --lila-principal: #C8B5E5;
-            --lila-oscuro: #8A68B1;
-            --lila-suave: #F3EFFF;
-            --plateado: #C0C0C8;
-            --plateado-brillo: #E8E8EE;
-            --blanco-perla: #FAF7FC;
-            --texto-oscuro: #3A3546;
-            --sombra-elegante: 0 10px 30px rgba(138, 104, 177, 0.15);
+            --bg-color: #fbf9fc;
+            --purple-primary: #7d5a88;
+            --purple-dark: #41284a;
+            --lila-light: #f3edf6;
+            --lila-accent: #b897c3;
+            --text-color: #3b3540;
+            --white: #ffffff;
+            --gold: #d4af37;
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
+            background-color: var(--bg-color);
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--blanco-perla);
-            color: var(--texto-oscuro);
-            overflow-x: hidden;
-            text-align: center;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        /* --- SOBRE INTERACTIVO --- */
-        #envelope-overlay {
+        .phone-container {
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            box-shadow: 0 0 25px rgba(65, 40, 74, 0.08);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Pantalla de Sobre / Portada */
+        #envelope-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #FAF7FC 0%, #EAE3F7 100%);
-            z-index: 9999;
+            background: linear-gradient(135deg, rgba(65,40,74,0.95), rgba(125,90,136,0.9)), url('portada.jpg') center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 1s ease, visibility 1s ease;
+            z-index: 1000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
             padding: 20px;
+            text-align: center;
         }
 
-        .envelope-container {
+        #envelope-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .invite-title {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--lila-light);
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .guest-name-cover {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .couple-names-cover {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 5px;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .wedding-date-cover {
+            color: var(--lila-accent);
+            font-size: 1rem;
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+        }
+
+        .envelope-box {
+            background: var(--purple-dark);
+            width: 82%;
+            max-width: 320px;
+            height: 170px;
+            border-radius: 6px;
             position: relative;
-            width: 320px;
-            height: 220px;
-            background: #E4D9F5;
-            border-radius: 8px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            border: 1px solid var(--plateado);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: transform 0.4s ease;
-        }
-
-        .envelope-container:hover {
-            transform: scale(1.03);
-        }
-
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 160px solid transparent;
-            border-right: 160px solid transparent;
-            border-top: 120px solid #D1C0EC;
-            transform-origin: top;
-            transition: transform 0.6s ease;
-            z-index: 3;
+            border: 1px solid rgba(255,255,255,0.15);
+            margin-bottom: 20px;
         }
 
         .wax-seal {
-            position: absolute;
-            z-index: 4;
-            width: 65px;
-            height: 65px;
-            background: linear-gradient(135deg, #D4AF37, #AA7C11);
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #fff;
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: 1.4rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 0 8px rgba(255,255,255,0.4);
-            border: 2px solid #F3E5AB;
-            transition: transform 0.4s ease;
-        }
-
-        .envelope-card-preview {
-            position: absolute;
-            width: 90%;
-            height: 85%;
-            background: #fff;
-            border-radius: 6px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border: 1px dashed var(--lila-principal);
-            z-index: 2;
-        }
-
-        .envelope-title {
-            font-family: 'Cinzel', serif;
-            color: var(--lila-oscuro);
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-        }
-
-        .guest-tag {
-            background-color: var(--lila-suave);
-            border: 1px solid var(--lila-principal);
-            padding: 12px 25px;
-            border-radius: 30px;
-            margin-top: 25px;
-            max-width: 90%;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .guest-name-preview {
-            font-family: 'Cinzel', serif;
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: var(--lila-oscuro);
-        }
-
-        .passes-preview {
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border: 2px solid #fff;
+            font-size: 20px;
         }
 
         .open-btn {
-            margin-top: 30px;
-            padding: 14px 32px;
-            background: linear-gradient(135deg, var(--lila-oscuro), var(--lila-principal));
-            color: white;
-            border: none;
-            border-radius: 30px;
+            background: transparent;
+            border: 1px solid var(--white);
+            color: var(--white);
+            padding: 10px 28px;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: 1px;
+            font-size: 0.75rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(138, 104, 177, 0.35);
             transition: all 0.3s ease;
+            border-radius: 3px;
         }
 
         .open-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(138, 104, 177, 0.45);
+            background: var(--white);
+            color: var(--purple-dark);
         }
 
-        /* --- BOTÓN MÚSICA FLOTANTE --- */
-        .music-control {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--lila-oscuro), var(--lila-principal));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 1000;
-            transition: transform 0.3s ease;
+        .reserved-box {
+            margin-top: 20px;
+            color: var(--lila-light);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            line-height: 1.5;
         }
 
-        .music-control:hover {
-            transform: scale(1.1);
+        .reserved-badge {
+            display: inline-block;
+            border: 1px solid var(--lila-accent);
+            padding: 5px 16px;
+            border-radius: 4px;
+            margin-top: 5px;
+            font-size: 1.1rem;
+            color: var(--lila-light);
+            background: rgba(255,255,255,0.05);
+            font-family: 'Cormorant Garamond', serif;
         }
 
-        .music-control.playing {
-            animation: pulse-music 2s infinite;
+        /* Contenido Principal */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease;
         }
 
-        @keyframes pulse-music {
-            0% { box-shadow: 0 0 0 0 rgba(138, 104, 177, 0.6); }
-            70% { box-shadow: 0 0 0 15px rgba(138, 104, 177, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(138, 104, 177, 0); }
+        .main-content.visible {
+            opacity: 1;
         }
 
-        /* --- CONTENEDOR PRINCIPAL --- */
-        .main-wrapper {
-            max-width: 520px;
-            margin: 0 auto;
-            background: #ffffff;
-            box-shadow: 0 0 40px rgba(0,0,0,0.06);
-            min-height: 100vh;
+        section {
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(184, 151, 195, 0.15);
+        }
+
+        .hero-section {
+            padding: 0;
             position: relative;
-            padding-bottom: 60px;
         }
 
-        .svg-flower-header {
+        .hero-img {
             width: 100%;
-            height: 180px;
-            background: linear-gradient(180deg, #F3EFFF 0%, #ffffff 100%);
+            height: 480px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-text {
+            padding: 40px 20px;
+            background: var(--white);
+        }
+
+        .hero-text h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-style: italic;
+            color: var(--purple-dark);
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .hero-text p {
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--purple-primary);
+        }
+
+        /* Cuenta Regresiva */
+        .countdown-section {
+            background: var(--lila-light);
+        }
+
+        .countdown-title {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: var(--purple-primary);
+            font-weight: 500;
+        }
+
+        .countdown-grid {
             display: flex;
             justify-content: center;
+            gap: 22px;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        /* HERO SECTION */
-        .hero {
-            padding: 20px 25px 40px 25px;
+        .countdown-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.6rem;
+            color: var(--purple-dark);
+            line-height: 1;
+            font-weight: 400;
         }
 
-        .sub-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
-            letter-spacing: 4px;
-            color: var(--plateado);
+        .countdown-label {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            margin-top: 6px;
+            color: var(--purple-primary);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--purple-dark);
+            margin-bottom: 30px;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        /* Familia y Padrinos */
+        .family-section {
+            background: var(--white);
+            line-height: 1.7;
+        }
+
+        .family-block {
+            margin-bottom: 25px;
+        }
+
+        .family-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--purple-primary);
+            margin-bottom: 8px;
+        }
+
+        .family-names {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--purple-dark);
+        }
+
+        .godparents-grid {
+            font-size: 0.9rem;
+            color: #555;
+            max-width: 360px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Tarjetas de Evento */
+        .card-event {
+            background: var(--white);
+            padding: 35px 20px;
+            margin-bottom: 25px;
+            border-radius: 6px;
+            box-shadow: 0 6px 20px rgba(65, 40, 74, 0.04);
+            border: 1px solid rgba(184, 151, 195, 0.2);
+        }
+
+        .event-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .event-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--purple-dark);
             margin-bottom: 10px;
         }
 
-        .name-title {
-            font-family: 'Alex Brush', cursive;
-            font-size: 3.8rem;
-            color: var(--lila-oscuro);
-            margin: 10px 0 20px 0;
-            line-height: 1.1;
+        .event-place {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--purple-primary);
         }
 
-        .divider-silver {
-            width: 80px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--plateado), transparent);
-            margin: 25px auto;
+        .event-address {
+            font-size: 0.88rem;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
         }
 
-        .prayer-box {
-            font-style: italic;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: #555;
-            padding: 0 15px;
-            margin-bottom: 30px;
+        .btn-action {
+            display: inline-block;
+            padding: 11px 28px;
+            border: 1px solid var(--purple-primary);
+            color: var(--purple-primary);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border-radius: 3px;
         }
 
-        .photo-frame {
-            width: 85%;
-            margin: 20px auto;
-            border-radius: 150px 150px 15px 15px;
-            padding: 10px;
-            background: linear-gradient(135deg, var(--lila-principal), var(--plateado-brillo));
-            box-shadow: var(--sombra-elegante);
+        .btn-action:hover {
+            background: var(--purple-primary);
+            color: var(--white);
         }
 
-        .photo-frame img {
+        /* Galería de Fotos */
+        .gallery-section {
+            background: var(--white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .gallery-img {
             width: 100%;
-            height: 380px;
+            height: 180px;
             object-fit: cover;
-            border-radius: 140px 140px 10px 10px;
-            display: block;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Confirmación de Asistencia (RSVP) */
+        .rsvp-section {
+            background: var(--lila-light);
+        }
+
+        .btn-whatsapp {
+            display: inline-block;
+            background: #25D366;
+            color: white;
+            padding: 14px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: transform 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .btn-whatsapp:hover {
+            transform: scale(1.03);
+        }
+
+        /* Notas e Información */
+        .info-section {
+            background: var(--bg-color);
+        }
+
+        .info-box {
+            margin-bottom: 25px;
+            background: var(--white);
+            padding: 30px 20px;
+            border-radius: 6px;
+            border: 1px solid rgba(184, 151, 195, 0.15);
+        }
+
+        .info-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--purple-dark);
+            margin-bottom: 12px;
+            font-weight: 400;
+        }
+
+        .info-box p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.7;
+            max-width: 340px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--purple-dark);
+            color: var(--white);
+            padding: 45px 20px;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-style: italic;
         }
     </style>
 </head>
-<body><!-- REPRODUCTOR DE MÚSICA EN FONDO -->
-    <audio id="bg-music" loop preload="auto">
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=violin-romantic-112349.mp3" type="audio/mpeg">
+<body>
+
+    <!-- REPRODUCTOR DE MÚSICA OCULTO -->
+    <audio id="bg-music" loop>
+        <source src="https://actions.google.com/sounds/v1/ambiences/music_box.ogg" type="audio/ogg">
+        Tu navegador no soporta audio.
     </audio>
 
-    <!-- BOTÓN DE MÚSICA FLOTANTE -->
-    <div class="music-control" id="music-toggle" title="Reproducir / Pausar Música">
-        <i class="fa-solid fa-music"></i>
-    </div>
+    <div class="phone-container">
 
-    <!-- PANTALLA SOBRE INTERACTIVO -->
-    <div id="envelope-overlay">
-        <div class="envelope-container" onclick="openEnvelope()">
-            <div class="envelope-flap" id="envelope-flap"></div>
-            <div class="wax-seal" id="wax-seal">RA</div>
-            <div class="envelope-card-preview">
-                <div class="envelope-title">MIS XV AÑOS</div>
-                <div style="font-family: 'Alex Brush', cursive; font-size: 1.8rem; color: var(--lila-oscuro);">Regina Alejandra</div>
+        <!-- PANTALLA DE SOBRE / PORTADA INTERACTIVA -->
+        <div id="envelope-screen">
+            <div class="invite-title">Invitación Especial para:</div>
+            <div class="guest-name-cover" id="guest-name">Estimado Invitado</div>
+
+            <div class="couple-names-cover">Regina Alejandra</div>
+            <div class="wedding-date-cover">Mis XV Años · 19 · 12 · 2026</div>
+
+            <div class="envelope-box" onclick="openInvitation()">
+                <div class="wax-seal">👑</div>
             </div>
-        </div>
 
-        <div class="guest-tag">
-            <div class="guest-name-preview" id="guest-name-display">Familia Invitada</div>
-            <div class="passes-preview" id="guest-passes-display">Te invitamos a celebrar con nosotros</div>
-        </div>
-
-        <button class="open-btn" onclick="openEnvelope()">
-            <i class="fa-envelope-open" style="margin-right: 8px;"></i> ABRIR INVITACIÓN
-        </button>
-    </div>
-
-    <!-- CONTENIDO DE LA INVITACIÓN -->
-    <div class="main-wrapper">
-
-        <!-- CABECERA DE FLORES LILA -->
-        <div class="svg-flower-header">
-            <svg width="100%" height="100%" viewBox="0 0 500 150" preserveAspectRatio="none">
-                <path d="M0,0 L500,0 L500,80 Q250,150 0,80 Z" fill="#E4D9F5" opacity="0.5"/>
-                <path d="M0,0 L500,0 L500,50 Q250,120 0,50 Z" fill="#C8B5E5" opacity="0.7"/>
-            </svg>
-            <div style="position: absolute; top: 25px; color: var(--lila-oscuro); font-size: 1.5rem;">
-                ✦ &nbsp; 🎕 &nbsp; ✦
-            </div>
-        </div>
-
-        <!-- HERO SECTION -->
-        <section class="hero">
-            <div class="sub-title">MIS XV AÑOS</div>
-            <div class="name-title">Regina Alejandra</div>
+            <button class="open-btn" onclick="openInvitation()">Abrir Invitación</button>
             
-            <div class="divider-silver"></div>
-
-            <div class="prayer-box">
-                "Doy gracias a Dios y a mis padres por concederme la vida y formar parte de ella. Hay recuerdos que no voy a olvidar y momentos como este que siempre voy a guardar, porque serán parte de mi vida. Es mi deseo que compartan conmigo la alegría de mis quince años."
-            </div>
-
-            <!-- FOTO PRINCIPAL -->
-            <div class="photo-frame">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800" alt="Regina Alejandra XV Años">
-            </div>
-        </section>
-
-        <!-- CUENTA REGRESIVA -->
-        <div class="countdown-container">
-            <div class="section-title" style="font-size: 1.1rem; margin-bottom: 15px;">FALTAN TAN SOLO</div>
-            <div class="countdown-grid">
-                <div class="countdown-item">
-                    <span class="countdown-number" id="days">00</span>
-                    <span class="countdown-label">Días</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="hours">00</span>
-                    <span class="countdown-label">Hs</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="minutes">00</span>
-                    <span class="countdown-label">Min</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="seconds">00</span>
-                    <span class="countdown-label">Seg</span>
-                </div>
+            <div class="reserved-box">
+                Hemos reservado<br>
+                <span class="reserved-badge" id="num-lugares">2</span><br>
+                Lugares en su honor
             </div>
         </div>
 
-        <!-- PADRES & PADRINOS -->
-        <section class="section-padding">
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="main-content" id="main-content">
             
-            <!-- PADRES -->
-            <div class="family-card">
-                <div class="family-sub">Con el amor y la bendición de mis padres:</div>
-                <div class="names-list">
-                    Andrés Amaya Lugo<br>
-                    <span style="font-family: 'Alex Brush', cursive; font-size: 1.5rem; color: var(--lila-oscuro);">&</span><br>
-                    Mónica Mirelia Cienfuegos García
+            <section class="hero-section">
+                <img src="portada.jpg" alt="Regina Alejandra" class="hero-img">
+                <div class="hero-text">
+                    <h1>Regina Alejandra</h1>
+                    <p>Mis XV Años</p>
                 </div>
-            </div>
+            </section>
 
-            <!-- PADRINOS -->
-            <div class="family-card">
-                <div class="section-title" style="font-size: 1.1rem; margin-bottom: 15px;">MIS PADRINOS</div>
-                <div class="family-sub" style="margin-bottom: 18px;">Quienes con su apoyo y cariño acompañan este día tan especial:</div>
-                
-                <div class="padrinos-item">
-                    Gabriela Cienfuegos García<br>
-                    <small style="color:#888;">&</small> Fernando Mendívil Valenzuela
+            <section class="countdown-section">
+                <div class="countdown-title">Faltan</div>
+                <div class="countdown-grid">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">00</span>
+                        <span class="countdown-label">Días</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">Horas</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">Min</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label">Seg</span>
+                    </div>
                 </div>
-                <div class="divider-silver" style="margin: 12px auto; width: 40px;"></div>
-                <div class="padrinos-item">
-                    Nailea Yosmara Méndez Velázquez<br>
-                    <small style="color:#888;">&</small> Alejandro Gutiérrez Medina
+            </section>
+
+            <section class="family-section">
+                <div class="family-block">
+                    <div class="family-subtitle">Con la bendición de mis padres</div>
+                    <div class="family-names">Andres Amaya y Monica Mirelia Cienfuegos</div>
                 </div>
-                <div class="divider-silver" style="margin: 12px auto; width: 40px;"></div>
-                <div class="padrinos-item">
-                    Camila Morales García<br>
-                    <small style="color:#888;">&</small> Jesús Aarón García Parra
+
+                <div class="family-block" style="margin-top: 30px;">
+                    <div class="family-subtitle">Mis Padrinos</div>
+                    <div class="godparents-grid">
+                        Gabriela Cienfuegos García, Fernando Mendivil Valenzuela, Nailea Yosmara Mendez Velazquez, Alejandro Gutierrez Medina, Jesus Aaron García Parra y Andrea Camila Morales Garcia
+                    </div>
                 </div>
-            </div>
 
-            <!-- CHAMBELÁN -->
-            <div class="family-card">
-                <div class="section-title" style="font-size: 1rem; margin-bottom: 12px;">MI CHAMBELÁN DE HONOR</div>
-                <div class="names-list" style="font-size: 1.1rem; color: var(--lila-oscuro);">
-                    Dilan Arak Enríquez Álvarez
+                <div class="family-block" style="margin-top: 30px;">
+                    <div class="family-subtitle">Mi Chambelán</div>
+                    <div class="family-names">Dilam Arak Enriquez Alvarez</div>
                 </div>
-            </div>
+            </section>
 
-        </section>
+            <section style="background-color: var(--bg-color);">
+                <h2 class="section-title">Detalles del Evento</h2>
 
-        <!-- ITINERARIO -->
-        <section class="section-padding" style="background: #FAF7FC;">
-            <div class="section-title">¿DÓNDE & CUÁNDO?</div>
-            <div style="font-size: 0.9rem; color: #666; margin-bottom: 30px;">SÁBADO, 19 DE DICIEMBRE DE 2026</div>
+                <div class="card-event">
+                    <div class="event-icon">✨</div>
+                    <div class="event-title">Recepción</div>
+                    <div class="event-place">La Carreta</div>
+                    <div class="event-address">19 de Diciembre de 2026<br>Hermosillo, Sonora</div>
+                    <a href="https://maps.google.com/?q=La+Carreta+Hermosillo" target="_blank" class="btn-action">Ver Ubicación</a>
+                </div>
+            </section>
 
-            <!-- MISA -->
-            <div class="event-card">
-                <div class="event-icon"><i class="fa-solid fa-church"></i></div>
-                <div class="event-type">MISA DE ACCIÓN DE GRACIAS</div>
-                <div class="event-time"><i class="fa-regular fa-clock"></i> 5:00 PM</div>
-                <div class="event-place">Iglesia Sagrados Corazones de Jesús y María</div>
-                <div class="event-address">Hermosillo, Sonora.</div>
-                <a href="https://maps.google.com/?q=Iglesia+Sagrados+Corazones+de+Jesus+y+Maria" target="_blank" class="map-btn">
-                    <i class="fa-solid fa-location-dot"></i> VER EN GOOGLE MAPS
+            <section class="gallery-section">
+                <h2 class="section-title">Galería</h2>
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">Momentos especiales</p>
+                <div class="gallery-grid">
+                    <img src="foto1.jpg" alt="Foto 1" class="gallery-img">
+                    <img src="foto2.jpg" alt="Foto 2" class="gallery-img">
+                </div>
+            </section>
+
+            <section class="rsvp-section">
+                <h2 class="section-title">Asistencia</h2>
+                <p style="font-size: 0.9rem; color: #555; line-height: 1.6; max-width: 320px; margin: 0 auto 20px auto;">
+                    Tu presencia es muy importante para nosotros. Por favor, confirma tu asistencia dando clic en el botón de abajo.
+                </p>
+                <!-- BOTÓN VINCULADO A TU WHATSAPP PERSONAL -->
+                <a href="https://wa.me/526221252954?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Regina%20Alejandra." target="_blank" class="btn-whatsapp">
+                    Confirmar por WhatsApp
                 </a>
-            </div>
+            </section>
 
-            <!-- RECEPCIÓN -->
-            <div class="event-card" style="border-left-color: var(--plateado);">
-                <div class="event-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
-                <div class="event-type">RECEPCIÓN DE GALA</div>
-                <div class="event-time"><i class="fa-regular fa-clock"></i> 9:00 PM</div>
-                <div class="event-place">Eventos La Carreta</div>
-                <div class="event-address">Hermosillo, Sonora.</div>
-                <a href="https://maps.google.com/?q=Eventos+La+Carreta+Hermosillo" target="_blank" class="map-btn">
-                    <i class="fa-solid fa-location-dot"></i> VER EN GOOGLE MAPS
-                </a>
-            </div>
-        </section>
-
-        <!-- GALERÍA DE FOTOS -->
-        <section class="section-padding">
-            <div class="section-title">MIS RECUERDOS</div>
-            <div class="gallery-grid" style="margin-top: 20px;">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&q=80&w=400" alt="Foto XV">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&q=80&w=400" alt="Foto XV">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400" alt="Foto XV">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400" alt="Foto XV">
-                </div>
-            </div>
-        </section>
-
-        <!-- DETALLES ADICIONALES -->
-        <section class="section-padding" style="padding-top: 0;">
-            
-            <!-- DRESS CODE -->
-            <div class="info-box">
-                <div class="info-icon"><i class="fa-solid fa-user-tie"></i></div>
-                <div class="section-title" style="font-size: 1rem; margin-bottom: 8px;">CÓDIGO DE VESTIMENTA</div>
-                <div style="font-weight: 600; color: var(--lila-oscuro); letter-spacing: 1px;">FORMAL</div>
-                <div style="font-size: 0.85rem; color: #777; margin-top: 5px;">Agradecemos vestir de etiqueta para esta noche de gala.</div>
-            </div>
-
-            <!-- REGALOS / SOBRES -->
-            <div class="info-box">
-                <div class="info-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
-                <div class="section-title" style="font-size: 1rem; margin-bottom: 8px;">LLUVIA DE SOBRES</div>
-                <div style="font-size: 0.9rem; color: #555; line-height: 1.6;">
-                    Su presencia es nuestro mejor regalo. Sin embargo, si desean hacerme un obsequio, contaremos con un buzón para lluvia de sobres durante la recepción.
-                </div>
-            </div>
-
-        </section>
-
-        <!-- CONFIRMACIÓN DE ASISTENCIA -->
-        <section class="rsvp-section" id="rsvp">
-            <div class="section-title">CONFIRMAR ASISTENCIA</div>
-            <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">Por favor confirma tu asistencia antes del 1 de Diciembre de 2026.</div>
-
-            <form class="rsvp-form" onsubmit="sendWhatsApp(event)">
-                <div class="form-group">
-                    <label for="name">Nombre / Familia:</label>
-                    <input type="text" id="name" class="form-control" placeholder="Ej. Familia López" required>
+            <section class="info-section">
+                <div class="info-box">
+                    <h3>Código de Vestimenta</h3>
+                    <p style="font-weight: 600; color: var(--purple-dark); margin-bottom: 6px;">Formal</p>
                 </div>
 
-                <div class="form-group">
-                    <label for="attending-passes">Lugares a confirmar:</label>
-                    <select id="attending-passes" class="form-control" required>
-                        <option value="1">1 Persona</option>
-                        <option value="2" selected>2 Personas</option>
-                        <option value="3">3 Personas</option>
-                        <option value="4">4 Personas</option>
-                        <option value="5">5 Personas</option>
-                    </select>
+                <div class="info-box">
+                    <h3>Lluvia de Sobres</h3>
+                    <p>Su presencia es nuestro mejor regalo, pero si desean tener un detalle adicional con nuestra quinceañera, tendremos lluvia de sobres.</p>
                 </div>
+            </section>
 
-                <div class="form-group">
-                    <label for="status">¿Asistirás?</label>
-                    <select id="status" class="form-control" required>
-                        <option value="Sí asistiré">¡Sí, ahí estaré con mucho gusto!</option>
-                        <option value="No podré asistir">Lamentablemente no podré asistir</option>
-                    </select>
-                </div>
+            <footer>
+                Regina Alejandra<br>
+                <span style="font-size: 0.95rem; letter-spacing: 3px; font-family: 'Montserrat', sans-serif; color: var(--lila-accent);">19 · 12 · 2026</span>
+            </footer>
 
-                <button type="submit" class="whatsapp-btn">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> ENVIAR A WHATSAPP
-                </button>
-            </form>
-        </section>
-
-        <!-- FOOTER -->
-        <div class="footer">
-            <div class="footer-name">Regina Alejandra</div>
-            <div>¡Te espero para celebrar juntos mis XV años!</div>
         </div>
 
     </div>
 
-    <!-- SCRIPTS DE FUNCIONALIDAD -->
     <script>
-        // --- 1. CAPTURA DE PARÁMETROS URL (?invitado=...&pases=...&id=...) ---
         const urlParams = new URLSearchParams(window.location.search);
-        const invitadoParam = urlParams.get('invitado');
-        const pasesParam = urlParams.get('pases');
-        const idParam = urlParams.get('id');
-
-        const guestNameDisplay = document.getElementById('guest-name-display');
-        const guestPassesDisplay = document.getElementById('guest-passes-display');
-        const inputName = document.getElementById('name');
-        const selectPasses = document.getElementById('attending-passes');
-
-        if (invitadoParam) {
-            guestNameDisplay.textContent = invitadoParam;
-            inputName.value = invitadoParam;
-            
-            if (pasesParam) {
-                guestPassesDisplay.textContent = `Pases asignados: ${pasesParam} ${pasesParam == 1 ? 'Lugar' : 'Lugares'}`;
-                selectPasses.value = pasesParam <= 5 ? pasesParam : "5";
-            } else {
-                guestPassesDisplay.textContent = '¡Estás cordialmente invitado!';
-            }
-        } else {
-            guestNameDisplay.textContent = '¡Estás Invitado!';
-            guestPassesDisplay.textContent = 'Acompáñanos a celebrar este día tan especial';
+        
+        const nombreInvitado = urlParams.get('nombre');
+        if (nombreInvitado) {
+            document.getElementById('guest-name').innerText = decodeURIComponent(nombreInvitado);
         }
 
-        // --- 2. CONTROL DEL SOBRE Y MÚSICA ---
-        const bgMusic = document.getElementById('bg-music');
-        const musicToggle = document.getElementById('music-toggle');
-        let isPlaying = false;
-
-        function openEnvelope() {
-            document.getElementById('wax-seal').style.transform = 'scale(0)';
-            document.getElementById('envelope-flap').style.transform = 'rotateX(180deg)';
-            
-            setTimeout(() => {
-                const overlay = document.getElementById('envelope-overlay');
-                overlay.style.opacity = '0';
-                overlay.style.visibility = 'hidden';
-                playMusic();
-            }, 600);
+        const numInvitados = urlParams.get('invitados');
+        if (numInvitados) {
+            document.getElementById('num-lugares').innerText = numInvitados;
         }
 
-        function playMusic() {
-            bgMusic.play().then(() => {
-                isPlaying = true;
-                musicToggle.classList.add('playing');
-            }).catch(e => {
-                console.log("Reproducción automática bloqueada por navegador:", e);
+        function openInvitation() {
+            const envelope = document.getElementById('envelope-screen');
+            const mainContent = document.getElementById('main-content');
+            const music = document.getElementById('bg-music');
+            
+            music.play().catch(error => {
+                console.log("Audio autoplay restricted by browser:", error);
             });
+
+            envelope.classList.add('hidden');
+            mainContent.classList.add('visible');
+            window.scrollTo(0, 0);
         }
 
-        musicToggle.addEventListener('click', () => {
-            if (isPlaying) {
-                bgMusic.pause();
-                isPlaying = false;
-                musicToggle.classList.remove('playing');
-            } else {
-                bgMusic.play();
-                isPlaying = true;
-                musicToggle.classList.add('playing');
-            }
-        });
+        const eventDate = new Date('December 19, 2026 19:00:00').getTime();
 
-        // --- 3. CUENTA REGRESIVA ---
-        const eventDate = new Date('December 19, 2026 17:00:00').getTime();
-
-        const updateCountdown = () => {
+        function updateCountdown() {
             const now = new Date().getTime();
-            const difference = eventDate - now;
+            const distance = eventDate - now;
 
-            if (difference > 0) {
-                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-                document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-                document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-                document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
-            } else {
-                document.querySelector('.countdown-container').innerHTML = '<div style="font-family:Cinzel; font-size:1.2rem; color:var(--lila-oscuro);">¡LLEGÓ EL GRAN DÍA!</div>';
+            if (distance < 0) {
+                document.getElementById('days').innerText = '00';
+                document.getElementById('hours').innerText = '00';
+                document.getElementById('minutes').innerText = '00';
+                document.getElementById('seconds').innerText = '00';
+                return;
             }
-        };
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
-
-        // --- 4. ENVÍO DE CONFIRMACIÓN POR WHATSAPP ---
-        function sendWhatsApp(event) {
-            event.preventDefault();
-            
-            // Número de la mamá de Regina Alejandra
-            const phoneNumber = "526221252954"; 
-            
-            const name = document.getElementById('name').value;
-            const passes = document.getElementById('attending-passes').value;
-            const status = document.getElementById('status').value;
-            const guestID = idParam ? ` (ID: ${idParam})` : '';
-
-            let message = `¡Hola! Confirmo asistencia para los XV Años de Regina Alejandra ✨%0A%0A`;
-            message += `👤 *Nombre/Familia:* ${name}${guestID}%0A`;
-            message += `🎟️ *Asistentes:* ${passes} persona(s)%0A`;
-            message += `📌 *Estado:* ${status}`;
-
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
-            window.open(whatsappUrl, '_blank');
-        }
     </script>
 </body>
 </html>
