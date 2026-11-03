@@ -399,6 +399,7 @@
             font-size: 1.25rem;
             color: var(--purple-dark);
             line-height: 1.7;
+            text-align: center;
         }
 
         /* Familia y Padrinos */
@@ -612,7 +613,7 @@
 
         .btn-rsvp-yes {
             display: block;
-            background: #25D366;
+            background: var(--purple-primary);
             color: white;
             padding: 13px 20px;
             border-radius: 25px;
@@ -620,12 +621,15 @@
             font-weight: 500;
             font-size: 0.88rem;
             letter-spacing: 0.5px;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
-            transition: transform 0.2s ease, opacity 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(125, 90, 136, 0.25);
+            transition: transform 0.2s ease, background 0.3s ease;
         }
 
         .btn-rsvp-yes:hover {
             transform: scale(1.02);
+            background: var(--purple-dark);
         }
 
         .btn-rsvp-no {
@@ -639,22 +643,28 @@
             font-size: 0.88rem;
             letter-spacing: 0.5px;
             border: 1px solid var(--lila-accent);
-            transition: background 0.2s ease, opacity 0.3s ease;
+            cursor: pointer;
+            transition: background 0.2s ease;
         }
 
         .btn-rsvp-no:hover {
             background: #e3d2ea;
         }
 
-        .btn-hidden {
-            display: none !important;
+        .status-confirmed-box {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+            padding: 18px;
+            border-radius: 8px;
         }
 
-        .confirmed-text {
-            font-size: 0.85rem;
-            color: #777;
-            margin-top: 10px;
-            font-style: italic;
+        .status-declined-box {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+            padding: 18px;
+            border-radius: 8px;
         }
 
         /* GALERÍA DESLIZABLE CON FLECHITAS Y PUNTITOS INDICADORES */
@@ -678,11 +688,11 @@
             -webkit-overflow-scrolling: touch;
             border-radius: 8px;
             box-shadow: 0 8px 20px rgba(65, 40, 74, 0.12);
-            scrollbar-width: none; /* Ocultar barra en Firefox */
+            scrollbar-width: none;
         }
 
         .gallery-carousel::-webkit-scrollbar {
-            display: none; /* Ocultar barra en Chrome, Safari, Edge */
+            display: none;
         }
 
         .carousel-item {
@@ -700,7 +710,6 @@
             display: block;
         }
 
-        /* Flechitas sutiles a los lados */
         .gallery-arrow {
             position: absolute;
             top: 50%;
@@ -733,7 +742,6 @@
             right: 10px;
         }
 
-        /* Puntitos indicadores abajo */
         .gallery-dots {
             display: flex;
             justify-content: center;
@@ -755,42 +763,6 @@
             opacity: 1;
             background-color: var(--purple-primary);
             transform: scale(1.2);
-        }
-
-        /* Info Boxes */
-        .info-section {
-            background: var(--white);
-        }
-
-        .info-box {
-            margin-bottom: 25px;
-            background: var(--bg-color);
-            padding: 30px 20px;
-            border-radius: 6px;
-            border: 1px solid rgba(184, 151, 195, 0.15);
-        }
-
-        .info-title-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 12px;
-        }
-
-        .info-box h3 {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            color: var(--purple-dark);
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .info-box p {
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.7;
-            max-width: 340px;
-            margin: 0 auto;
         }
 
         footer {
@@ -1023,179 +995,77 @@
                 </div>
             </section>
 
+            <!-- GALERÍA DE FOTOS -->
+            <section class="gallery-section">
+                <h2 class="section-title">Galería</h2>
+                <div class="gallery-wrapper">
+                    <button class="gallery-arrow gallery-arrow-left" onclick="scrollGallery(-1)">❮</button>
+                    <button class="gallery-arrow gallery-arrow-right" onclick="scrollGallery(1)">❯</button>
+                    
+                    <div class="gallery-carousel" id="gallery-carousel">
+                        <div class="carousel-item"><img src="foto1.jpg" alt="Regina 1" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?w=500&auto=format&fit=crop&q=80'"></div>
+                        <div class="carousel-item"><img src="foto2.jpg" alt="Regina 2" onerror="this.src='https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500&auto=format&fit=crop&q=80'"></div>
+                        <div class="carousel-item"><img src="foto3.jpg" alt="Regina 3" onerror="this.src='https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=500&auto=format&fit=crop&q=80'"></div>
+                    </div>
+
+                    <div class="gallery-dots">
+                        <span class="dot active" onclick="goToSlide(0)"></span>
+                        <span class="dot" onclick="goToSlide(1)"></span>
+                        <span class="dot" onclick="goToSlide(2)"></span>
+                    </div>
+                </div>
+            </section>
+
             <!-- SECCIÓN DE CONFIRMACIÓN DE ASISTENCIA DINÁMICA -->
             <section class="rsvp-section">
                 <h2 class="section-title">Asistencia</h2>
                 <div class="rsvp-card">
                     <div class="rsvp-limit-title">Favor de confirmar antes del</div>
-                    <div class="rsvp-limit-date">20 de Noviembre de 2026</div>
-                    
-                    <div class="rsvp-buttons-container" id="rsvp-container">
-                        <a id="btn-yes" href="#" target="_blank" class="btn-rsvp-yes" onclick="selectOption('yes')">
-                            ✓ Sí, asistiré
-                        </a>
-                        <a id="btn-no" href="#" target="_blank" class="btn-rsvp-no" onclick="selectOption('no')">
-                            ✕ No podré asistir
-                        </a>
+                    <div class="rsvp-limit-date">5 de Diciembre de 2026</div>
+
+                    <div id="seccion-asistencia">
+                        <p style="font-size: 0.9rem; color: #888; font-style: italic;">Verificando estado de invitación...</p>
                     </div>
-                    <div id="rsvp-status-note" class="confirmed-text" style="display: none;">Respuesta registrada correctamente ✨</div>
-                </div>
-            </section>
-
-            <!-- GALERÍA CON FLECHITAS Y PUNTITOS INDICADORES -->
-            <section class="gallery-section">
-                <h2 class="section-title">Galería</h2>
-                <p style="font-size: 0.85rem; color: #666; margin-bottom: 5px;">Momentos especiales</p>
-                
-                <div class="gallery-wrapper">
-                    <!-- Flechitas laterales -->
-                    <button class="gallery-arrow gallery-arrow-left" onclick="scrollGallery(-1)">&#10094;</button>
-                    <button class="gallery-arrow gallery-arrow-right" onclick="scrollGallery(1)">&#10095;</button>
-
-                    <!-- Carrusel deslizable -->
-                    <div class="gallery-carousel" id="gallery-carousel" onscroll="updateDotsOnScroll()">
-                        <div class="carousel-item">
-                            <img src="foto1.jpg" alt="Foto 1">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="foto2.jpg" alt="Foto 2">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="foto3.jpg" alt="Foto 3">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="foto4.jpg" alt="Foto 4">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Puntitos indicadores -->
-                <div class="gallery-dots" id="gallery-dots">
-                    <span class="dot active" onclick="currentSlide(0)"></span>
-                    <span class="dot" onclick="currentSlide(1)"></span>
-                    <span class="dot" onclick="currentSlide(2)"></span>
-                    <span class="dot" onclick="currentSlide(3)"></span>
-                </div>
-            </section>
-
-            <section class="info-section">
-                <div class="info-box">
-                    <div class="info-title-container">
-                        <svg class="icon-svg-small" viewBox="0 0 24 24" style="margin-right: 10px;">
-                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"></path>
-                        </svg>
-                        <h3>Código de Vestimenta</h3>
-                    </div>
-                    <p style="font-weight: 600; color: var(--purple-dark); margin-bottom: 6px;">Formal</p>
-                    <p style="font-size: 0.82rem; font-style: italic; color: #777; line-height: 1.5;">
-                        Sabemos que el lila es un color hermoso, pero lo hemos reservado exclusivamente para nuestra quinceañera.
-                    </p>
-                </div>
-
-                <div class="info-box">
-                    <div class="info-title-container">
-                        <svg class="icon-svg-small" viewBox="0 0 24 24" style="margin-right: 10px;">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg>
-                        <h3>Lluvia de Sobres</h3>
-                    </div>
-                    <p>Su presencia es nuestro mejor regalo, pero si desean tener un detalle adicional con nuestra quinceañera, tendremos lluvia de sobres.</p>
                 </div>
             </section>
 
             <footer>
                 <div class="footer-name">Regina Alejandra</div>
                 <div class="footer-date">19 · 12 · 2026</div>
-                <div class="footer-thanks">Gracias por ser parte de este capítulo tan especial en mi vida. ¡Nos vemos en la pista! 💜✨</div>
+                <div class="footer-thanks">¡Gracias por ser parte de este día tan especial!</div>
             </footer>
 
         </div>
-
     </div>
 
     <script>
+        // Enlace conectado directamente a tu Google Sheet
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJHWN6XCU4nijCGQOELNZoqzaQ7EzQwDgQdeFrHJ5yjew_x08Cz2BP6PSwjYAfG1v/exec";
+
+        // Obtener parámetros de la URL (?nombre=...&invitados=...)
         const urlParams = new URLSearchParams(window.location.search);
-        
-        const nombreInvitado = urlParams.get('nombre') ? decodeURIComponent(urlParams.get('nombre')) : 'Estimado Invitado';
-        const numInvitados = urlParams.get('invitados') ? urlParams.get('invitados') : '2';
+        const nombreInvitado = urlParams.get('nombre') || 'Estimado Invitado';
+        const pasesInvitado = urlParams.get('invitados') || '2';
 
         document.getElementById('guest-name').innerText = nombreInvitado;
-        document.getElementById('num-lugares').innerText = numInvitados;
+        document.getElementById('num-lugares').innerText = pasesInvitado;
 
-        const telefono = "526221252954";
-        const mensajeSi = `¡Hola! 👋 Confirmo mi asistencia a los XV de Regina Alejandra. Soy ${nombreInvitado} y asistiremos ${numInvitados} personas. ¡Allá nos vemos! 🎉`;
-        const mensajeNo = `¡Hola! 👋 Lamentablemente no podré asistir a los XV de Regina Alejandra, pero les deseo el mejor de los éxitos. Soy ${nombreInvitado}. ✨`;
-
-        const btnYes = document.getElementById('btn-yes');
-        const btnNo = document.getElementById('btn-no');
-
-        btnYes.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeSi)}`;
-        btnNo.href = `https://wa.me/${telefono}?text=${encodeURIComponent(mensajeNo)}`;
-
-        function selectOption(choice) {
-            if (choice === 'yes') {
-                btnNo.classList.add('btn-hidden');
-                btnYes.innerText = "✓ Asistencia Confirmada";
-                btnYes.style.pointerEvents = "none";
-            } else if (choice === 'no') {
-                btnYes.classList.add('btn-hidden');
-                btnNo.innerText = "✕ Confirmaste que no asistirás";
-                btnNo.style.pointerEvents = "none";
-            }
-            document.getElementById('rsvp-status-note').style.display = 'block';
-        }
-
-        // Lógica de la Galería con Flechas y Puntos Sincronizados
-        const carousel = document.getElementById('gallery-carousel');
-        const dots = document.querySelectorAll('.gallery-dots .dot');
-
-        function scrollGallery(direction) {
-            const itemWidth = carousel.clientWidth;
-            carousel.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
-        }
-
-        function currentSlide(index) {
-            const itemWidth = carousel.clientWidth;
-            carousel.scrollTo({ left: index * itemWidth, behavior: 'smooth' });
-        }
-
-        function updateDotsOnScroll() {
-            const itemWidth = carousel.clientWidth;
-            const scrollPos = carousel.scrollLeft;
-            const activeIndex = Math.round(scrollPos / itemWidth);
-
-            dots.forEach((dot, index) => {
-                if (index === activeIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-        }
-
-        let isOpened = false;
+        // Abrir sobre animado
         function openInvitation() {
-            if (isOpened) return;
-            isOpened = true;
-
-            const envelopeScreen = document.getElementById('envelope-screen');
+            const screen = document.getElementById('envelope-screen');
             const mainContent = document.getElementById('main-content');
             const music = document.getElementById('bg-music');
-            
-            music.play().catch(error => {
-                console.log("Audio autoplay restricted by browser:", error);
-            });
 
-            document.getElementById('env-container').classList.add('open');
+            screen.classList.add('open');
+            music.play().catch(() => {});
 
             setTimeout(() => {
-                envelopeScreen.classList.add('hidden');
+                screen.classList.add('hidden');
                 mainContent.classList.add('visible');
-                window.scrollTo(0, 0);
             }, 800);
         }
 
+        // Control de música
         function toggleMusic() {
             const music = document.getElementById('bg-music');
             if (music.paused) {
@@ -1205,33 +1075,101 @@
             }
         }
 
+        // Cuenta Regresiva
         const eventDate = new Date('December 19, 2026 17:00:00').getTime();
-
-        const updateCountdown = () => {
+        setInterval(() => {
             const now = new Date().getTime();
-            const distance = eventDate - now;
+            const difference = eventDate - now;
 
-            if (distance < 0) {
-                document.getElementById('days').innerText = '00';
-                document.getElementById('hours').innerText = '00';
-                document.getElementById('minutes').innerText = '00';
-                document.getElementById('seconds').innerText = '00';
-                return;
+            if (difference > 0) {
+                document.getElementById('days').innerText = Math.floor(difference / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById('hours').innerText = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = Math.floor((difference % (1000 * 60)) / 1000).toString().padStart(2, '0');
             }
+        }, 1000);
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // Galería Carrusel
+        const carousel = document.getElementById('gallery-carousel');
+        const dots = document.querySelectorAll('.dot');
 
-            document.getElementById('days').innerText = String(days).padStart(2, '0');
-            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
-        };
+        function scrollGallery(direction) {
+            const slideWidth = carousel.clientWidth;
+            carousel.scrollBy({ left: direction * slideWidth, behavior: 'smooth' });
+        }
 
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+        function goToSlide(index) {
+            const slideWidth = carousel.clientWidth;
+            carousel.scrollTo({ left: index * slideWidth, behavior: 'smooth' });
+        }
+
+        carousel.addEventListener('scroll', () => {
+            const index = Math.round(carousel.scrollLeft / carousel.clientWidth);
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        });
+
+        // LÓGICA DE GOOGLE SHEETS (Verificación y Guardado)
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=verificar&nombre=${encodeURIComponent(nombreInvitado)}`);
+                const data = await response.json();
+
+                if (data.yaRespondio) {
+                    bloquearInterfaz(data.estado, nombreInvitado);
+                } else {
+                    mostrarBotones(nombreInvitado, pasesInvitado);
+                }
+            } catch (error) {
+                console.error("Error al verificar asistencia:", error);
+                mostrarBotones(nombreInvitado, pasesInvitado);
+            }
+        });
+
+        function mostrarBotones(nombre, pases) {
+            const contenedor = document.getElementById('seccion-asistencia');
+            contenedor.innerHTML = `
+                <div class="rsvp-buttons-container">
+                    <button class="btn-rsvp-yes" onclick="enviarRespuesta('Confirmado', '${pases}')">✨ Confirmar Asistencia</button>
+                    <button class="btn-rsvp-no" onclick="enviarRespuesta('Rechazado', '0')">Lo siento, no podré asistir</button>
+                </div>
+            `;
+        }
+
+        async function enviarRespuesta(estado, pases) {
+            const contenedor = document.getElementById('seccion-asistencia');
+            contenedor.innerHTML = `<p style="font-size: 0.9rem; color: #888; font-style: italic;">Guardando tu respuesta...</p>`;
+
+            try {
+                await fetch(`${SCRIPT_URL}?action=confirmar&nombre=${encodeURIComponent(nombreInvitado)}&estado=${encodeURIComponent(estado)}&asistentes=${pases}`);
+                bloquearInterfaz(estado, nombreInvitado);
+            } catch (error) {
+                alert("Hubo un problema al conectar. Por favor intenta de nuevo.");
+                mostrarBotones(nombreInvitado, pases);
+            }
+        }
+
+        function bloquearInterfaz(estado, nombre) {
+            const contenedor = document.getElementById('seccion-asistencia');
+            const esConfirmado = estado.toLowerCase().includes('confirmado');
+
+            if (esConfirmado) {
+                contenedor.innerHTML = `
+                    <div class="status-confirmed-box">
+                        <h4 style="margin: 0 0 6px 0; font-family: var(--font-serif); font-size: 1.2rem;">✨ ¡Asistencia Confirmada! ✨</h4>
+                        <p style="margin: 0; font-size: 0.88rem;">La confirmación para <strong>${nombre}</strong> se ha guardado con éxito.</p>
+                    </div>
+                `;
+            } else {
+                contenedor.innerHTML = `
+                    <div class="status-declined-box">
+                        <h4 style="margin: 0 0 6px 0; font-family: var(--font-serif); font-size: 1.2rem;">Respuesta Registrada</h4>
+                        <p style="margin: 0; font-size: 0.88rem;">Se ha registrado que <strong>${nombre}</strong> no podrá asistir.</p>
+                    </div>
+                `;
+            }
+        }
     </script>
 </body>
 </html>
