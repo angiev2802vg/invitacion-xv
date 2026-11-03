@@ -1,236 +1,252 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invitación XV Años - Regina Alejandra</title>
-  <style>
-    :root {
-      --primary-color: #7e57c2;
-      --secondary-color: #5e35b1;
-      --bg-color: #f5f3ff;
-      --text-color: #333333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV Años - Regina Alejandra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #6a4c93;
+            --secondary-color: #c9b1ff;
+            --bg-color: #fcfbfe;
+            --text-color: #333333;
+        }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    .card {
-      background-color: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      max-width: 480px;
-      width: 100%;
-      padding: 30px 24px;
-      text-align: center;
-      box-sizing: border-box;
-    }
+        .invitation-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+            box-sizing: border-box;
+            padding: 40px 24px;
+            text-align: center;
+        }
 
-    h1 {
-      color: var(--primary-color);
-      font-size: 1.8rem;
-      margin-bottom: 8px;
-    }
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
 
-    .guest-name {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--secondary-color);
-      margin: 16px 0 4px 0;
-    }
+        h2 {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 20px;
+        }
 
-    .guest-passes {
-      font-size: 1rem;
-      color: #666;
-      margin-bottom: 24px;
-    }
+        .guest-box {
+            background: #f7f5fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #ede8f5;
+        }
 
-    .divider {
-      height: 1px;
-      background-color: #ede7f6;
-      margin: 20px 0;
-    }
+        .guest-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
 
-    .btn-container {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 16px;
-    }
+        .guest-passes {
+            font-size: 0.95rem;
+            color: #555;
+        }
 
-    button {
-      padding: 14px 20px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.2s, transform 0.1s;
-    }
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 25px 0 10px 0;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-    button:active {
-      transform: scale(0.98);
-    }
+        p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+        }
 
-    .btn-confirm {
-      background-color: var(--primary-color);
-      color: #ffffff;
-    }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
 
-    .btn-confirm:hover {
-      background-color: var(--secondary-color);
-    }
+        button {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-    .btn-decline {
-      background-color: #f3f4f6;
-      color: #4b5563;
-    }
+        .btn-confirm {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(106, 76, 147, 0.3);
+        }
 
-    .btn-decline:hover {
-      background-color: #e5e7eb;
-    }
+        .btn-confirm:hover {
+            background-color: #55387d;
+        }
 
-    .status-card {
-      padding: 20px;
-      border-radius: 12px;
-      margin-top: 16px;
-    }
+        .btn-decline {
+            background-color: #f1f0f5;
+            color: #666;
+        }
 
-    .status-confirmed {
-      background-color: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      color: #166534;
-    }
+        .btn-decline:hover {
+            background-color: #e4e1ed;
+        }
 
-    .status-declined {
-      background-color: #fef2f2;
-      border: 1px solid #fecaca;
-      color: #991b1b;
-    }
+        .status-card {
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
 
-    .loading-text {
-      color: #888;
-      font-style: italic;
-    }
-  </style>
+        .status-confirmed {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        .status-declined {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+
+        .loading {
+            color: #888;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>Mis XV Años</h1>
-    <h2 style="font-weight: 400; color: #555; margin-top: 0;">Regina Alejandra</h2>
-    
-    <div class="divider"></div>
+    <div class="invitation-container">
+        <h2>Mis XV Años</h2>
+        <h1>Regina Alejandra</h1>
+        <p>Con la bendición de Dios y de mis padres, tengo el honor de invitarte a celebrar este momento tan importante.</p>
 
-    <div id="info-invitado">
-      <p class="guest-name" id="nombre-display">Cargando invitación...</p>
-      <p class="guest-passes" id="pases-display"></p>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- Sección de Confirmación (Se actualiza dinámicamente) -->
-    <div id="seccion-confirmacion">
-      <p class="loading-text">Verificando estado de asistencia...</p>
-    </div>
-  </div>
-
-  <script>
-    // ⚠️ REEMPLAZA ESTA URL CON LA QUE TE DIO APPS SCRIPT AL IMPLEMENTAR TU GOOGLE SHEET
-    const SCRIPT_URL = "https://script.google.com/macros/s/TU_SCRIPT_ID/exec";
-
-    document.addEventListener('DOMContentLoaded', async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const nombreInvitado = urlParams.get('nombre') || 'Invitado Especial';
-      const invitadosCount = urlParams.get('invitados') || '1';
-
-      // Mostrar datos en pantalla
-      document.getElementById('nombre-display').innerText = nombreInvitado;
-      document.getElementById('pases-display').innerText = `Lugares reservados: ${invitadosCount}`;
-
-      if (!SCRIPT_URL.includes("TU_SCRIPT_ID")) {
-        // Consultar el estado en Google Sheets
-        try {
-          const response = await fetch(`${SCRIPT_URL}?action=verificar&nombre=${encodeURIComponent(nombreInvitado)}`);
-          const data = await response.json();
-
-          if (data.yaRespondio) {
-            bloquearFormulario(data.estado, nombreInvitado);
-          } else {
-            mostrarBotonesConfirmacion(nombreInvitado, invitadosCount);
-          }
-        } catch (error) {
-          console.error("Error al verificar asistencia:", error);
-          mostrarBotonesConfirmacion(nombreInvitado, invitadosCount);
-        }
-      } else {
-        // Si aún no has puesto el SCRIPT_URL, muestra los botones normalmente
-        mostrarBotonesConfirmacion(nombreInvitado, invitadosCount);
-      }
-    });
-
-    // Muestra los botones si la persona no ha respondido
-    function mostrarBotonesConfirmacion(nombre, pases) {
-      const contenedor = document.getElementById('seccion-confirmacion');
-      contenedor.innerHTML = `
-        <p style="font-weight: 500; margin-bottom: 12px;">¿Nos acompañarás en este día tan especial?</p>
-        <div class="btn-container">
-          <button class="btn-confirm" onclick="responderAsistencia('Confirmado', '${pases}')">✨ Confirmar Asistencia</button>
-          <button class="btn-decline" onclick="responderAsistencia('Rechazado', 0)">No podré asistir</button>
+        <div class="guest-box">
+            <div class="guest-name" id="display-nombre">Cargando invitación...</div>
+            <div class="guest-passes" id="display-pases"></div>
         </div>
-      `;
-    }
 
-    // Registra la respuesta en Google Sheets y bloquea los botones
-    async function responderAsistencia(estado, pases) {
-      const urlParams = new URLSearchParams(window.location.search);
-      const nombreInvitado = urlParams.get('nombre') || 'Invitado Especial';
-      const contenedor = document.getElementById('seccion-confirmacion');
+        <div class="section-title">Recepción y Ceremonia</div>
+        <p>📅 <strong>Fecha:</strong> 19 de Diciembre de 2026</p>
+        <p>⛪ <strong>Misa:</strong> Iglesia Sagrados Corazones de Jesús y María</p>
+        <p>🎉 <strong>Recepción:</strong> La Carreta, Hermosillo, Sonora</p>
 
-      contenedor.innerHTML = `<p class="loading-text">Guardando tu respuesta...</p>`;
+        <div class="section-title">Confirmación de Asistencia</div>
+        
+        <div id="seccion-asistencia">
+            <p class="loading">Verificando estado de la invitación...</p>
+        </div>
+    </div>
 
-      try {
-        if (!SCRIPT_URL.includes("TU_SCRIPT_ID")) {
-          await fetch(`${SCRIPT_URL}?action=confirmar&nombre=${encodeURIComponent(nombreInvitado)}&estado=${encodeURIComponent(estado)}&asistentes=${pases}`);
+    <script>
+        // Enlace conectado a tu Google Sheet
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJHWN6XCU4nijCGQOELNZoqzaQ7EzQwDgQdeFrHJ5yjew_x08Cz2BP6PSwjYAfG1v/exec";
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const nombreInvitado = urlParams.get('nombre') || 'Invitado Especial';
+            const pasesInvitado = urlParams.get('invitados') || '1';
+
+            document.getElementById('display-nombre').innerText = nombreInvitado;
+            document.getElementById('display-pases').innerText = `Lugares reservados: ${pasesInvitado}`;
+
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=verificar&nombre=${encodeURIComponent(nombreInvitado)}`);
+                const data = await response.json();
+
+                if (data.yaRespondio) {
+                    bloquearInterfaz(data.estado, nombreInvitado);
+                } else {
+                    mostrarBotones(nombreInvitado, pasesInvitado);
+                }
+            } catch (error) {
+                console.error("Error al conectar:", error);
+                mostrarBotones(nombreInvitado, pasesInvitado);
+            }
+        });
+
+        function mostrarBotones(nombre, pases) {
+            const contenedor = document.getElementById('seccion-asistencia');
+            contenedor.innerHTML = `
+                <p>Por favor, confirma tu asistencia antes del 5 de Diciembre.</p>
+                <div class="btn-container">
+                    <button class="btn-confirm" onclick="enviarRespuesta('Confirmado', '${pases}')">✨ ¡Sí asistiremos!</button>
+                    <button class="btn-decline" onclick="enviarRespuesta('Rechazado', '0')">No nos será posible asistir</button>
+                </div>
+            `;
         }
-        bloquearFormulario(estado, nombreInvitado);
-      } catch (error) {
-        alert("Ocurrió un error al guardar tu respuesta. Por favor intenta nuevamente.");
-        mostrarBotonesConfirmacion(nombreInvitado, pases);
-      }
-    }
 
-    // Cambia la vista de la invitación cuando ya fue respondida
-    function bloquearFormulario(estado, nombre) {
-      const contenedor = document.getElementById('seccion-confirmacion');
-      const esConfirmado = estado.toLowerCase().includes('confirmado');
+        async function enviarRespuesta(estado, pases) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const nombreInvitado = urlParams.get('nombre') || 'Invitado Especial';
+            const contenedor = document.getElementById('seccion-asistencia');
 
-      if (esConfirmado) {
-        contenedor.innerHTML = `
-          <div class="status-card status-confirmed">
-            <h3 style="margin-top: 0; margin-bottom: 6px;">✨ ¡Asistencia Registrada! ✨</h3>
-            <p style="margin: 0;">La confirmación para <strong>${nombre}</strong> ya se encuentra guardada.</p>
-          </div>
-        `;
-      } else {
-        contenedor.innerHTML = `
-          <div class="status-card status-declined">
-            <h3 style="margin-top: 0; margin-bottom: 6px;">Respuesta Registrada</h3>
-            <p style="margin: 0;">Ya se había registrado previamente que <strong>${nombre}</strong> no podrá asistir.</p>
-          </div>
-        `;
-      }
-    }
-  </script>
+            contenedor.innerHTML = `<p class="loading">Guardando tu respuesta...</p>`;
 
+            try {
+                await fetch(`${SCRIPT_URL}?action=confirmar&nombre=${encodeURIComponent(nombreInvitado)}&estado=${encodeURIComponent(estado)}&asistentes=${pases}`);
+                bloquearInterfaz(estado, nombreInvitado);
+            } catch (error) {
+                alert("Hubo un detalle al guardar. Intenta de nuevo.");
+                mostrarBotones(nombreInvitado, pases);
+            }
+        }
+
+        function bloquearInterfaz(estado, nombre) {
+            const contenedor = document.getElementById('seccion-asistencia');
+            const esConfirmado = estado.toLowerCase().includes('confirmado');
+
+            if (esConfirmado) {
+                contenedor.innerHTML = `
+                    <div class="status-card status-confirmed">
+                        <h3 style="margin: 0 0 8px 0;">✨ ¡Asistencia Confirmada! ✨</h3>
+                        <p style="margin: 0; color: #15803d;">La respuesta para <strong>${nombre}</strong> ya se encuentra guardada.</p>
+                    </div>
+                `;
+            } else {
+                contenedor.innerHTML = `
+                    <div class="status-card status-declined">
+                        <h3 style="margin: 0 0 8px 0;">Respuesta Registrada</h3>
+                        <p style="margin: 0; color: #b91c1c;">Se registró previamente que <strong>${nombre}</strong> no podrá asistir.</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
 </body>
 </html>
